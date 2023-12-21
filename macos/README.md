@@ -24,10 +24,8 @@ ln -sf ~/.dotfiles/macos/.tmux.conf ~
 # alacritty
 mkdir -p ~/.config/alacritty
 ln -s ~/.dotfiles/macos/alacritty.yml ~/.config/alacritty/.
-
-
-
-
-
-
 ```
+---
+### Additionally, you may need `rust-analyzer` installation
+
+`brew install rust-analyzer`
