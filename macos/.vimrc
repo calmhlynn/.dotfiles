@@ -1,9 +1,3 @@
-" Require Vim ≥8.0 or Neovim
-" See https://github.com/simnalamburt/.dotfiles/blob/master/.vimrc
-
-"
-" General configs
-"
 scriptencoding UTF-8
 set encoding=UTF-8
 set fileencoding=UTF-8
