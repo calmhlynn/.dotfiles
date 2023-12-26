@@ -16,6 +16,13 @@ ln -s ~/.dotfiles/macos/coc-settings.json ~/.config/nvim/coc-settings.json
 cp ~/.dotfiles/macos/.vimrc.local ~
 
 
+# zsh
+git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin
+ln -sf ~/.dotfiles/.zshrc ~
+cp ~/.dotfiles/.zshrc.local ~
+exec zsh
+p10k configure
+
 # tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ln -sf ~/.dotfiles/macos/.tmux.conf ~
