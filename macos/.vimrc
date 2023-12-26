@@ -211,6 +211,8 @@ try
     endif
     Plug 'fannheyward/coc-rust-analyzer', {'do': 'yarn install --frozen-lockfile'}
     Plug 'weirongxu/coc-kotlin', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'cespare/vim-toml'
+    Plug 'fannheyward/coc-pyright'
     Plug 'ervandew/supertab'
     Plug 'junegunn/fzf'
   endif

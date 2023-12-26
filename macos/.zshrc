@@ -164,32 +164,10 @@ zmodload -i zsh/complist
 
 
 #
-# WSL support
-#
-if [[ -f /proc/sys/fs/binfmt_misc/WSLInterop ]]; then
-  umask 022
-  alias open=explorer.exe
-  alias pbcopy=clip.exe
-  alias pbpaste='powershell.exe Get-Clipboard | sed "s/\r$//" | head -c -1'
-fi
-
-
-#
 # zshrc
 #
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export DOCKER_BUILDKIT=1
 
-# Terraform
-if (( $+commands[terraform] )); then
-  alias tf='terraform'
-  export TF_PLUGIN_CACHE_DIR="${HOME}/.terraform.d/plugin-cache"
-fi
-
-# Golang
-if (( $+commands[go] )); then
-  export GOPATH="${HOME}/.go"
-  export GOPRIVATE=github.com/portone-io/go
-fi
 

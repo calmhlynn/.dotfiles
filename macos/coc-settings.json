@@ -3,6 +3,5 @@
   "rust-analyzer.cargo.autoreload": true,
   "rust-analyzer.checkOnSave": true,
   "rust-analyzer.inlayHints.bindingModeHints.enable": true,
-  "rust-analyzer.checkOnSave.enable": "clippy",
   "diagnostic.warningSign": ">>",
 }
