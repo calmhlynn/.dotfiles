@@ -18,8 +18,8 @@ cp ~/.dotfiles/macos/.vimrc.local ~
 
 # zsh
 git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin
-ln -sf ~/.dotfiles/.zshrc ~
-cp ~/.dotfiles/.zshrc.local ~
+ln -sf ~/.dotfiles/macos/.zshrc ~
+cp ~/.dotfiles/macos/.zshrc.local ~
 exec zsh
 p10k configure
 
