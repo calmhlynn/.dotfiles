@@ -211,6 +211,7 @@ try
     Plug 'junegunn/fzf'
   endif
 
+
   " Neovim plugins
   if has('nvim-0.7')
     Plug 'github/copilot.vim'
