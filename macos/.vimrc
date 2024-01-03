@@ -66,7 +66,8 @@ set completeopt=preview,menuone,noinsert,noselect
 set shortmess+=c
 set signcolumn=yes
 
-
+" use Copy & Paste with other programs
+set clipboard=unnamedplus
 
 "
 " Key mappings
