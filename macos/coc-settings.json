@@ -1,7 +1,0 @@
-{
-  "rust-analyzer.enable": true,
-  "rust-analyzer.cargo.autoreload": true,
-  "rust-analyzer.checkOnSave": true,
-  "rust-analyzer.inlayHints.bindingModeHints.enable": true,
-  "diagnostic.warningSign": ">>",
-}

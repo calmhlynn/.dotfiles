@@ -2,7 +2,8 @@ key_bindings:
   - { key: Insert, mods: Shift, action: Paste }
   - { key: Insert, mods: Control, action: Copy }
 
-background_opacity: 0.92
+window:
+  opacity: 0.92
 
 # Campbell (Windows 10 default)
 #
@@ -35,3 +36,30 @@ colors:
     magenta:    '0xb4009e'
     cyan:       '0x61d6d6'
     white:      '0xf2f2f2'
+
+
+font:
+  # Normal (roman) font face
+  normal:
+    family: Hack Nerd Font Mono
+    style: Regular
+
+  # Bold font face
+  bold:
+    family: Hack Nerd Font Mono
+    style: Bold
+
+  # Italic font face
+  italic:
+    family: Hack Nerd Font Mono
+    style: Italic
+
+  # Bold italic font face
+  bold_italic:
+    family: Hack Nerd Font Mono
+    stle: Bold Italic
+
+  # Point size
+  size: 14.0
+
+  
