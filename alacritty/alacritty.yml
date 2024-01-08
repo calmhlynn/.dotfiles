@@ -57,7 +57,7 @@ font:
   # Bold italic font face
   bold_italic:
     family: Hack Nerd Font Mono
-    stle: Bold Italic
+    style: Bold Italic
 
   # Point size
   size: 14.0
