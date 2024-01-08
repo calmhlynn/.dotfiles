@@ -20,3 +20,8 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 
 cp -i .zshrc ~
 ```
+---
+
+if your os is `amazon linux 2`, need to modify `/etc/passwd` to change `bash` to `zsh`
+
+
