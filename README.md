@@ -1,18 +1,28 @@
 # dotfiles
 
-이 dotfiles은 아래의 프로그램에 대한 세팅 파일입니다.
+아래의 프로그램에 대한 세팅 파일
 * zsh
 * tmux
 * alacritty
----
+* etc.
 
 neovim의 세팅은 [nvim.lua](https://github.com/or-feus/nvim.lua)
-리포지토리에구성되어 있습니다.
-
 
 ---
+#### 설치 체크 목록
+* rust
+* rust-analyzer
+* nerd-font
+* sqlite
+* python-pip3
+---
+
+####  try
 
 ```
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 cd "$(mktemp -d)"
 git clone http://github.com/or-feus/dotfiles
 
