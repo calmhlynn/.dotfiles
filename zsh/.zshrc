@@ -122,3 +122,10 @@ alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
+
+# terraform
+if (( $+commands[terraform] )); then
+  alias tf='terraform'
+  export TF_PLUGIN_CACHE_DIR="${HOME}/.terraform.d/plugin-cache"
+fi
+
