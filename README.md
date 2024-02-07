@@ -9,12 +9,18 @@
 neovim의 세팅은 [nvim.lua](https://github.com/or-feus/nvim.lua)
 
 ---
-#### 설치 체크 목록
+#### macos
 * rust
 * rust-analyzer
 * nerd-font
+* lua-server-language
 * sqlite
 * python-pip3
+* docker
+* terraform
+* lsd
+* openssl
+
 ---
 
 ####  try
