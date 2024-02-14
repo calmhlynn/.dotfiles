@@ -3,7 +3,11 @@
 ```
 brew install
 
-neovim, bat, tmux, lsd, rust-analyzer
+
+## utils written rust
+bat, lsd, fd, gitui, bottom, tokei, rust-analyzer
+
+neovim, tmux 
 terraform, docker-compose
 
 ```
