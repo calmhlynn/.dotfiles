@@ -125,13 +125,19 @@ alias lt='ls --tree'
 # Terraform
 if (( $+commands[terraform] )); then
   alias tf='terraform'
+  complete -o nospace -C /opt/homebrew/bin/terraform terraform
   export TF_PLUGIN_CACHE_DIR="${HOME}/.terraform.d/plugin-cache"
 fi
 
+# AWS CLI
+if (( $+commands[aws] )); then
+  complete -C '/usr/local/bin/aws_completer' aws
+fi
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/feus/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+# Kubectl
+if (( $+commands[kubectl] )); then
+  source <(kubectl completion zsh)
+fi
 
 
-source <(kubectl completion zsh)
+autoload -U +X bashcompinit && bashcompinit
