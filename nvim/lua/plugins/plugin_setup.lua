@@ -1,13 +1,13 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -49,6 +49,7 @@ return require("lazy").setup({
 			"nvim-tree/nvim-web-devicons", -- optional
 		},
 	},
+	{ "mfussenegger/nvim-dap" },
 
 	-- Telescope
 	{
@@ -83,7 +84,7 @@ return require("lazy").setup({
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-path" },
 	{ "hrsh7th/cmp-buffer" },
-    { "hrsh7th/cmp-nvim-lsp-signature-help"},
+	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
@@ -99,8 +100,6 @@ return require("lazy").setup({
 		end,
 	},
 
-
-
 	-- Utilities
 	{ "rcarriga/nvim-notify" },
 	{ "rmagatti/auto-session" },
@@ -111,10 +110,10 @@ return require("lazy").setup({
 
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
-    {
-        'stevearc/conform.nvim',
-        opts = {},
-    },
+	{
+		"stevearc/conform.nvim",
+		opts = {},
+	},
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
