@@ -13,8 +13,7 @@ brew install --cask font-hack-nerd-font
 Step 3. set configure file
 ```zsh
 mkdir -p ~/.config/alacritty
-mv alacritty.yml ~/.config/alacritty/
-alacritty migrate
+mv alacritty.toml ~/.config/alacritty/
 ```
 
 
