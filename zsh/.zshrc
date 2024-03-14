@@ -116,7 +116,10 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-alias ls='lsd'
+if (( $+commands[lsd])); then
+  alias ls='lsd'
+fi
+
 alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
@@ -137,7 +140,14 @@ fi
 # Kubectl
 if (( $+commands[kubectl] )); then
   source <(kubectl completion zsh)
+  alias k='kubectl'
 fi
 
+# Zellij
+if (( $+commands[zellij])); then
+    alias zj='zellij'
+fi
 
 autoload -U +X bashcompinit && bashcompinit
+
+
