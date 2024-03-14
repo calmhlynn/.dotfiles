@@ -252,7 +252,7 @@ plugins {
 // For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
 // Once these themes are defined, one of them should to be selected in the "theme" section of this file
 
-theme "kanagawa-dragon"
+theme "kanagawa"
 themes {
     kanagawa-dragon {
         fg "#c5c9c5"
@@ -266,6 +266,21 @@ themes {
         cyan "#8ea4a2"
         black "#0d0c0c"
         white "#C8C093"
+    }
+}
+themes {
+    kanagawa {
+        fg "#DCD7BA"
+        bg "#1F1F28"
+        red "#C34043"
+        green "#76946A"
+        yellow "#FF9E3B"
+        blue "#7E9CD8"
+        magenta "#957FB8"
+        orange "#FFA066"
+        cyan "#7FB4CA"
+        black "#16161D"
+        white "#DCD7BA"
     }
 }
 
