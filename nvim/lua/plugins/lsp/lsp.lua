@@ -116,6 +116,10 @@ vim.g.rustaceanvim = function()
 		-- other rustacean settings. --
 		server = {
 			on_attach = function()
+				vim.keymap.set("n", "<leader>ac", function()
+					vim.cmd.RustLsp({ "codeAction" })
+				end, { buffer = bufnr })
+
 				vim.keymap.set("n", "K", function()
 					vim.cmd.RustLsp({ "hover", "actions" })
 				end, { buffer = bufnr })
