@@ -34,6 +34,8 @@ LSP_ON_ATTACH = function(client, bufnr)
 	-- keybind options
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
+	vim.lsp.inlay_hint.enable(bufnr, true)
+
 	-- set keybinds
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
@@ -115,7 +117,7 @@ vim.g.rustaceanvim = function()
 	return {
 		-- other rustacean settings. --
 		server = {
-			on_attach = function()
+			on_attach = function(client, bufnr)
 				vim.keymap.set("n", "<leader>ac", function()
 					vim.cmd.RustLsp({ "codeAction" })
 				end, { buffer = bufnr })
@@ -155,6 +157,7 @@ vim.g.rustaceanvim = function()
 				vim.keymap.set("n", "<leader>c", function()
 					vim.cmd.RustLsp({ "openCargo" })
 				end, { buffer = bufnr })
+				vim.lsp.inlay_hint.enable(bufnr, true)
 			end,
 		},
 	}
