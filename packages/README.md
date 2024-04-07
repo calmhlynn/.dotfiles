@@ -23,6 +23,7 @@
 * aws
 * openssl
 * font-hack-nerd-font
+* starship
 
 <b>Option</b>
 * stylua (formatting in nvim)
@@ -32,4 +33,5 @@
 * tcping
 * bottom
 * redis 
+* copilot
 ---
