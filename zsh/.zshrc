@@ -1,9 +1,5 @@
-
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -15,7 +11,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -79,9 +75,15 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    zsh-completions    
-    zsh-syntax-highlighting   
+    zsh-completions
+    zsh-syntax-highlighting
     zsh-autosuggestions
+    git-commit
+    rust
+    terraform
+    kubectl
+    aws
+    starship
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -113,8 +115,6 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 if (( $+commands[lsd])); then
   alias ls='lsd'
@@ -125,29 +125,11 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 
-# Terraform
-if (( $+commands[terraform] )); then
-  alias tf='terraform'
-  complete -o nospace -C /opt/homebrew/bin/terraform terraform
-  export TF_PLUGIN_CACHE_DIR="${HOME}/.terraform.d/plugin-cache"
-fi
-
-# AWS CLI
-if (( $+commands[aws] )); then
-  complete -C '/usr/local/bin/aws_completer' aws
-fi
-
-# Kubectl
-if (( $+commands[kubectl] )); then
-  source <(kubectl completion zsh)
-  alias k='kubectl'
-fi
-
 # Zellij
-if (( $+commands[zellij])); then
-    alias zj='zellij'
-fi
+if [[ -x "$(command -v zellij)" ]];
+then
+  eval "$(zellij setup --generate-completion zsh | grep "^function")"
+  alias zj='zellij'
+fi;
 
-autoload -U +X bashcompinit && bashcompinit
-
-
+autoload -U compinit && compinit
