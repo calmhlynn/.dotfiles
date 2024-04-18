@@ -105,9 +105,15 @@ return require("lazy").setup({
 	{ "rmagatti/auto-session" },
 	{ "windwp/nvim-autopairs" },
 	{ "folke/trouble.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
-	{ "numToStr/Comment.nvim", lazy = false },
 	{ "nvim-lua/plenary.nvim" },
 
+	{
+		"numToStr/Comment.nvim",
+		lazy = false,
+		config = function()
+			require("Comment").setup()
+		end,
+	},
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{
