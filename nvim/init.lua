@@ -76,3 +76,5 @@ require("plugins.lsp.terraform")
 
 require("filetypes.markdown")
 require("filetypes.javascript")
+require("filetypes.graphql")
+require("filetypes.prisma")
