@@ -50,6 +50,7 @@ return require("lazy").setup({
 		},
 	},
 	{ "mfussenegger/nvim-dap" },
+	{ "jose-elias-alvarez/null-ls.nvim" },
 
 	-- Telescope
 	{
