@@ -21,7 +21,7 @@ return require("lazy").setup({
 
 	-- Status Line
 	{ "nvim-lualine/lualine.nvim" },
-	{ "akinsho/bufferline.nvim" },
+	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	-- LSP Installer
 	{ "williamboman/mason.nvim" },
@@ -79,7 +79,17 @@ return require("lazy").setup({
 	},
 
 	-- Completion Engine Plugin
-	{ "hrsh7th/nvim-cmp" },
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			{ "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+		},
+		opts = function(_, opts)
+			opts.formatting = {
+				format = require("tailwindcss-colorizer-cmp").formatter,
+			}
+		end,
+	},
 	{ "L3MON4D3/LuaSnip" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "hrsh7th/cmp-nvim-lsp" },
@@ -108,13 +118,6 @@ return require("lazy").setup({
 	{ "folke/trouble.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
 	{ "nvim-lua/plenary.nvim" },
 
-	{
-		"numToStr/Comment.nvim",
-		lazy = false,
-		config = function()
-			require("Comment").setup()
-		end,
-	},
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{
@@ -138,4 +141,12 @@ return require("lazy").setup({
 		config = true,
 	},
 	{ "lewis6991/gitsigns.nvim" },
+	{
+		"NvChad/nvim-colorizer.lua",
+		opts = {
+			user_default_options = {
+				tailwind = true,
+			},
+		},
+	},
 })

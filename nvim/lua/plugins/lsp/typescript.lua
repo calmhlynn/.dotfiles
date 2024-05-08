@@ -44,12 +44,6 @@ lspconfig["eslint"].setup({
 	on_attach = on_attach,
 })
 
-null_ls.setup({
-	sources = {
-		null_ls.builtins.formatting.prettier,
-	},
-})
-
 -- Prisma
 lspconfig["prismals"].setup({
 	on_attach = on_attach,
@@ -57,4 +51,26 @@ lspconfig["prismals"].setup({
 
 lspconfig["tailwindcss"].setup({
 	on_attach = on_attach,
+	settings = {
+		tailwindCSS = {
+			classAttributes = { "class", "className", "classList", "ngClass" },
+			lint = {
+				cssConflict = "warning",
+				invalidApply = "error",
+				invalidConfigPath = "error",
+				invalidScreen = "error",
+				invalidTailwindDirective = "error",
+				invalidVariant = "error",
+				recommendedVariantOrder = "warning",
+			},
+			validate = true,
+			colorDecorators = true,
+		},
+	},
+})
+
+null_ls.setup({
+	sources = {
+		null_ls.builtins.formatting.prettier,
+	},
 })

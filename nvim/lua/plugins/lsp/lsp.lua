@@ -39,8 +39,7 @@ LSP_ON_ATTACH = function(client, bufnr)
 	-- set keybinds
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-	--    vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+	vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", bufopts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, bufopts)
@@ -50,7 +49,7 @@ LSP_ON_ATTACH = function(client, bufnr)
 	vim.keymap.set("n", "L", "<cmd>Lspsaga show_cursor_diagnostics<CR>", bufopts)
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-	vim.keymap.set("n", "<leader>ff", function()
+	vim.keymap.set("n", "<leader>bf", function()
 		vim.lsp.buf.format()
 	end, bufopts)
 
@@ -98,7 +97,7 @@ LSP_ON_ATTACH = function(client, bufnr)
 		select_signature_key = nil, -- cycle to next signature, e.g. '<M-n>' function overloading
 		move_cursor_key = nil, -- imap, use nvim_set_current_win to move cursor between current win and floating
 	}
-	require("lsp_signature").on_attach(cfg, bufnr) -- Note: add in lsp client on-attach
+	-- require("lsp_signature").on_attach(cfg, bufnr) -- Note: add in lsp client on-attach
 
 	if client.supports_method("textDocument/formatting") then
 		vim.api.nvim_create_autocmd("BufWritePre", {
