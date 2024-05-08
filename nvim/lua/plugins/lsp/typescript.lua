@@ -49,3 +49,12 @@ null_ls.setup({
 		null_ls.builtins.formatting.prettier,
 	},
 })
+
+-- Prisma
+lspconfig["prismals"].setup({
+	on_attach = on_attach,
+})
+
+lspconfig["tailwindcss"].setup({
+	on_attach = on_attach,
+})
