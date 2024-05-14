@@ -96,20 +96,6 @@ return require("lazy").setup({
 	{ "hrsh7th/cmp-path" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({})
-		end,
-	},
-	{
-		"zbirenbaum/copilot-cmp",
-		config = function()
-			require("copilot_cmp").setup()
-		end,
-	},
 
 	-- Utilities
 	{ "rcarriga/nvim-notify" },
@@ -147,6 +133,17 @@ return require("lazy").setup({
 			user_default_options = {
 				tailwind = true,
 			},
+		},
+	},
+	-- ChatGPT
+	{
+		"jackMort/ChatGPT.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"nvim-lua/plenary.nvim",
+			"folke/trouble.nvim",
+			"nvim-telescope/telescope.nvim",
 		},
 	},
 })

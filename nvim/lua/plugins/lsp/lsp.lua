@@ -43,7 +43,7 @@ LSP_ON_ATTACH = function(client, bufnr)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set("n", "<leader>ac", vim.lsp.buf.code_action, bufopts)
+	-- vim.keymap.set("n", "<leader>ac", vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>Lspsaga code_action<CR>", bufopts)
 
 	vim.keymap.set("n", "L", "<cmd>Lspsaga show_cursor_diagnostics<CR>", bufopts)
@@ -111,7 +111,7 @@ LSP_ON_ATTACH = function(client, bufnr)
 	end
 end
 
--- others lsp settings. --ㅅ
+-- others lsp settings. --
 vim.g.rustaceanvim = function()
 	return {
 		-- other rustacean settings. --
@@ -156,7 +156,7 @@ vim.g.rustaceanvim = function()
 				vim.keymap.set("n", "<leader>c", function()
 					vim.cmd.RustLsp({ "openCargo" })
 				end, { buffer = bufnr })
-				vim.lsp.inlay_hint.enable(bufnr, true)
+				-- vim.lsp.inlay_hint.enable(bufnr, true)
 			end,
 		},
 	}

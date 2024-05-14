@@ -59,6 +59,7 @@ require("plugins.gitsigns")
 require("plugins.notify")
 require("plugins.neogit")
 require("plugins.conform")
+require("plugins.chatgpt")
 require("plugins.mason")
 
 require("plugins.lsp.lsp")
