@@ -37,6 +37,7 @@ lspconfig["tsserver"].setup({
 			insertSpaceBeforeFunctionParenthesis = true,
 		},
 	},
+	filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
 })
 
 -- ESLint
