@@ -103,6 +103,7 @@ return require("lazy").setup({
 	{ "windwp/nvim-autopairs" },
 	{ "folke/trouble.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
 	{ "nvim-lua/plenary.nvim" },
+	{ "windwp/nvim-ts-autotag" },
 
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
