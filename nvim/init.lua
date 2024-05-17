@@ -61,6 +61,7 @@ require("plugins.neogit")
 require("plugins.conform")
 require("plugins.chatgpt")
 require("plugins.mason")
+require("plugins.comment")
 
 require("plugins.lsp.lsp")
 -- require("plugins.lsp.rust")

@@ -104,6 +104,8 @@ return require("lazy").setup({
 	{ "folke/trouble.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
 	{ "nvim-lua/plenary.nvim" },
 	{ "windwp/nvim-ts-autotag" },
+	{ "numToStr/Comment.nvim" },
+	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
