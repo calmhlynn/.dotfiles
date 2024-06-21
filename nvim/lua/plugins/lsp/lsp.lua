@@ -114,7 +114,7 @@ vim.g.rustaceanvim = function()
 	return {
 		-- other rustacean settings. --
 		server = {
-			on_attach = function(client, bufnr)
+			on_attach = function(_, bufnr)
 				vim.keymap.set("n", "<leader>ac", function()
 					vim.cmd.RustLsp({ "codeAction" })
 				end, { buffer = bufnr })
@@ -154,7 +154,7 @@ vim.g.rustaceanvim = function()
 				vim.keymap.set("n", "<leader>c", function()
 					vim.cmd.RustLsp({ "openCargo" })
 				end, { buffer = bufnr })
-				vim.lsp.inlay_hint.enable(bufnr, true)
+				vim.lsp.inlay_hint.enable(true)
 			end,
 		},
 	}
