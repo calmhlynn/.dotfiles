@@ -69,9 +69,3 @@ lspconfig["tailwindcss"].setup({
 		},
 	},
 })
-
-null_ls.setup({
-	sources = {
-		null_ls.builtins.formatting.prettier,
-	},
-})
