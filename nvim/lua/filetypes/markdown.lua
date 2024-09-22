@@ -9,13 +9,3 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = "markdown",
 	command = "set wrap | set textwidth=80",
 })
-
-require("render-markdown").setup({
-	file_types = { "markdown" },
-	render_modes = {
-		"n",
-		"v",
-		"i",
-		"c",
-	},
-})

@@ -62,6 +62,7 @@ require("plugins.conform")
 -- require("plugins.chatgpt")
 require("plugins.mason")
 require("plugins.comment")
+require("plugins.markdown")
 
 require("plugins.lsp.lsp")
 -- require("plugins.lsp.rust")
