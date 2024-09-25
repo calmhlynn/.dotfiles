@@ -25,6 +25,13 @@ saga.setup({
 	symbol_in_winbar = {
 		hide_keyword = false, -- Temporarily fix formatting bug on Scala
 	},
+	code_action = {
+		style = "vsplit",
+		max_height = 0.5,
+		max_width = 0.5,
+		show_server_name = true,
+		extend_gitsigns = true,
+	},
 })
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -89,6 +96,8 @@ LSP_ON_ATTACH = function(client, bufnr)
 	vim.keymap.set({ "n", "v" }, "<leader>ac", "<cmd>Lspsaga code_action<CR>", bufopts)
 
 	vim.keymap.set("n", "L", "<cmd>Lspsaga show_cursor_diagnostics<CR>", bufopts)
+	vim.keymap.set("n", "<leader>f", "<cmd>Lspsaga finder<CR>", bufopts)
+	vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>", bufopts)
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
 	vim.keymap.set("n", "<leader>bf", function()
