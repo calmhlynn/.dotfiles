@@ -1,4 +1,5 @@
 require("render-markdown").setup({
+	enabled = false,
 	file_types = { "markdown" },
 	render_modes = { "n", "v", "i", "c" },
 
