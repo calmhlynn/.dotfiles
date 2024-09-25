@@ -28,7 +28,11 @@ return require("lazy").setup({
 	{ "williamboman/mason-lspconfig.nvim" },
 
 	-- Rust
-	{ "mrcjkb/rustaceanvim", version = "^4", ft = { "rust" } },
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^5",
+		lazy = false,
+	},
 	{
 		"saecki/crates.nvim",
 		tag = "stable",
@@ -116,10 +120,11 @@ return require("lazy").setup({
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = function()
-			vim.fn["mkdp#util#install"]()
+		build = "cd app && yarn install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
 		end,
+		ft = { "markdown" },
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
