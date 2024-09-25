@@ -86,6 +86,23 @@ plugins=(
     starship
 )
 
+
+# Zellij
+if [[ -x "$(command -v zellij)" ]];
+then
+  ZELLIJ_COMPLETION_DIR="${ZSH_CUSTOM:-$ZSH/custom}/plugins/zellij"
+  if [[ ! -d "$ZELLIJ_COMPLETION_DIR" ]]; then
+    mkdir -p "$ZELLIJ_COMPLETION_DIR"
+  fi
+  
+  if [[ ! -f "$ZELLIJ_COMPLETION_DIR/_zellij" || "$(zellij --version)" != "$(cat "$ZELLIJ_COMPLETION_DIR/.zellij_version" 2>/dev/null)" ]]; then
+    zellij setup --generate-completion zsh > "$ZELLIJ_COMPLETION_DIR/_zellij"
+    zellij --version > "$ZELLIJ_COMPLETION_DIR/.zellij_version"
+  fi
+  fpath=("$ZELLIJ_COMPLETION_DIR" $fpath)
+  alias zj='zellij'
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -125,11 +142,3 @@ alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 
-# Zellij
-if [[ -x "$(command -v zellij)" ]];
-then
-  eval "$(zellij setup --generate-completion zsh | grep "^function")"
-  alias zj='zellij'
-fi;
-
-autoload -U compinit && compinit
