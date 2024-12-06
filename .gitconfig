@@ -1,0 +1,103 @@
+# vim: noexpandtab sw=8
+[user]
+	name = calmhlynn
+	email = barca105@nate.com
+[core]
+	editor = nvim
+	excludesfile = ~/.gitexclude
+	fscache = yes
+	preloadindex = yes
+	autocrlf = no
+	quotepath = no
+	precomposeunicode = yes
+[init]
+	defaultBranch = main
+[log]
+	date = iso8601
+[color]
+	ui = auto
+[diff]
+	renames = copies
+	algorithm = histogram
+	submodule = log
+[branch]
+	sort = committerdate
+[fetch]
+	prune = yes
+	prunetags = true
+	fsckobjects = true
+[transfer]
+	fsckobjects = true
+[receive]
+	fsckObjects = true
+[push]
+	default = simple
+[pull]
+	rebase = true
+[rebase]
+	autostash = true
+	autosquash = true
+[merge]
+	conflictstyle = zdiff3
+[commit]
+	verbose = true
+	gpgsign = yes
+[tag]
+	gpgsign = true
+[rerere]
+	enabled = true
+[stash]
+	showPatch = true
+[status]
+	showStash = true
+	submoduleSummary = true
+[submodule]
+	fetchJobs = 0
+	recurse = true
+[help]
+	autocorrect = prompt
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+	# Complex and long git aliases.
+	# Check out https://github.com/simnalamburt/cgitc for short aliases!
+
+	# git all
+	#
+	# It shows *all* git commit references in a graph format, including dangling
+	# or unreachable commits (e.g., popped stashes, etc.).
+	all = "!_() { git log --oneline --graph --reflog $(git fsck --unreachable | perl -ne 'print \"$1\\n\" if /^\\w+ commit ([0-9a-f]+)$/'); }; _"
+
+	# git pr [<remote>]
+	#
+	# Fetch pull requests from GitHub. Fetch "origin" if remote is not
+	# specified.
+	#
+	# Usage:
+	#   git pr
+	#   git pr other
+	pr = "!_() { git config fetch.prune no && git fetch ${1:-origin} +refs/pull/*/head:refs/remotes/${1:-origin}/pr/*; }; _"
+
+	# git g
+	#
+	# Git graph with signature info
+	g = "log --graph --pretty='format:%C(auto)%h%d %s%x1b[38;5;022m% GS %x1b[38;5;239m%cr%x1b[0m'"
+
+	# git h <filename>
+	#
+	# Show history of a file
+	#
+	# Usage:
+	#   git h README.md
+	h = "log -p -M --follow"
+
+	# git sed <regex>
+	#
+	# Find and replace patterns with given regex.
+	#
+	# Usage:
+	#   git sed 's/yolo/swag/g'
+	sed = "!_() { git ls-files -z | xargs -0 perl -i -pe ${1}; }; _"
