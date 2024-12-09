@@ -65,6 +65,7 @@ require("plugins.comment")
 require("plugins.markdown")
 
 require("plugins.lsp.lsp")
+require("plugins.lsp.yaml")
 -- require("plugins.lsp.rust")
 -- require("plugins.lsp.zig")
 -- require("plugins.lsp.typescript")
