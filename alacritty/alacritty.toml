@@ -67,5 +67,5 @@ action = "Copy"
 key = "C"
 mods = "Control|Shift"
 
-[window]
-opacity = 0.92
+# [window]
+# opacity = 0.92
