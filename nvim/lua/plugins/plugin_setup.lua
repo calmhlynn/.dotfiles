@@ -148,7 +148,7 @@ return require("lazy").setup({
 			},
 		},
 	},
-
+	{ "towolf/vim-helm", ft = "helm" },
 	{
 		"yetone/avante.nvim",
 		event = "VeryLazy",
