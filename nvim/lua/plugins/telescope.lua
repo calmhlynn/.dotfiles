@@ -43,6 +43,8 @@ vim.keymap.set("i", [[<C-\>g]], ":Telescope live_grep<CR>", { noremap = true, si
 vim.keymap.set("n", [[<C-\>g]], ":Telescope live_grep<CR>", { noremap = true, silent = true })
 vim.keymap.set("i", [[<C-\>f]], ":Telescope find_files<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", [[<C-\>f]], ":Telescope find_files<CR>", { noremap = true, silent = true })
+vim.keymap.set("i", [[<C-\>d]], ":Telescope find_files no_ignore=true<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", [[<C-\>d]], ":Telescope find_files no_ignore=true<CR>", { noremap = true, silent = true })
 vim.keymap.set("i", [[<C-\>b]], ":Telescope buffers<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", [[<C-\>b]], ":Telescope buffers<CR>", { noremap = true, silent = true })
 vim.keymap.set("i", [[<C-\>p]], ":Telescope frecency<CR>", { noremap = true, silent = true }) -- p means "priority"
