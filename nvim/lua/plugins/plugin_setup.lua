@@ -62,38 +62,12 @@ return require("lazy").setup({
 		tag = "0.1.5",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
-	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-	{
-		"nvim-telescope/telescope-frecency.nvim",
-		config = function()
-			require("telescope").load_extension("frecency")
-		end,
-	},
 
 	-- Treesitter
-	{ "hiphish/rainbow-delimiters.nvim" },
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-	-- Theme
-	{
-		"rebelot/kanagawa.nvim",
-		config = function()
-			vim.cmd([[colorscheme kanagawa-dragon]])
-		end,
-	},
-
 	-- Completion Engine Plugin
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			{ "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
-		},
-		opts = function(_, opts)
-			opts.formatting = {
-				format = require("tailwindcss-colorizer-cmp").formatter,
-			}
-		end,
-	},
+	{ "hrsh7th/nvim-cmp" },
 	{ "L3MON4D3/LuaSnip" },
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "hrsh7th/cmp-nvim-lsp" },
@@ -102,16 +76,15 @@ return require("lazy").setup({
 	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 
 	-- Utilities
+	{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	{ "hiphish/rainbow-delimiters.nvim" },
 	{ "rcarriga/nvim-notify" },
 	{ "rmagatti/auto-session" },
 	{ "windwp/nvim-autopairs" },
 	{ "folke/trouble.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
 	{ "nvim-lua/plenary.nvim" },
-	{ "windwp/nvim-ts-autotag" },
 	{ "numToStr/Comment.nvim" },
-	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 
-	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{
 		"stevearc/conform.nvim",
@@ -140,15 +113,7 @@ return require("lazy").setup({
 		config = true,
 	},
 	{ "lewis6991/gitsigns.nvim" },
-	{
-		"NvChad/nvim-colorizer.lua",
-		opts = {
-			user_default_options = {
-				tailwind = true,
-			},
-		},
-	},
-	{ "towolf/vim-helm", ft = "helm" },
+	{ "NvChad/nvim-colorizer.lua" },
 	{
 		"yetone/avante.nvim",
 		event = "VeryLazy",
@@ -185,4 +150,19 @@ return require("lazy").setup({
 			"MeanderingProgrammer/render-markdown.nvim",
 		},
 	},
+
+	-- Theme
+	{
+		"rebelot/kanagawa.nvim",
+		config = function()
+			vim.cmd([[colorscheme kanagawa-dragon]])
+		end,
+	},
+
+	{ "towolf/vim-helm", ft = "helm" },
+
+	-- TypeScript
+	-- Comment used only by TSX
+	-- { "windwp/nvim-ts-autotag" },
+	-- { "JoosepAlviste/nvim-ts-context-commentstring" },
 })
