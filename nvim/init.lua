@@ -20,6 +20,7 @@ vim.opt.hidden = true
 vim.opt.updatetime = 300
 vim.g.loaded_perl_provider = 0
 vim.wo.signcolumn = "yes"
+vim.opt.clipboard = "unnamedplus"
 vim.cmd([[language en_US]])
 
 -- (Global) Key mappings
@@ -63,6 +64,7 @@ require("plugins.avante")
 require("plugins.mason")
 require("plugins.comment")
 require("plugins.markdown")
+require("plugins.util")
 
 require("plugins.lsp.lsp")
 require("plugins.lsp.yaml")
@@ -72,7 +74,7 @@ require("plugins.lsp.yaml")
 require("plugins.lsp.lua")
 require("plugins.lsp.python")
 require("plugins.lsp.cpp")
--- require("plugins.lsp.terraform")
+require("plugins.lsp.terraform")
 -- require("plugins.lsp.scala")
 -- require("plugins.lsp.go")
 
