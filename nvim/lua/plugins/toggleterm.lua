@@ -1,6 +1,7 @@
 require("toggleterm").setup({
 	size = 20,
 	auto_scroll = false,
+	shading_factor = 0,
 	persist_size = false,
 	persist_mode = false,
 	-- direction = "float",
