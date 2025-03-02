@@ -16,14 +16,14 @@ return require("lazy").setup({
 	-- Plugin Manager
 	{ "folke/lazy.nvim" },
 
-	-- File Explorer
+	-- File explorer
 	{ "nvim-tree/nvim-tree.lua" },
 
-	-- Status Line
+	-- Status line
 	{ "nvim-lualine/lualine.nvim" },
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 
-	-- LSP Installer
+	-- LSP installer
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 
@@ -36,9 +36,6 @@ return require("lazy").setup({
 	{
 		"saecki/crates.nvim",
 		tag = "stable",
-		config = function()
-			require("crates").setup()
-		end,
 	},
 
 	-- LSP
@@ -66,7 +63,7 @@ return require("lazy").setup({
 	-- Treesitter
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-	-- Completion Engine Plugin
+	-- Completion engine plugins
 	{ "hrsh7th/nvim-cmp" },
 	{ "L3MON4D3/LuaSnip" },
 	{ "saadparwaiz1/cmp_luasnip" },
@@ -103,14 +100,6 @@ return require("lazy").setup({
 		"MeanderingProgrammer/render-markdown.nvim",
 		opts = {},
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-	},
-	{
-		"NeogitOrg/neogit",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-		config = true,
 	},
 	{ "lewis6991/gitsigns.nvim" },
 	{ "NvChad/nvim-colorizer.lua" },
@@ -160,9 +149,17 @@ return require("lazy").setup({
 	},
 
 	{ "towolf/vim-helm", ft = "helm" },
-
-	-- TypeScript
-	-- Comment used only by TSX
-	-- { "windwp/nvim-ts-autotag" },
-	-- { "JoosepAlviste/nvim-ts-context-commentstring" },
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
+		},
+	},
 })
