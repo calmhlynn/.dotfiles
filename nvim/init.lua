@@ -1,4 +1,4 @@
--- Setup Lazy plugin manager
+-- Setup plugin manager
 require("plugins.plugin_setup")
 
 -- Settings
@@ -41,7 +41,6 @@ require("plugins.trouble")
 require("plugins.bufferline")
 require("plugins.gitsigns")
 require("plugins.notify")
-require("plugins.neogit")
 require("plugins.conform")
 require("plugins.avante")
 require("plugins.mason")
