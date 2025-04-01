@@ -51,3 +51,8 @@ function _G.smart_space()
 	end
 end
 vim.api.nvim_set_keymap("i", "<Space>", "v:lua.smart_space()", { expr = true, noremap = true })
+
+-- this feature requires nvim versions >= 0.11
+vim.diagnostic.config({
+	virtual_lines = true,
+})
