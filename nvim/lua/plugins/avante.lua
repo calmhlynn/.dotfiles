@@ -1,7 +1,8 @@
 require("avante").setup({
 
-	provider = "openai",
-	openai = {
-		api_key_name = "cmd:security find-generic-password -s OPENAI_KEY -a calmhlynn -w",
+	provider = "claude",
+	claude = {
+        model = "claude-sonnet-4-20250514",
+		api_key_name = "cmd:pass show api_tokens/claude",
 	},
 })
