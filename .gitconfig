@@ -1,7 +1,7 @@
-# vim: noexpandtab sw=8
 [user]
 	name = calmhlynn
-	email = barca105@nate.com
+    email = barca105@naver.com
+	signingkey = 913FBD0B6CDFCAFE8FB80C8FE201D1FA43538FCC
 [core]
 	editor = nvim
 	excludesfile = ~/.gitexclude
