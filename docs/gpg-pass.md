@@ -22,13 +22,9 @@ pass init "Your Name (Comment)" # gpg --list-key에서 출력된 uid 영역
 ```
 
 
-
 #### 4 암호 생성
 
 ```bash
 pass insert email/test@test.com # 그 후 비밀번호 입력
 ```
 
-
-
----
