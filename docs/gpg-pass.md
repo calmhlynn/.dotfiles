@@ -32,5 +32,3 @@ pass insert email/test@test.com # 그 후 비밀번호 입력
 
 
 ---
-
-pub key, pri key 각각 출력해서 사용할 수 있음
