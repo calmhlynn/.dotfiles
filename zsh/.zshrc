@@ -133,8 +133,8 @@ if (( $+commands[lsd])); then
   alias ls='lsd'
 fi
 
-alias l='ls -l'
+alias l='ls -lg'
 alias la='ls -a'
-alias lla='ls -la'
+alias lla='ls -lga'
 alias lt='ls --tree'
 
