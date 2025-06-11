@@ -78,11 +78,7 @@ plugins=(
     zsh-completions
     zsh-syntax-highlighting
     zsh-autosuggestions
-    git-commit
     rust
-    terraform
-    kubectl
-    aws
     starship
 )
 
@@ -116,7 +112,7 @@ export LANG=en_US.UTF-8
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
 else
-   export EDITOR='mvim'
+   export EDITOR='nvim'
 fi
 
 # Compilation flags
