@@ -1,5 +1,4 @@
 
-````markdown
 # GPG Key Export & Import
 
 This README describes how to export your GPG public and secret keys to files on a local Linux PC, and how to import them back into GPG. Use these steps to back up your keys or transfer them to another machine.
@@ -102,6 +101,3 @@ gpg --edit-key <KEY_ID>
 ```
 
 Your keys should now be correctly exported, imported, and available for use. Enjoy secure signing and encryption!
-
-```
-```
