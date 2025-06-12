@@ -26,7 +26,7 @@ vim.opt.ttimeoutlen = 10
 vim.g.loaded_perl_provider = 0
 vim.wo.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
-vim.cmd([[language en_US]])
+-- vim.cmd([[language en_US]])
 
 -- Plugins
 require("plugins.auto_session")
@@ -54,15 +54,12 @@ require("plugins.lsp.yaml")
 require("plugins.lsp.lua")
 require("plugins.lsp.python")
 require("plugins.lsp.rust")
+require("plugins.lsp.c")
 -- require("plugins.lsp.zig")
 -- require("plugins.lsp.typescript")
-require("plugins.lsp.cpp")
 -- require("plugins.lsp.terraform")
--- require("plugins.lsp.scala")
--- require("plugins.lsp.go")
 
 -- Filetypes
+require("filetypes.c")
 require("filetypes.markdown")
 -- require("filetypes.javascript")
--- require("filetypes.graphql")
--- require("filetypes.prisma")
