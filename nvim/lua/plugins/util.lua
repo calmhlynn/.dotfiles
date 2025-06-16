@@ -43,7 +43,7 @@ hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_ex
 local last_space_time = 0
 function _G.smart_space()
 	local now = vim.loop.hrtime() / 1e6
-	if now - last_space_time < 50 then
+	if now - last_space_time < 20 then
 		return ""
 	else
 		last_space_time = now
@@ -52,11 +52,11 @@ function _G.smart_space()
 end
 vim.api.nvim_set_keymap("i", "<Space>", "v:lua.smart_space()", { expr = true, noremap = true })
 
--- this feature requires nvim versions >= 0.11
-vim.diagnostic.config({
-	virtual_lines = true,
-
-    virtual_lines = {
-        current_line = true,
-    },
-})
+-- -- this feature requires nvim versions >= 0.11
+-- vim.diagnostic.config({
+-- 	virtual_lines = true,
+--
+--     virtual_lines = {
+--         current_line = true,
+--     },
+-- })
