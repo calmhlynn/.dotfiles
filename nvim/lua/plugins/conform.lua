@@ -5,7 +5,7 @@ require("conform").setup({
 	},
 	formatters = {
 		["clang-format"] = {
-			args = { "--style='{ColumnLimit: 150}'" },
+			args = { "--style={ColumnLimit: 150}" },
 		},
 	},
 	format_on_save = {
