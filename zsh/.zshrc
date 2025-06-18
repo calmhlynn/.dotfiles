@@ -133,6 +133,10 @@ if (( $+commands[lsd])); then
   alias ls='lsd'
 fi
 
+if (( $+commands[wezterm])); then
+    alias wz='wezterm'
+fi
+
 alias l='ls -lg'
 alias la='ls -a'
 alias lla='ls -lga'
