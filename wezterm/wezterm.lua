@@ -3,8 +3,12 @@ local config = wezterm.config_builder()
 local ac = wezterm.action
 
 config.front_end = "WebGpu"
-config.font = wezterm.font("Hack Nerd Font Mono")
-config.font_size = 15
+config.font = wezterm.font_with_fallback({
+	"Hack Nerd Font Mono",
+	"Noto Sans Mono CJK KR",
+})
+-- config.color_scheme = "Kanagawa (Gogh)"
+config.font_size = 14
 config.use_fancy_tab_bar = true
 config.window_decorations = "RESIZE"
 config.show_new_tab_button_in_tab_bar = false
@@ -102,6 +106,10 @@ config.keys = {
 	{ key = "w", mods = "LEADER", action = ac.CloseCurrentTab({ confirm = true }) },
 	{ key = ";", mods = "LEADER", action = ac.AdjustPaneSize({ "Left", 5 }) },
 	{ key = "'", mods = "LEADER", action = ac.AdjustPaneSize({ "Right", 5 }) },
+
+	{ key = "c", mods = "CTRL|SHIFT", action = ac.CopyTo("ClipboardAndPrimarySelection") },
+	{ key = "v", mods = "CTRL|SHIFT", action = ac.PasteFrom("Clipboard") },
+	{ key = "l", mods = "CTRL|SHIFT", action = ac.ShowDebugOverlay },
 }
 
 for i = 1, 9 do
@@ -111,11 +119,5 @@ for i = 1, 9 do
 		action = ac.ActivateTab(i - 1),
 	})
 end
-
-config.unix_domains = {
-	{
-		name = "main",
-	},
-}
 
 return config
