@@ -14,6 +14,7 @@ config.window_decorations = "RESIZE"
 config.show_new_tab_button_in_tab_bar = false
 config.show_tab_index_in_tab_bar = false
 
+-- kanagawa dragon without wezterm@nightly
 config.colors = {
 	background = "#181616",
 	foreground = "#c5c9c5",
@@ -88,36 +89,34 @@ config.window_padding = {
 	top = 2,
 	bottom = 2,
 }
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
-
-config.disable_default_key_bindings = true
 
 config.keys = {
-	{ key = "p", mods = "LEADER", action = ac.SplitHorizontal },
+	{ key = "l", mods = "CTRL|SHIFT", action = ac.SplitHorizontal },
+	{ key = "m", mods = "CTRL|SHIFT", action = ac.SplitVertical },
+	{ key = "n", mods = "CTRL|SHIFT", action = ac.SpawnTab("CurrentPaneDomain") },
 
-	{ key = "LeftArrow", mods = "LEADER", action = ac.ActivatePaneDirection("Left") },
-	{ key = "RightArrow", mods = "LEADER", action = ac.ActivatePaneDirection("Right") },
+	{ key = "x", mods = "CTRL|SHIFT", action = ac.CloseCurrentPane({ confirm = true }) },
+	{ key = "w", mods = "CTRL|SHIFT", action = ac.CloseCurrentTab({ confirm = true }) },
 
-	{ key = "x", mods = "LEADER", action = ac.CloseCurrentPane({ confirm = true }) },
-	{ key = "n", mods = "LEADER", action = ac.SpawnTab("CurrentPaneDomain") },
-	{ key = "]", mods = "LEADER", action = ac.ActivateTabRelative(1) },
-	{ key = "[", mods = "LEADER", action = ac.ActivateTabRelative(-1) },
+	{ key = "LeftArrow", mods = "CTRL|SHIFT", action = ac.AdjustPaneSize({ "Left", 5 }) },
+	{ key = "RightArrow", mods = "CTRL|SHIFT", action = ac.AdjustPaneSize({ "Right", 5 }) },
+	{ key = "UpArrow", mods = "CTRL|SHIFT", action = ac.AdjustPaneSize({ "Up", 5 }) },
+	{ key = "DownArrow", mods = "CTRL|SHIFT", action = ac.AdjustPaneSize({ "Down", 5 }) },
 
-	{ key = "w", mods = "LEADER", action = ac.CloseCurrentTab({ confirm = true }) },
-	{ key = ";", mods = "LEADER", action = ac.AdjustPaneSize({ "Left", 5 }) },
-	{ key = "'", mods = "LEADER", action = ac.AdjustPaneSize({ "Right", 5 }) },
+	{ key = "]", mods = "CTRL", action = ac.ActivateTabRelative(1) },
+	{ key = "[", mods = "CTRL", action = ac.ActivateTabRelative(-1) },
 
-	{ key = "c", mods = "CTRL|SHIFT", action = ac.CopyTo("ClipboardAndPrimarySelection") },
-	{ key = "v", mods = "CTRL|SHIFT", action = ac.PasteFrom("Clipboard") },
-	{ key = "l", mods = "CTRL|SHIFT", action = ac.ShowDebugOverlay },
+	{ key = "LeftArrow", mods = "CTRL", action = ac.ActivatePaneDirection("Left") },
+	{ key = "RightArrow", mods = "CTRL", action = ac.ActivatePaneDirection("Right") },
+	{ key = "UpArrow", mods = "CTRL", action = ac.ActivatePaneDirection("Up") },
+	{ key = "DownArrow", mods = "CTRL", action = ac.ActivatePaneDirection("Down") },
 }
 
 for i = 1, 9 do
 	table.insert(config.keys, {
 		key = tostring(i),
-		mods = "LEADER",
+		mods = "CTRL",
 		action = ac.ActivateTab(i - 1),
 	})
 end
-
 return config
