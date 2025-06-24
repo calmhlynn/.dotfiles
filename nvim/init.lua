@@ -11,6 +11,8 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.wildignorecase = true
 vim.opt.ignorecase = true
+-- vim.opt.textwidth = 0
+-- vim.opt.wrap = false
 vim.opt.smartcase = true
 vim.opt.ff = "unix"
 vim.opt.scrolloff = 4
@@ -22,10 +24,11 @@ vim.opt.lazyredraw = true
 vim.opt.timeout = true
 vim.opt.ttimeout = true
 vim.opt.timeoutlen = 500
-vim.opt.ttimeoutlen = 10
+vim.opt.ttimeoutlen = 100
 vim.g.loaded_perl_provider = 0
 vim.wo.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
+vim.opt.formatoptions:remove("t")
 -- vim.cmd([[language en_US]])
 
 -- Plugins
@@ -46,6 +49,7 @@ require("plugins.avante")
 require("plugins.mason")
 require("plugins.comment")
 require("plugins.markdown")
+require("plugins.kanagawa")
 require("plugins.util")
 
 -- LSPs
@@ -61,5 +65,5 @@ require("plugins.lsp.c")
 
 -- Filetypes
 require("filetypes.c")
-require("filetypes.markdown")
+-- require("filetypes.markdown")
 -- require("filetypes.javascript")
