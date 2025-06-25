@@ -8,8 +8,10 @@ kanagawa.setup({
 		-- local theme = colors.theme
 		return {
 			NormalFloat = { fg = colors.palette.dragonWhite, bg = colors.palette.dragonBlack3 },
-			FloatBorder = { fg = colors.palette.dragonWhite, bg = colors.palette.dragonBlack3 },
-			LspInfoBorder = { fg = colors.palette.dragonWhite, bg = colors.palette.dragonBlack3 },
+			NormalFloat = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
+			FloatBorder = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
+
+			AvanteSidebarWinSeparator = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
 		}
 	end,
 })
