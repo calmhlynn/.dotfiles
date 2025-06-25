@@ -40,17 +40,17 @@ require("ibl").setup({ indent = { highlight = highlight } })
 hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 
 -- This code addresses the issue of duplicate spaces when typing in Korean.
-local last_space_time = 0
-function _G.smart_space()
-	local now = vim.loop.hrtime() / 1e6
-	if now - last_space_time < 20 then
-		return ""
-	else
-		last_space_time = now
-		return " "
-	end
-end
-vim.api.nvim_set_keymap("i", "<Space>", "v:lua.smart_space()", { expr = true, noremap = true })
+-- local last_space_time = 0
+-- function _G.smart_space()
+-- 	local now = vim.loop.hrtime() / 1e6
+-- 	if now - last_space_time < 20 then
+-- 		return ""
+-- 	else
+-- 		last_space_time = now
+-- 		return " "
+-- 	end
+-- end
+-- vim.api.nvim_set_keymap("i", "<Space>", "v:lua.smart_space()", { expr = true, noremap = true })
 
 -- -- this feature requires nvim versions >= 0.11
 -- vim.diagnostic.config({

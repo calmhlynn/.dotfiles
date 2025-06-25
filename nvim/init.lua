@@ -11,8 +11,6 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.wildignorecase = true
 vim.opt.ignorecase = true
--- vim.opt.textwidth = 0
--- vim.opt.wrap = false
 vim.opt.smartcase = true
 vim.opt.ff = "unix"
 vim.opt.scrolloff = 4
@@ -28,7 +26,7 @@ vim.opt.ttimeoutlen = 100
 vim.g.loaded_perl_provider = 0
 vim.wo.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
-vim.opt.formatoptions:remove("t")
+vim.o.winborder = "rounded"
 -- vim.cmd([[language en_US]])
 
 -- Plugins

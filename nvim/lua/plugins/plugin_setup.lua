@@ -30,7 +30,7 @@ return require("lazy").setup({
 	-- Rust
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^5",
+		version = "^6",
 		lazy = false,
 	},
 	{
@@ -40,16 +40,6 @@ return require("lazy").setup({
 
 	-- LSP
 	{ "neovim/nvim-lspconfig" },
-	{
-		"nvimdev/lspsaga.nvim",
-		config = function()
-			require("lspsaga").setup({})
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter", -- optional
-			"nvim-tree/nvim-web-devicons", -- optional
-		},
-	},
 	{ "mfussenegger/nvim-dap" },
 	{ "jose-elias-alvarez/null-ls.nvim" },
 
@@ -74,6 +64,7 @@ return require("lazy").setup({
 
 	-- Utilities
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	{ "lewis6991/hover.nvim" },
 	{ "hiphish/rainbow-delimiters.nvim" },
 	{ "rcarriga/nvim-notify" },
 	{ "rmagatti/auto-session" },
@@ -81,6 +72,7 @@ return require("lazy").setup({
 	{ "folke/trouble.nvim", dependencies = "kyazdani42/nvim-web-devicons" },
 	{ "nvim-lua/plenary.nvim" },
 	{ "numToStr/Comment.nvim" },
+	{ "aznhe21/actions-preview.nvim" },
 
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{
@@ -138,13 +130,6 @@ return require("lazy").setup({
 			},
 			"MeanderingProgrammer/render-markdown.nvim",
 		},
-	},
-	{
-		"chipsenkbeil/distant.nvim",
-		branch = "v0.3",
-		config = function()
-			require("distant"):setup()
-		end,
 	},
 	-- Theme
 	{

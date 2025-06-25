@@ -1,10 +1,24 @@
 require("toggleterm").setup({
 	size = 20,
 	auto_scroll = false,
-	shading_factor = 0,
 	persist_size = false,
 	persist_mode = false,
 	-- direction = "float",
+	highlights = {
+		Normal = {
+			link = "Normal",
+		},
+		NormalFloat = {
+			link = "NormalFloat",
+		},
+		FloatBorder = {
+			link = "FloatBorder",
+		},
+	},
+
+	float_opts = {
+		border = "rounded",
+	},
 })
 
 vim.api.nvim_create_autocmd(
