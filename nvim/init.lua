@@ -26,8 +26,18 @@ vim.opt.ttimeoutlen = 100
 vim.g.loaded_perl_provider = 0
 vim.wo.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
-vim.o.winborder = "rounded"
 -- vim.cmd([[language en_US]])
+
+-- LSPs
+require("plugins.lsp.lsp")
+require("plugins.lsp.yaml")
+require("plugins.lsp.lua")
+require("plugins.lsp.python")
+require("plugins.lsp.rust")
+require("plugins.lsp.c")
+-- require("plugins.lsp.zig")
+-- require("plugins.lsp.typescript")
+-- require("plugins.lsp.terraform")
 
 -- Plugins
 require("plugins.auto_session")
@@ -49,17 +59,6 @@ require("plugins.comment")
 require("plugins.markdown")
 require("plugins.kanagawa")
 require("plugins.util")
-
--- LSPs
-require("plugins.lsp.lsp")
-require("plugins.lsp.yaml")
-require("plugins.lsp.lua")
-require("plugins.lsp.python")
-require("plugins.lsp.rust")
-require("plugins.lsp.c")
--- require("plugins.lsp.zig")
--- require("plugins.lsp.typescript")
--- require("plugins.lsp.terraform")
 
 -- Filetypes
 require("filetypes.c")

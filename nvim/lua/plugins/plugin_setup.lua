@@ -64,7 +64,6 @@ return require("lazy").setup({
 
 	-- Utilities
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
-	{ "lewis6991/hover.nvim" },
 	{ "hiphish/rainbow-delimiters.nvim" },
 	{ "rcarriga/nvim-notify" },
 	{ "rmagatti/auto-session" },
@@ -73,6 +72,30 @@ return require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ "numToStr/Comment.nvim" },
 	{ "aznhe21/actions-preview.nvim" },
+
+	{
+		"lewis6991/hover.nvim",
+		config = function()
+			require("hover").setup({
+				init = function()
+					require("hover.providers.lsp")
+					require("hover.providers.highlight")
+				end,
+				preview_opts = { border = "single" },
+			})
+			vim.keymap.set("n", "K", require("hover").hover)
+			vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
+			vim.keymap.set("n", "<C-p>", function()
+				require("hover").hover_switch("previous")
+			end, { desc = "hover.nvim (previous source)" })
+			vim.keymap.set("n", "<C-n>", function()
+				require("hover").hover_switch("next")
+			end, { desc = "hover.nvim (next source)" })
+
+			vim.keymap.set("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
+			vim.o.mousemoveevent = true
+		end,
+	},
 
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{
