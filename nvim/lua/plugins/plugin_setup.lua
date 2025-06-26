@@ -49,6 +49,16 @@ return require("lazy").setup({
 		tag = "0.1.5",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
+		config = function()
+			require("telescope").load_extension("fzf")
+		end,
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+		},
+	},
 
 	-- Treesitter
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -79,7 +89,7 @@ return require("lazy").setup({
 			require("hover").setup({
 				init = function()
 					require("hover.providers.lsp")
-					require("hover.providers.highlight")
+					require("hover.providers.diagnostic")
 				end,
 				preview_opts = { border = "single" },
 			})
