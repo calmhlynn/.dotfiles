@@ -1,5 +1,5 @@
 local lspconfig = require("lspconfig")
-local null_ls = require("null-ls")
+-- local null_ls = require("null-ls")
 
 local on_attach = function(client, bufnr)
 	LSP_ON_ATTACH(client, bufnr)
@@ -42,11 +42,6 @@ lspconfig["tsserver"].setup({
 
 -- ESLint
 lspconfig["eslint"].setup({
-	on_attach = on_attach,
-})
-
--- Prisma
-lspconfig["prismals"].setup({
 	on_attach = on_attach,
 })
 

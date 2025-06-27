@@ -20,7 +20,7 @@ return require("lazy").setup({
 	{ "nvim-tree/nvim-tree.lua" },
 
 	-- Status line
-	{ "nvim-lualine/lualine.nvim" },
+	{ "nvim-lualine/lualine.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 	{ "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	-- LSP installer
@@ -41,7 +41,6 @@ return require("lazy").setup({
 	-- LSP
 	{ "neovim/nvim-lspconfig" },
 	{ "mfussenegger/nvim-dap" },
-	{ "jose-elias-alvarez/null-ls.nvim" },
 
 	-- Telescope
 	{
@@ -74,7 +73,6 @@ return require("lazy").setup({
 
 	-- Utilities
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
-	{ "hiphish/rainbow-delimiters.nvim" },
 	{ "rcarriga/nvim-notify" },
 	{ "rmagatti/auto-session" },
 	{ "windwp/nvim-autopairs" },
@@ -82,7 +80,19 @@ return require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ "numToStr/Comment.nvim" },
 	{ "aznhe21/actions-preview.nvim" },
-
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
+		},
+	},
 	{
 		"lewis6991/hover.nvim",
 		config = function()
@@ -112,38 +122,24 @@ return require("lazy").setup({
 		"stevearc/conform.nvim",
 		opts = {},
 	},
-	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		build = "cd app && yarn install",
-		init = function()
-			vim.g.mkdp_filetypes = { "markdown" }
-		end,
-		ft = { "markdown" },
-	},
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		opts = {},
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-	},
 	{ "lewis6991/gitsigns.nvim" },
 	{ "NvChad/nvim-colorizer.lua" },
+
+	-- ai
 	{
 		"yetone/avante.nvim",
 		event = "VeryLazy",
 		lazy = false,
 		version = false, -- set this if you want to always pull the latest change
-		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 		build = "make",
-		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
+
+			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
 			--- The below dependencies are optional,
 			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-			"zbirenbaum/copilot.lua", -- for providers='copilot'
 			{
 				-- support for image pasting
 				"HakonHarnes/img-clip.nvim",
@@ -161,25 +157,34 @@ return require("lazy").setup({
 					},
 				},
 			},
-			"MeanderingProgrammer/render-markdown.nvim",
+			{
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = {
+					file_types = { "markdown", "Avante" },
+				},
+				ft = { "markdown", "Avante" },
+			},
 		},
 	},
+
+	-- Markdown
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		build = "cd app && yarn install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
+	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		opts = {},
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+	},
+
 	-- Theme
 	{
 		"rebelot/kanagawa.nvim",
-	},
-
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		keys = {
-			{
-				"<leader>?",
-				function()
-					require("which-key").show({ global = false })
-				end,
-				desc = "Buffer Local Keymaps (which-key)",
-			},
-		},
 	},
 })
