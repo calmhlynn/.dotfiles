@@ -11,7 +11,7 @@ kanagawa.setup({
 			NormalFloat = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
 			FloatBorder = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
 
-			AvanteSidebarWinSeparator = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
+			-- AvanteSidebarWinSeparator = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
 		}
 	end,
 })

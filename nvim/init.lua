@@ -24,6 +24,7 @@ vim.opt.ttimeout = true
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 100
 vim.g.loaded_perl_provider = 0
+vim.opt.laststatus = 3
 vim.wo.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
 -- vim.cmd([[language en_US]])

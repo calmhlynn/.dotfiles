@@ -95,26 +95,7 @@ return require("lazy").setup({
 	},
 	{
 		"lewis6991/hover.nvim",
-		config = function()
-			require("hover").setup({
-				init = function()
-					require("hover.providers.lsp")
-					require("hover.providers.diagnostic")
-				end,
-				preview_opts = { border = "single" },
-			})
-			vim.keymap.set("n", "K", require("hover").hover)
-			vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
-			vim.keymap.set("n", "<C-p>", function()
-				require("hover").hover_switch("previous")
-			end, { desc = "hover.nvim (previous source)" })
-			vim.keymap.set("n", "<C-n>", function()
-				require("hover").hover_switch("next")
-			end, { desc = "hover.nvim (next source)" })
-
-			vim.keymap.set("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
-			vim.o.mousemoveevent = true
-		end,
+		dependencies = "rebelot/kanagawa.nvim",
 	},
 
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
@@ -135,6 +116,7 @@ return require("lazy").setup({
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
+			-- "rebelot/kanagawa.nvim",
 
 			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
 			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
