@@ -40,12 +40,11 @@ return require("lazy").setup({
 
 	-- LSP
 	{ "neovim/nvim-lspconfig" },
-	{ "mfussenegger/nvim-dap" },
 
 	-- Telescope
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.5",
+		tag = "0.1.8",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	{
@@ -80,6 +79,13 @@ return require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ "numToStr/Comment.nvim" },
 	{ "aznhe21/actions-preview.nvim" },
+	{
+		"mfussenegger/nvim-dap",
+		config = function()
+			require("dapui").setup()
+		end,
+	},
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",

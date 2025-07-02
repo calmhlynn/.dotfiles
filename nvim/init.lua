@@ -26,7 +26,6 @@ vim.opt.ttimeoutlen = 100
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.opt.laststatus = 3
 vim.wo.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
 -- vim.cmd([[language en_US]])
@@ -49,7 +48,7 @@ require("plugins.avante")
 require("plugins.bufferline")
 require("plugins.comment")
 require("plugins.conform")
--- require("plugins.dap")
+require("plugins.dap")
 require("plugins.gitsigns")
 require("plugins.kanagawa")
 require("plugins.lualine")
