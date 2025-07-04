@@ -1,8 +1,3 @@
-local setup, plugin = pcall(require, "lualine")
-if not setup then
-	return
-end
-
 local colors = {
 	dragonBlack = "#0D0C0C",
 	dragonGray = "#A6A69C",
@@ -50,7 +45,10 @@ local kanagawa_dragon = {
 	},
 }
 
-plugin.setup({
+return {
+	"nvim-lualine/lualine.nvim",
+	dependencies = "nvim-tree/nvim-web-devicons",
+
 	options = {
 		theme = kanagawa_dragon,
 	},
@@ -63,4 +61,4 @@ plugin.setup({
 			},
 		},
 	},
-})
+}

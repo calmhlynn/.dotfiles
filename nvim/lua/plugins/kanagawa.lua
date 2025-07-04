@@ -1,18 +1,22 @@
-local status_ok, kanagawa = pcall(require, "kanagawa")
-if not status_ok then
-	return
-end
+return {
+	"rebelot/kanagawa.nvim",
+	lazy = false,
+	priority = 1000,
+	opts = {},
+	config = function()
+		require("kanagawa").setup({
+			overrides = function(colors)
+				-- local theme = colors.theme
+				return {
+					Normal = { fg = colors.palette.dragonWhite, bg = colors.palette.dragonBlack3 },
+					NormalFloat = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
+					FloatBorder = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
 
-kanagawa.setup({
-	overrides = function(colors)
-		-- local theme = colors.theme
-		return {
-			Normal = { fg = colors.palette.dragonWhite, bg = colors.palette.dragonBlack3 },
-			NormalFloat = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
-			FloatBorder = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
-
-			-- AvanteSidebarWinSeparator = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
-		}
+					-- AvanteSidebarWinSeparator = { fg = colors.palette.fujiWhite, bg = colors.palette.dragonBlack3 },
+				}
+			end,
+		})
+		vim.cmd([[colorscheme kanagawa-dragon]])
 	end,
-})
-kanagawa.load("dragon")
+	build = "KanagawaComile",
+}

@@ -1,8 +1,8 @@
--- require("lspconfig").clangd.setup({
---     -- cmd = { "clangd", "--background-index", "--clang-tidy" },
---     filetypes = { "c", "cpp", "objc", "objcpp" },
---     capabilities = {
---         offsetEncoding = "utf-8",
---     },
---     on_attach = LSP_ON_ATTACH,
--- })
+require("lspconfig").clangd.setup({
+	-- cmd = { "clangd", "--background-index", "--clang-tidy" },
+	filetypes = { "c", "cpp", "objc", "objcpp" },
+	capabilities = {
+		offsetEncoding = "utf-8",
+	},
+	on_attach = LSP_ON_ATTACH,
+})

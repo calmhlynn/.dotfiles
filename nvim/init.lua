@@ -1,7 +1,3 @@
--- Setup plugin manager
-require("plugins.plugin_setup")
-
--- Settings
 vim.g.mapleader = ";"
 vim.opt.termguicolors = true
 vim.opt.number = true
@@ -23,50 +19,57 @@ vim.opt.timeout = true
 vim.opt.ttimeout = true
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 100
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.o.mousemoveevent = true
+-- vim.g.loaded_perl_provider = 0
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 vim.wo.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
--- vim.cmd([[language en_US]])
 
--- LSPs
-require("plugins.lsp.lsp")
-require("plugins.lsp.yaml")
-require("plugins.lsp.lua")
-require("plugins.lsp.python")
-require("plugins.lsp.rust")
-require("plugins.lsp.c")
--- require("plugins.lsp.zig")
--- require("plugins.lsp.typescript")
--- require("plugins.lsp.terraform")
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
+end
+vim.opt.rtp:prepend(lazypath)
 
--- Plugins
-require("plugins.auto_session")
-require("plugins.autopairs")
-require("plugins.avante")
-require("plugins.bufferline")
-require("plugins.comment")
-require("plugins.conform")
-require("plugins.dap")
-require("plugins.kanagawa")
-require("plugins.lualine")
-require("plugins.markdown")
-require("plugins.mason")
-require("plugins.nvim_cmp")
-require("plugins.treesitter")
-require("plugins.util")
+LSP_ON_ATTACH = function(client, bufnr)
+	-- keybind options
+	-- local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
--- Deprecated
--- require("plugins.gitsigns")
--- require("plugins.trouble")
--- require("plugins.notify")
--- require("plugins.nvim_tree")
--- require("plugins.telescope")
--- require("plugins.toggleterm")
+	-- set keybinds
+	-- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+	-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+	-- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+	-- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+	-- vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, bufopts)
+	-- vim.keymap.set("n", "L", "<cmd>Lspsaga show_cursor_diagnostics<CR>", bufopts)
+	-- vim.keymap.set("n", "<leader>f", "<cmd>Lspsaga finder<CR>", bufopts)
+	-- vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>", bufopts)
+	-- vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+	-- vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+	-- vim.keymap.set("n", "<leader>ac", function()
+	-- 	require("actions-preview").code_actions()
+	-- end, bufopts)
+	-- vim.keymap.set("n", "<leader>bf", function()
+	-- 	vim.lsp.buf.format()
+	-- end, bufopts)
 
--- Filetypes
-require("filetypes.c")
--- require("filetypes.markdown")
--- require("filetypes.javascript")
---
+	vim.lsp.inlay_hint.enable(true)
+end
+-- Setup lazy.nvim
+require("lazy").setup({
+	spec = {
+		{ import = "plugins" },
+	},
+})
