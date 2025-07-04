@@ -13,10 +13,6 @@
 	precomposeunicode = yes
 [init]
 	defaultBranch = main
-[log]
-	date = iso8601
-[color]
-	ui = always
 [diff]
 	renames = copies
 	algorithm = histogram
