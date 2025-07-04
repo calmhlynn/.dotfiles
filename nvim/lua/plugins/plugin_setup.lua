@@ -27,6 +27,14 @@ return require("lazy").setup({
 	{ "williamboman/mason.nvim" },
 	{ "williamboman/mason-lspconfig.nvim" },
 
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		opts = require("settings.snacks").opts,
+		keys = require("settings.snacks").keys,
+	},
+
 	-- Rust
 	{
 		"mrcjkb/rustaceanvim",
@@ -84,6 +92,7 @@ return require("lazy").setup({
 		config = function()
 			require("dapui").setup()
 		end,
+		dependencies = "rebelot/kanagawa.nvim",
 	},
 	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 	{
@@ -104,7 +113,7 @@ return require("lazy").setup({
 		dependencies = "rebelot/kanagawa.nvim",
 	},
 
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+	-- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{
 		"stevearc/conform.nvim",
 		opts = {},
@@ -126,6 +135,7 @@ return require("lazy").setup({
 
 			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
 			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+			"folke/snacks.nvim",
 			--- The below dependencies are optional,
 			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
 			{
