@@ -1,20 +1,22 @@
 return {
 	"akinsho/bufferline.nvim",
+	lazy = false,
 	version = "*",
 	dependencies = "nvim-tree/nvim-web-devicons",
-	opts = {
-		options = {
-			mode = "buffers",
-			numbers = "ordinal",
-			diagnostics = "nvim_lsp",
-			offsets = {
-				filetype = "NvimTree",
-				text = "File Explorer",
-			},
-		},
-	},
+	opts = {},
 	config = function()
-		require("bufferline").setup(opts)
+		require("bufferline").setup({
+			options = {
+				mode = "buffers",
+				numbers = "ordinal",
+				diagnostics = "nvim_lsp",
+				offsets = {
+					filetype = "NvimTree",
+					text = "File Explorer",
+				},
+			},
+		})
+
 		vim.keymap.set("n", "<Leader>n", ":bnext<CR>", { silent = true })
 		vim.keymap.set("n", "<Leader>p", ":bprev<CR>", { silent = true })
 		vim.keymap.set("n", "<Leader>q", ":bp | bd #<CR>", { silent = true })

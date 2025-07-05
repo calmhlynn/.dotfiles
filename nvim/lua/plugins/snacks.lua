@@ -201,6 +201,13 @@ return {
 			desc = "Buffer Lines",
 		},
 		{
+			"<C-\\>n",
+			function()
+				Snacks.notifier.show_history()
+			end,
+			desc = "Notification History",
+		},
+		{
 			"<C-\\>gl",
 			function()
 				Snacks.picker.git_log()
