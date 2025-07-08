@@ -173,7 +173,7 @@ return {
 		},
 
 		{
-			"<C-\\>gb",
+			"Gb",
 			function()
 				Snacks.picker.git_branches()
 			end,
@@ -208,42 +208,42 @@ return {
 			desc = "Notification History",
 		},
 		{
-			"<C-\\>gl",
+			"Gl",
 			function()
 				Snacks.picker.git_log()
 			end,
 			desc = "Git Log",
 		},
 		{
-			"<C-\\>gL",
+			"GL",
 			function()
 				Snacks.picker.git_log_line()
 			end,
 			desc = "Git Log Line",
 		},
 		{
-			"<C-\\>gs",
+			"Gs",
 			function()
 				Snacks.picker.git_status()
 			end,
 			desc = "Git Status",
 		},
 		{
-			"<C-\\>gS",
+			"GS",
 			function()
 				Snacks.picker.git_stash()
 			end,
 			desc = "Git Stash",
 		},
 		{
-			"<C-\\>gd",
+			"Gd",
 			function()
 				Snacks.picker.git_diff()
 			end,
 			desc = "Git Diff (Hunks)",
 		},
 		{
-			"<C-\\>gf",
+			"Gf",
 			function()
 				Snacks.picker.git_log_file()
 			end,
