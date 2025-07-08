@@ -300,5 +300,12 @@ return {
 			end,
 			desc = "Goto T[y]pe Definition",
 		},
+		{
+			"<C-\\>k",
+			function()
+				Snacks.picker.keymaps()
+			end,
+			desc = "Keymaps",
+		},
 	},
 }

@@ -48,8 +48,11 @@ return {
 				max_file_lines = nil,
 			},
 		})
+		vim.keymap.set(
+			"n",
+			"<leader>rr",
+			"<Cmd>TSDisable rainbow|TSEnable rainbow<CR>",
+			{ desc = "Toggle Treesitter Rainbow" }
+		)
 	end,
-	keys = {
-		{ "n", "<leader>rr", "<Cmd>TSDisable rainbow|TSEnable rainbow<CR>", desc = "Toggle Treesitter Rainbow" },
-	},
 }

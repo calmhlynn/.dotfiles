@@ -19,6 +19,10 @@ vim.opt.timeout = true
 vim.opt.ttimeout = true
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 100
+-- vim.o.mousemoveevent = true
+-- vim.g.loaded_perl_provider = 0
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 vim.wo.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
 

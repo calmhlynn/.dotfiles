@@ -23,9 +23,14 @@ return {
 				min_chars = 3,
 			},
 		},
-		keys = {
-			{ "n", "<Leader>cf", ":Crates show_features_popup<CR>", desc = "Crates show features popup" },
-			{ "n", "<Leader>cp", ":Crates focus_popup<CR>", desc = "Crates focus popup" },
-		},
+		config = function()
+			vim.keymap.set(
+				"n",
+				"<Leader>cf",
+				":Crates show_features_popup<CR>",
+				{ desc = "Crates show features popup" }
+			)
+			vim.keymap.set("n", "<Leader>cp", ":Crates focus_popup<CR>", { desc = "Crates focus popup" })
+		end,
 	},
 }

@@ -7,7 +7,7 @@ return {
 
 		-- C & CPP
 		vim.lsp.config("clangd", {
-			on_attach = on_attach,
+			-- on_attach = on_attach,
 		})
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = { "c", "cpp", "objc", "objcpp" },
