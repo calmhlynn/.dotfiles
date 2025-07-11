@@ -3,6 +3,7 @@ local config = wezterm.config_builder()
 local ac = wezterm.action
 
 config.front_end = "WebGpu"
+config.webgpu_power_preference = "HighPerformance"
 config.font = wezterm.font_with_fallback({
 	"Hack Nerd Font Mono",
 	"Noto Sans Mono CJK KR",
@@ -14,7 +15,6 @@ config.window_decorations = "RESIZE"
 config.show_new_tab_button_in_tab_bar = false
 config.show_tab_index_in_tab_bar = false
 
--- kanagawa dragon without wezterm@nightly
 config.colors = {
 	background = "#181616",
 	foreground = "#c5c9c5",
@@ -93,9 +93,15 @@ config.window_padding = {
 config.keys = {
 	{ key = "l", mods = "CTRL|SHIFT", action = ac.SplitHorizontal },
 	{ key = "m", mods = "CTRL|SHIFT", action = ac.SplitVertical },
-	{ key = "n", mods = "CTRL|SHIFT", action = ac.SpawnTab("CurrentPaneDomain") },
 
 	{ key = "x", mods = "CTRL|SHIFT", action = ac.CloseCurrentPane({ confirm = true }) },
+
+	{ key = "n", mods = "CTRL|SHIFT", action = ac.SpawnTab("CurrentPaneDomain") },
+	{ key = "]", mods = "CTRL", action = ac.ActivateTabRelative(1) },
+	{ key = "[", mods = "CTRL", action = ac.ActivateTabRelative(-1) },
+
+	{ key = "d", mods = "CTRL|SHIFT", action = ac.ShowDebugOverlay },
+
 	{ key = "w", mods = "CTRL|SHIFT", action = ac.CloseCurrentTab({ confirm = true }) },
 
 	{ key = "LeftArrow", mods = "CTRL|SHIFT", action = ac.AdjustPaneSize({ "Left", 5 }) },
@@ -103,14 +109,20 @@ config.keys = {
 	{ key = "UpArrow", mods = "CTRL|SHIFT", action = ac.AdjustPaneSize({ "Up", 5 }) },
 	{ key = "DownArrow", mods = "CTRL|SHIFT", action = ac.AdjustPaneSize({ "Down", 5 }) },
 
-	{ key = "]", mods = "CTRL", action = ac.ActivateTabRelative(1) },
-	{ key = "[", mods = "CTRL", action = ac.ActivateTabRelative(-1) },
-
 	{ key = "LeftArrow", mods = "CTRL", action = ac.ActivatePaneDirection("Left") },
 	{ key = "RightArrow", mods = "CTRL", action = ac.ActivatePaneDirection("Right") },
 	{ key = "UpArrow", mods = "CTRL", action = ac.ActivatePaneDirection("Up") },
 	{ key = "DownArrow", mods = "CTRL", action = ac.ActivatePaneDirection("Down") },
 }
+
+config.unix_domains = {
+	{
+		name = "wezterm",
+	},
+}
+config.default_gui_startup_args = { "connect", "wezterm" }
+config.enable_tab_bar = true
+config.use_dead_keys = false
 
 for i = 1, 9 do
 	table.insert(config.keys, {
