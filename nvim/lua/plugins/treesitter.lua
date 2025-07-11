@@ -37,6 +37,7 @@ return {
 				"bash",
 				"vim",
 				"dockerfile",
+				"regex",
 				"gitignore",
 				"zig",
 			},
