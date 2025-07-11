@@ -18,6 +18,8 @@ vim.opt.timeout = true
 vim.opt.ttimeout = true
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 100
+vim.opt.lazyredraw = true
+vim.opt.swapfile = false
 vim.wo.signcolumn = "yes"
 vim.opt.clipboard = "unnamedplus"
 
