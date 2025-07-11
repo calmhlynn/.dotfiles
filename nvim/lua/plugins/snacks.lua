@@ -171,14 +171,6 @@ return {
 			end,
 			desc = "Command History",
 		},
-
-		{
-			"Gb",
-			function()
-				Snacks.picker.git_branches()
-			end,
-			desc = "Git Branches",
-		},
 		{
 			"<C-\\>ss",
 			function()
@@ -208,42 +200,49 @@ return {
 			desc = "Notification History",
 		},
 		{
-			"Gl",
+			"@b",
+			function()
+				Snacks.picker.git_branches()
+			end,
+			desc = "Git Branches",
+		},
+		{
+			"@l",
 			function()
 				Snacks.picker.git_log()
 			end,
 			desc = "Git Log",
 		},
 		{
-			"GL",
+			"@L",
 			function()
 				Snacks.picker.git_log_line()
 			end,
 			desc = "Git Log Line",
 		},
 		{
-			"Gs",
+			"@s",
 			function()
 				Snacks.picker.git_status()
 			end,
 			desc = "Git Status",
 		},
 		{
-			"GS",
+			"@S",
 			function()
 				Snacks.picker.git_stash()
 			end,
 			desc = "Git Stash",
 		},
 		{
-			"Gd",
+			"@d",
 			function()
 				Snacks.picker.git_diff()
 			end,
 			desc = "Git Diff (Hunks)",
 		},
 		{
-			"Gf",
+			"@f",
 			function()
 				Snacks.picker.git_log_file()
 			end,
