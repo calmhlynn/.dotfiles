@@ -22,6 +22,7 @@ vim.opt.lazyredraw = true
 vim.opt.cursorline = true
 vim.opt.swapfile = false
 vim.wo.signcolumn = "yes"
+vim.o.ttyfast = true
 vim.opt.clipboard = "unnamedplus"
 
 -- Bootstrap lazy.nvim
