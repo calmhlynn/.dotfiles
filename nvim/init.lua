@@ -52,9 +52,24 @@ require("lazy").setup({
 vim.api.nvim_create_autocmd("WinEnter", {
 	group = vim.api.nvim_create_augroup("snacks_auto_quit_all_tabs", { clear = true }),
 	pattern = "*",
+	desc = "Quit nvim if only special (non-file) buffers remain and no unsaved changes",
 	callback = function()
+		-- vim.defer_fn to execute after window state stabilizes
 		vim.defer_fn(function()
 			local real_file_open = false
+			local has_modified_buffer = false
+
+			-- 1. Check all buffers first for modified status
+			for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+				if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_option(bufnr, "buftype") == "" then
+					if vim.api.nvim_buf_get_option(bufnr, "modified") then
+						has_modified_buffer = true
+						break
+					end
+				end
+			end
+
+			-- 2. Check all tab pages for real files
 			for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
 				for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
 					local bufnr = vim.api.nvim_win_get_buf(win)
@@ -68,9 +83,10 @@ vim.api.nvim_create_autocmd("WinEnter", {
 				end
 			end
 
-			if not real_file_open then
+			-- 3. Only quit if no real files are open and no modified buffers exist
+			if not real_file_open and not has_modified_buffer then
 				vim.cmd("qall!")
 			end
-		end, 50)
+		end, 50) -- 50ms delay for stability
 	end,
 })
