@@ -18,7 +18,7 @@ vim.opt.timeout = true
 vim.opt.ttimeout = true
 vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 100
-vim.opt.lazyredraw = true
+-- vim.opt.lazyredraw = true
 vim.opt.cursorline = true
 vim.opt.swapfile = false
 vim.wo.signcolumn = "yes"
@@ -47,4 +47,30 @@ require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 	},
+})
+
+vim.api.nvim_create_autocmd("WinEnter", {
+	group = vim.api.nvim_create_augroup("snacks_auto_quit_all_tabs", { clear = true }),
+	pattern = "*",
+	callback = function()
+		vim.defer_fn(function()
+			local real_file_open = false
+			for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
+				for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
+					local bufnr = vim.api.nvim_win_get_buf(win)
+					if vim.api.nvim_buf_get_option(bufnr, "buftype") == "" then
+						real_file_open = true
+						break
+					end
+				end
+				if real_file_open then
+					break
+				end
+			end
+
+			if not real_file_open then
+				vim.cmd("qall!")
+			end
+		end, 50)
+	end,
 })
