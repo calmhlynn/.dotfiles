@@ -39,6 +39,7 @@ return {
 				"dockerfile",
 				"regex",
 				"gitignore",
+				"diff",
 				"zig",
 			},
 			-- auto install above language parsers
