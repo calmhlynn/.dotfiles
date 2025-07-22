@@ -1,0 +1,6 @@
+# .clangd
+CompileFlags:
+  QueryDriver: aarch64-linux-gnu-gcc
+
+  Remove:
+    - -mcpu=cortex-a72.cortex-a53
