@@ -18,5 +18,4 @@ return {
 		})
 		vim.cmd([[colorscheme kanagawa-dragon]])
 	end,
-	build = "KanagawaComile",
 }
