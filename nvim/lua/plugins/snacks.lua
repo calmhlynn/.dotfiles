@@ -70,7 +70,7 @@ return {
 						desc = "escape to normal mode",
 					},
 					term_normal = {
-						"<esc>",
+						"<C-t>",
 						function()
 							Snacks.terminal.toggle()
 						end,
