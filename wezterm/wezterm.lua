@@ -97,6 +97,8 @@ config.keys = {
 	{ key = "x", mods = "CTRL|SHIFT", action = ac.CloseCurrentPane({ confirm = true }) },
 
 	{ key = "n", mods = "CTRL|SHIFT", action = ac.SpawnTab("CurrentPaneDomain") },
+	{ key = "t", mods = "CTRL|SHIFT", action = ac.SpawnWindow },
+
 	{ key = "]", mods = "CTRL", action = ac.ActivateTabRelative(1) },
 	{ key = "[", mods = "CTRL", action = ac.ActivateTabRelative(-1) },
 
