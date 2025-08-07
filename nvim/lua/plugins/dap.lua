@@ -36,27 +36,26 @@ return {
 			}
 
 			-- Key mappings for nvim-dap
-			vim.keymap.set("n", "<C-b>", ":DapToggleBreakpoint<CR>", { silent = true })
-			vim.keymap.set("n", "<C-d>", ":DapContinue<CR>", { silent = true })
-			vim.keymap.set("n", "<C-l>", ":DapStepInto<CR>", { silent = true })
-			vim.keymap.set("n", "<C-j>", ":DapStepOver<CR>", { silent = true })
-			vim.keymap.set("n", "<C-h>", ":DapStepOut<CR>", { silent = true })
-			vim.keymap.set("n", "<C-q>", ":DapTerminate<CR>", { silent = true })
-			vim.keymap.set("n", "<C-o>", function()
+			vim.keymap.set("n", "<leader>db", ":DapToggleBreakpoint<CR>", { silent = true })
+			vim.keymap.set("n", "<F5>", ":DapContinue<CR>", { silent = true })
+			vim.keymap.set("n", "<F11>", ":DapStepInto<CR>", { silent = true })
+			vim.keymap.set("n", "<F10>", ":DapStepOver<CR>", { silent = true })
+			vim.keymap.set("n", "<F12>", ":DapStepOut<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>dt", ":DapTerminate<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>do", function()
 				require("dapui").open()
 			end, { silent = true })
 
-			vim.keymap.set("n", "<C-c>", function()
+			vim.keymap.set("n", "<leader>dc", function()
 				require("dapui").close()
 			end, { silent = true })
 
-			vim.keymap.set("n", "<C-e>", function()
+			vim.keymap.set("n", "<leader>dw", function()
 				local word = vim.fn.expand("<cword>")
 				require("dapui").elements.watches.add(word)
 			end, { silent = true })
 		end,
 		dependencies = {
-			"rebelot/kanagawa.nvim",
 			"rcarriga/nvim-dap-ui",
 			"nvim-neotest/nvim-nio",
 		},
