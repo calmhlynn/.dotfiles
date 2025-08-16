@@ -1,0 +1,262 @@
+/* Kanagawa Dragon Theme */
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Hack Nerd Font Mono", "Noto Sans Mono CJK KR";
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(13, 12, 12, 0.8);
+    border-radius: 0px;
+    transition: all 0.3s ease;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#waybar {
+    box-shadow: inset 0 -3px transparent, inset 0 -3px;
+}
+
+tooltip {
+    background: #181616;
+    border-radius: 8px;
+    border: 1px solid #2a2016;
+    color: #c5c9c5;
+}
+
+/* Workspaces */
+#workspaces {
+    background: #181616;
+    margin: 4px 8px 4px 4px;
+    padding: 0px 8px;
+    border-radius: 8px;
+}
+
+#workspaces button {
+    padding: 0px 8px;
+    margin: 2px 2px;
+    border-radius: 6px;
+    color: #625e5a;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+#workspaces button.active {
+    color: #87a987;
+    background: #2a2016;
+}
+
+#workspaces button:hover {
+    color: #c4746e;
+    background: #2a2016;
+}
+
+/* Window title */
+#window {
+    background: #181616;
+    margin: 4px 8px;
+    padding: 4px 12px;
+    border-radius: 8px;
+    color: #c5c9c5;
+    font-weight: normal;
+}
+
+/* Clock */
+#clock {
+    background: #181616;
+    color: #87a987;
+    margin: 4px 8px;
+    padding: 4px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Right modules */
+#tray,
+#pulseaudio,
+#network,
+#battery,
+#custom-power {
+    background: #181616;
+    margin: 4px 2px;
+    padding: 4px 12px;
+    border-radius: 8px;
+    color: #c5c9c5;
+}
+
+#custom-power {
+    margin-right: 4px;
+    color: #c4746e;
+    font-size: 14px;
+}
+
+#custom-power:hover {
+    color: #e46876;
+    background: #2a2016;
+}
+
+/* Battery */
+#battery {
+    color: #87a987;
+}
+
+#battery.warning {
+    color: #c4b28a;
+}
+
+#battery.critical {
+    color: #c4746e;
+    animation: blink 0.5s linear infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #c4746e;
+        color: #0d0c0c;
+    }
+}
+
+/* Network */
+#network {
+    color: #8ba4b0;
+}
+
+#network.disconnected {
+    color: #625e5a;
+}
+
+/* Audio */
+#pulseaudio {
+    color: #a292a3;
+}
+
+#pulseaudio.muted {
+    color: #625e5a;
+}
+
+/* Tray */
+#tray {
+    padding: 4px 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #c4746e;
+}
+
+/* Center modules */
+#mpris,
+#cpu,
+#memory,
+#disk,
+#temperature {
+    background: #181616;
+    margin: 4px 2px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    color: #c5c9c5;
+}
+
+#cpu {
+    color: #87a987;
+}
+
+#memory {
+    color: #8ba4b0;
+}
+
+#disk {
+    color: #c4b28a;
+}
+
+#temperature {
+    color: #a292a3;
+}
+
+#temperature.critical {
+    color: #c4746e;
+}
+
+#mpris {
+    color: #a292a3;
+    padding: 4px 16px;
+}
+
+/* Taskbar */
+#taskbar {
+    background: #181616;
+    margin: 4px 8px;
+    padding: 2px 8px;
+    border-radius: 8px;
+}
+
+#taskbar button {
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin: 2px 2px;
+    transition: all 0.3s ease;
+}
+
+#taskbar button:hover {
+    background: #2a2016;
+}
+
+#taskbar button.active {
+    background: #2a2016;
+}
+
+#taskbar button.minimized {
+    opacity: 0.6;
+}
+
+
+/* Left modules */
+#idle_inhibitor,
+#submap {
+    background: #181616;
+    margin: 4px 2px;
+    padding: 4px 12px;
+    border-radius: 8px;
+    color: #c5c9c5;
+}
+
+#idle_inhibitor.activated {
+    color: #c4746e;
+}
+
+#idle_inhibitor.deactivated {
+    color: #625e5a;
+}
+
+#submap {
+    color: #87a987;
+    font-weight: bold;
+}
+
+/* Hover effects */
+#pulseaudio:hover,
+#network:hover,
+#battery:hover,
+#clock:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#temperature:hover,
+#mpris:hover,
+#idle_inhibitor:hover,
+#submap:hover,
+#taskbar:hover,
+#window:hover {
+    background: #2a2016;
+    transition: all 0.3s ease;
+}

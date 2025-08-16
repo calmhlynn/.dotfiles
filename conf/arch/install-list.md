@@ -1,9 +1,14 @@
 
+install by pacman
 ```bash
 pacman -S git curl wget neovim zsh sddm \
-nvidia nvidia-utils egl-wayland vulkan-icd-loader\
+nvidia nvidia-utils egl-wayland vulkan-icd-loader \
 hyprland wayland wayland-protocols xorg-xwayland \
-ttf-hack-nerd ttf-nerd-fonts-symbols 
+ttf-hack-nerd ttf-nerd-fonts-symbols \
+waybar hyprpaper \
+yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick \
+noto-fonts-cjk noto-fonts-emoji  \ # only korean
+fcitx5 fcitx5-hangul fcitx5-configtool
 ```
 
 
@@ -24,3 +29,8 @@ cd wezterm-git
 makepkg -si
 ```
 
+install by yay
+```bash
+yay -S google-chrome \
+wlogout
+```
