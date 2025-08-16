@@ -8,75 +8,13 @@ config.font = wezterm.font_with_fallback({
 	"Hack Nerd Font Mono",
 	"Noto Sans Mono CJK KR",
 })
--- config.color_scheme = "Kanagawa (Gogh)"
-config.font_size = 14
+config.color_scheme = "Kanagawa Dragon (Gogh)"
+config.font_size = 13
 config.use_fancy_tab_bar = true
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
 config.show_new_tab_button_in_tab_bar = false
 config.show_tab_index_in_tab_bar = false
-
-config.colors = {
-	background = "#181616",
-	foreground = "#c5c9c5",
-
-	cursor_bg = "#c5c9c5",
-	cursor_fg = "#181616",
-	cursor_border = "#c5c9c5",
-
-	selection_bg = "#2d4f67",
-	selection_fg = "#c8c093",
-
-	ansi = {
-		"#0d0c0c",
-		"#c4746e",
-		"#8a9a7b",
-		"#c4b28a",
-		"#8ba4b0",
-		"#a292a3",
-		"#8ea4a2",
-		"#C8C093",
-	},
-
-	brights = {
-		"#a6a69c",
-		"#E46876",
-		"#87a987",
-		"#E6C384",
-		"#7FB4CA",
-		"#938AA9",
-		"#7AA89F",
-		"#c5c9c5",
-	},
-
-	indexed = {
-		[16] = "#ffa066",
-		[17] = "#ff5d62",
-	},
-
-	tab_bar = {
-		background = "#181616",
-		active_tab = {
-			bg_color = "#2d4f67",
-			fg_color = "#c5c9c5",
-		},
-		inactive_tab = {
-			bg_color = "#181616",
-			fg_color = "#a6a69c",
-		},
-		inactive_tab_hover = {
-			bg_color = "#252530",
-			fg_color = "#c5c9c5",
-		},
-		new_tab = {
-			bg_color = "#181616",
-			fg_color = "#a6a69c",
-		},
-		new_tab_hover = {
-			bg_color = "#252530",
-			fg_color = "#c5c9c5",
-		},
-	},
-}
+config.adjust_window_size_when_changing_font_size = false
 
 config.inactive_pane_hsb = {
 	saturation = 0.6,
