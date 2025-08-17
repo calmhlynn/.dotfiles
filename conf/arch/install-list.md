@@ -5,10 +5,11 @@ pacman -S git curl wget neovim zsh sddm \
 nvidia nvidia-utils egl-wayland vulkan-icd-loader \
 hyprland wayland wayland-protocols xorg-xwayland \
 ttf-hack-nerd ttf-nerd-fonts-symbols \
-waybar hyprpaper \
+waybar hyprpaper mako wofi wl-clipboard brightnessctl cliphist\
 yazi ffmpeg 7zip jq poppler fd ripgrep fzf zoxide resvg imagemagick \
 noto-fonts-cjk noto-fonts-emoji  \ # only korean
-fcitx5 fcitx5-hangul fcitx5-configtool
+fcitx5 fcitx5-hangul fcitx5-configtool \
+grim slurp
 ```
 
 
@@ -32,5 +33,14 @@ makepkg -si
 install by yay
 ```bash
 yay -S google-chrome \
-wlogout
+wlogout hyprlock-git 
 ```
+
+yay
+* wezterm-git
+
+
+curl
+* sddm-astronaut-theme
+* node (npm)
+
