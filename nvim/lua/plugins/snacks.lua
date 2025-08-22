@@ -315,15 +315,5 @@ return {
 			desc = "Jumps",
 		},
 
-		{
-			"[[",
-			"<C-o>",
-			desc = "Go to Older Position in Jumplist",
-		},
-		{
-			"]]",
-			"<C-i>",
-			desc = "Go to Newer Position in Jumplist",
-		},
 	},
 }
