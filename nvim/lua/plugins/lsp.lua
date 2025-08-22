@@ -3,21 +3,24 @@ return {
 	config = function()
 		local on_attach = function(client, bufnr)
 			vim.lsp.inlay_hint.enable(true)
+			
+			vim.keymap.set("n", "[[", "<C-o>", { buffer = bufnr, desc = "Go to Older Position in Jumplist" })
+			vim.keymap.set("n", "]]", "<C-i>", { buffer = bufnr, desc = "Go to Newer Position in Jumplist" })
 		end
 
 		-- C & CPP
 		vim.lsp.config("clangd", {
 			on_attach = on_attach,
 		})
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = { "c", "cpp", "objc", "objcpp" },
-			callback = function()
-				-- Set indentation settings for C/C++ files
-				vim.bo.tabstop = 2
-				vim.bo.shiftwidth = 2
-				vim.bo.expandtab = true -- Use spaces instead of tabs
-			end,
-		})
+		-- vim.api.nvim_create_autocmd("FileType", {
+		-- 	pattern = { "c", "cpp", "objc", "objcpp" },
+		-- 	callback = function()
+		-- 		-- Set indentation settings for C/C++ files
+		-- 		vim.bo.tabstop = 2
+		-- 		vim.bo.shiftwidth = 2
+		-- 		vim.bo.expandtab = true -- Use spaces instead of tabs
+		-- 	end,
+		-- })
 
 		-- Rust
 		vim.g.rustaceanvim = function()
@@ -25,7 +28,7 @@ return {
 				-- other rustacean settings. --
 				server = {
 					on_attach = function(client, bufnr)
-						vim.lsp.inlay_hint.enable(true)
+						on_attach(client, bufnr)
 
 						vim.keymap.set("n", "<leader>d", function()
 							vim.cmd.RustLsp({ "debuggables" })
