@@ -137,8 +137,8 @@ if (( $+commands[wezterm])); then
     alias wz='wezterm'
 fi
 
-alias l='ls -lg'
-alias la='ls -a'
-alias lla='ls -lga'
-alias lt='ls --tree'
+alias l='ls -lgt --group-directories-first'
+alias la='ls -a --group-directories-first'
+alias lla='ls -lgat --group-directories-first'
+alias lt='ls --tree -t --group-directories-first'
 
