@@ -3,7 +3,7 @@ return {
 	config = function()
 		local on_attach = function(client, bufnr)
 			vim.lsp.inlay_hint.enable(true)
-			
+
 			vim.keymap.set("n", "[[", "<C-o>", { buffer = bufnr, desc = "Go to Older Position in Jumplist" })
 			vim.keymap.set("n", "]]", "<C-i>", { buffer = bufnr, desc = "Go to Newer Position in Jumplist" })
 		end
@@ -116,6 +116,26 @@ return {
 			filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
 		})
 
+		vim.lsp.config("tailwindcss", {
+			on_attach = on_attach,
+			settings = {
+				tailwindCSS = {
+					classAttributes = { "class", "className", "classList", "ngClass" },
+					lint = {
+						cssConflict = "warning",
+						invalidApply = "error",
+						invalidConfigPath = "error",
+						invalidScreen = "error",
+						invalidTailwindDirective = "error",
+						invalidVariant = "error",
+						recommendedVariantOrder = "warning",
+					},
+					validate = true,
+					colorDecorators = true,
+				},
+			},
+		})
+
 		-- Lua
 		vim.lsp.config("lua_ls", {
 			on_attach = on_attach,
@@ -139,11 +159,11 @@ return {
 		})
 
 		-- Markdown
-		vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
-			group = vim.api.nvim_create_augroup("markdown_sw_is_2", { clear = true }),
-			pattern = "markdown",
-			command = "setlocal shiftwidth=2",
-		})
+		-- vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+		-- 	group = vim.api.nvim_create_augroup("markdown_sw_is_2", { clear = true }),
+		-- 	pattern = "markdown",
+		-- 	command = "setlocal shiftwidth=2",
+		-- })
 
 		vim.api.nvim_create_autocmd({ "FileType" }, {
 			group = vim.api.nvim_create_augroup("markdown_wrap", { clear = true }),
