@@ -17,6 +17,7 @@ return {
 	},
 	opts = {
 		terminal = {
+			provider = "snacks",
 			---@module "snacks"
 			---@type snacks.win.Config|{}
 			snacks_win_opts = {

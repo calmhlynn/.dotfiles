@@ -1,4 +1,3 @@
-
 return {
 	"yetone/avante.nvim",
 	event = "VeryLazy",
@@ -10,7 +9,7 @@ return {
 		"MunifTanjim/nui.nvim",
 		-- "rebelot/kanagawa.nvim",
 
-		"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+		-- "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
 		"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
 		"folke/snacks.nvim",
 		--- The below dependencies are optional,
@@ -58,31 +57,18 @@ return {
 					api_key_name = "cmd:pass show api_tokens/gemini",
 				},
 			},
-
-			keys = {
-				{
-					"<leader>a+",
-					function()
-						local tree_ext = require("avante.extensions.nvim_tree")
-						tree_ext.add_file()
-					end,
-					desc = "Select file in NvimTree",
-					ft = "NvimTree",
-				},
-				{
-					"<leader>a-",
-					function()
-						local tree_ext = require("avante.extensions.nvim_tree")
-						tree_ext.remove_file()
-					end,
-					desc = "Deselect file in NvimTree",
-					ft = "NvimTree",
+			input = {
+				provider = "snacks", -- "native" | "dressing" | "snacks"
+				provider_opts = {
+					-- Snacks input configuration
+					title = "Avante Input",
+					icon = " ",
+					placeholder = "Enter your API key...",
 				},
 			},
-			opts = {
-				--- other configurations
-				selector = {
-					exclude_auto_select = { "NvimTree" },
+			windows = {
+				input = {
+					height = 16,
 				},
 			},
 		})
