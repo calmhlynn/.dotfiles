@@ -44,6 +44,15 @@ return {
 		},
 		picker = {
 			enabled = true,
+			previewers = {
+				diff = {
+					builtin = false,
+					cmd = {
+						"delta",
+						"--paging=never",
+					},
+				},
+			},
 		},
 		terminal = {
 			enabled = true,
@@ -314,6 +323,5 @@ return {
 			end,
 			desc = "Jumps",
 		},
-
 	},
 }
