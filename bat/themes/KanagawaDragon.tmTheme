@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>KanagawaDragon</string>
+	<key>uuid</key>
+	<string>12345678-90AB-CDEF-1234-567890ABCDEF</string>
+	<key>settings</key>
+	<array>
+		<!-- Global settings -->
+		<dict>
+			<key>settings</key>
+			<dict>
+				<key>background</key>
+				<string>#181616</string>
+				<key>foreground</key>
+				<string>#c5c9c5</string>
+				<key>caret</key>
+				<string>#c8c093</string>
+				<key>selection</key>
+				<string>#2d4f67</string>
+				<key>invisibles</key>
+				<string>#a6a69c</string>
+				<key>lineHighlight</key>
+				<string>#2d4f67</string>
+			</dict>
+		</dict>
+
+		<!-- Comments -->
+		<dict>
+			<key>name</key>
+			<string>Comment</string>
+			<key>scope</key>
+			<string>comment, punctuation.definition.comment</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#737c73</string>
+			</dict>
+		</dict>
+
+		<!-- Strings -->
+		<dict>
+			<key>name</key>
+			<string>String</string>
+			<key>scope</key>
+			<string>string, constant.other.symbol</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8a9a7b</string>
+			</dict>
+		</dict>
+
+		<!-- Keywords -->
+		<dict>
+			<key>name</key>
+			<string>Keyword</string>
+			<key>scope</key>
+			<string>keyword, storage</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8992a7</string>
+			</dict>
+		</dict>
+
+		<!-- Rust self keyword -->
+		<dict>
+			<key>name</key>
+			<string>Rust Self Keyword</string>
+			<key>scope</key>
+			<string>variable.language.self.rust, variable.language.rust, variable.parameter.self.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#af6863</string>
+			</dict>
+		</dict>
+
+		<!-- Rust let, impl, pub keywords -->
+		<dict>
+			<key>name</key>
+			<string>Rust Declaration Keywords</string>
+			<key>scope</key>
+			<string>storage.modifier.rust, keyword.declaration.rust, keyword.other.fn.rust, keyword.other.unsafe.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8992a7</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+
+		<!-- Rust bitwise and logical operators -->
+		<dict>
+			<key>name</key>
+			<string>Rust Bitwise Operators</string>
+			<key>scope</key>
+			<string>keyword.operator.bitwise.rust, keyword.operator.logical.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#af6863</string>
+			</dict>
+		</dict>
+
+		<!-- Rust async/await keywords -->
+		<!-- <dict> -->
+		<!-- 	<key>name</key> -->
+		<!-- 	<string>Rust Async Keywords</string> -->
+		<!-- 	<key>scope</key> -->
+		<!-- 	<string>storage.modifier.async.rust, storage.modifier.async, keyword.other.async, storage.type.async</string> -->
+		<!-- 	<key>settings</key> -->
+		<!-- 	<dict> -->
+		<!-- 		<key>foreground</key> -->
+		<!-- 		<string>#8ea4a2</string> -->
+		<!-- 		<key>fontStyle</key> -->
+		<!-- 	</dict> -->
+		<!-- </dict> -->
+
+		<!-- Rust mod, use, derive macros -->
+		<dict>
+			<key>name</key>
+			<string>Rust Mod Use Derive</string>
+			<key>scope</key>
+			<string>keyword.other.rust, keyword.control.import, entity.name.type.mod.rust, meta.attribute.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#af6863</string>
+			</dict>
+		</dict>
+
+		<!-- Rust macro names -->
+		<dict>
+			<key>name</key>
+			<string>Rust Macro Names</string>
+			<key>scope</key>
+			<string>entity.name.macro.rust, support.macro.rust, meta.macro.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#af6863</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+
+		<!-- Rust Type/Struct Names -->
+		<dict>
+			<key>name</key>
+			<string>Rust Type Names</string>
+			<key>scope</key>
+			<string>entity.name.struct.rust, entity.name.trait.rust, entity.name.type.rust, support.type.rust, storage.type.rust, meta.function.parameters.rust storage.type, meta.function.return-type.rust storage.type, meta.function.parameters.rust support.type, meta.function.return-type.rust support.type</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#889d9b</string>
+			</dict>
+		</dict>
+
+		<!-- Rust Enum Names -->
+		<dict>
+			<key>name</key>
+			<string>Rust Enum Names</string>
+			<key>scope</key>
+			<string>entity.name.enum.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#889d9b</string>
+			</dict>
+		</dict>
+
+		<!-- Rust Enum Variant/Fields -->
+		<dict>
+			<key>name</key>
+			<string>Rust Enum Variants</string>
+			<key>scope</key>
+			<string>constant.other.enum.rust, meta.enum.rust constant.other</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8e715f</string>
+			</dict>
+		</dict>
+
+		<!-- Rust const variables -->
+		<dict>
+			<key>name</key>
+			<string>Rust Const Variables</string>
+			<key>scope</key>
+			<string>variable.other.constant.rust, constant.other.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8e715f</string>
+			</dict>
+		</dict>
+
+		<!-- Rust Function calls -->
+		<dict>
+			<key>name</key>
+			<string>Rust Function Calls</string>
+			<key>scope</key>
+			<string>variable.function.rust, meta.function-call.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8992a7</string>
+			</dict>
+		</dict>
+
+		<!-- Rust struct fields -->
+		<dict>
+			<key>name</key>
+			<string>Rust Struct Fields</string>
+			<key>scope</key>
+			<string>variable.other.member.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#9c8e6e</string>
+			</dict>
+		</dict>
+
+		<!-- Functions and Types -->
+		<dict>
+			<key>name</key>
+			<string>Entity name</string>
+			<key>scope</key>
+			<string>entity.name.function.rust, entity.name.function</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ba4b0</string>
+			</dict>
+		</dict>
+
+		<!-- Support Functions (includes macro-like constructs) -->
+		<dict>
+			<key>name</key>
+			<string>Support Function</string>
+			<key>scope</key>
+			<string>support.function, support.function.builtin</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8992a7</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+
+		<!-- Numbers -->
+		<dict>
+			<key>name</key>
+			<string>Number</string>
+			<key>scope</key>
+			<string>constant.numeric</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#938AA9</string>
+			</dict>
+		</dict>
+
+		<!-- Operators and Punctuation -->
+		<dict>
+			<key>name</key>
+			<string>Operator</string>
+			<key>scope</key>
+			<string>keyword.operator, punctuation</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c5c9c5</string>
+			</dict>
+		</dict>
+
+
+	</array>
+</dict>
+</plist>
+
