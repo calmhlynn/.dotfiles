@@ -1,14 +1,35 @@
 return {
 	{
-		"aznhe21/actions-preview.nvim",
-		diff = {
-			algorithm = "patience",
-			ignore_whitespace = true,
+		"rachartier/tiny-code-action.nvim",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
 		},
-		config = function()
+		event = "LspAttach",
+		opts = {
+			backend = "delta",
+			backend_opts = {
+				delta = {
+					args = {
+						"--line-numbers",
+					},
+				},
+			},
+			picker = {
+				"buffer",
+				opts = {
+					auto_preview = true,
+					winborder = "rounded",
+					keymaps = {
+						close = { "q", "<Esc>" },
+					},
+				},
+			},
+		},
+		config = function(_, opts)
+			require("tiny-code-action").setup(opts)
 			vim.keymap.set("n", "<leader>ac", function()
-				require("actions-preview").code_actions()
-			end, bufopts)
+				require("tiny-code-action").code_action()
+			end, { noremap = true, silent = true })
 		end,
 	},
 	{
