@@ -8,7 +8,6 @@
 	<string>12345678-90AB-CDEF-1234-567890ABCDEF</string>
 	<key>settings</key>
 	<array>
-		<!-- Global settings -->
 		<dict>
 			<key>settings</key>
 			<dict>
@@ -27,7 +26,6 @@
 			</dict>
 		</dict>
 
-		<!-- Comments -->
 		<dict>
 			<key>name</key>
 			<string>Comment</string>
@@ -40,7 +38,6 @@
 			</dict>
 		</dict>
 
-		<!-- Strings -->
 		<dict>
 			<key>name</key>
 			<string>String</string>
@@ -53,7 +50,6 @@
 			</dict>
 		</dict>
 
-		<!-- Keywords -->
 		<dict>
 			<key>name</key>
 			<string>Keyword</string>
@@ -66,7 +62,6 @@
 			</dict>
 		</dict>
 
-		<!-- Rust self keyword -->
 		<dict>
 			<key>name</key>
 			<string>Rust Self Keyword</string>
@@ -79,12 +74,11 @@
 			</dict>
 		</dict>
 
-		<!-- Rust let, impl, pub keywords -->
 		<dict>
 			<key>name</key>
 			<string>Rust Declaration Keywords</string>
 			<key>scope</key>
-			<string>storage.modifier.rust, keyword.declaration.rust, keyword.other.fn.rust, keyword.other.unsafe.rust</string>
+			<string>storage.modifier.let.rust, storage.type.let.rust, keyword.declaration.rust, storage.type.rust, storage.modifier.async.rust, keyword.control.await.rust ,keyword.other.fn.rust, keyword.other.unsafe.rust</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -94,7 +88,6 @@
 			</dict>
 		</dict>
 
-		<!-- Rust bitwise and logical operators -->
 		<dict>
 			<key>name</key>
 			<string>Rust Bitwise Operators</string>
@@ -107,21 +100,6 @@
 			</dict>
 		</dict>
 
-		<!-- Rust async/await keywords -->
-		<!-- <dict> -->
-		<!-- 	<key>name</key> -->
-		<!-- 	<string>Rust Async Keywords</string> -->
-		<!-- 	<key>scope</key> -->
-		<!-- 	<string>storage.modifier.async.rust, storage.modifier.async, keyword.other.async, storage.type.async</string> -->
-		<!-- 	<key>settings</key> -->
-		<!-- 	<dict> -->
-		<!-- 		<key>foreground</key> -->
-		<!-- 		<string>#8ea4a2</string> -->
-		<!-- 		<key>fontStyle</key> -->
-		<!-- 	</dict> -->
-		<!-- </dict> -->
-
-		<!-- Rust mod, use, derive macros -->
 		<dict>
 			<key>name</key>
 			<string>Rust Mod Use Derive</string>
@@ -134,7 +112,6 @@
 			</dict>
 		</dict>
 
-		<!-- Rust macro names -->
 		<dict>
 			<key>name</key>
 			<string>Rust Macro Names</string>
@@ -149,12 +126,11 @@
 			</dict>
 		</dict>
 
-		<!-- Rust Type/Struct Names -->
 		<dict>
 			<key>name</key>
 			<string>Rust Type Names</string>
 			<key>scope</key>
-			<string>entity.name.struct.rust, entity.name.trait.rust, entity.name.type.rust, support.type.rust, storage.type.rust, meta.function.parameters.rust storage.type, meta.function.return-type.rust storage.type, meta.function.parameters.rust support.type, meta.function.return-type.rust support.type</string>
+			<string>entity.name.struct.rust, entity.name.trait.rust, entity.name.type.rust, support.type.rust, meta.function-call.rust entity.name.type.rust, meta.function-call.rust support.type, meta.function.parameters.rust storage.type, meta.function.return-type.rust, meta.function.parameters.rust, meta.function.return-type.rust</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -162,7 +138,6 @@
 			</dict>
 		</dict>
 
-		<!-- Rust Enum Names -->
 		<dict>
 			<key>name</key>
 			<string>Rust Enum Names</string>
@@ -175,7 +150,6 @@
 			</dict>
 		</dict>
 
-		<!-- Rust Enum Variant/Fields -->
 		<dict>
 			<key>name</key>
 			<string>Rust Enum Variants</string>
@@ -188,7 +162,6 @@
 			</dict>
 		</dict>
 
-		<!-- Rust const variables -->
 		<dict>
 			<key>name</key>
 			<string>Rust Const Variables</string>
@@ -201,7 +174,6 @@
 			</dict>
 		</dict>
 
-		<!-- Rust Function calls -->
 		<dict>
 			<key>name</key>
 			<string>Rust Function Calls</string>
@@ -214,7 +186,6 @@
 			</dict>
 		</dict>
 
-		<!-- Rust struct fields -->
 		<dict>
 			<key>name</key>
 			<string>Rust Struct Fields</string>
@@ -227,12 +198,11 @@
 			</dict>
 		</dict>
 
-		<!-- Functions and Types -->
 		<dict>
 			<key>name</key>
 			<string>Entity name</string>
 			<key>scope</key>
-			<string>entity.name.function.rust, entity.name.function</string>
+			<string>entity.name.function.rust, entity.name.function, meta.function-call.rust entity.name.function.rust</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -240,7 +210,6 @@
 			</dict>
 		</dict>
 
-		<!-- Support Functions (includes macro-like constructs) -->
 		<dict>
 			<key>name</key>
 			<string>Support Function</string>
@@ -255,7 +224,6 @@
 			</dict>
 		</dict>
 
-		<!-- Numbers -->
 		<dict>
 			<key>name</key>
 			<string>Number</string>
@@ -268,7 +236,6 @@
 			</dict>
 		</dict>
 
-		<!-- Operators and Punctuation -->
 		<dict>
 			<key>name</key>
 			<string>Operator</string>
@@ -280,9 +247,6 @@
 				<string>#c5c9c5</string>
 			</dict>
 		</dict>
-
-
 	</array>
 </dict>
 </plist>
-
