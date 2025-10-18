@@ -16,214 +16,39 @@
 				<key>foreground</key>
 				<string>#c5c9c5</string>
 				<key>caret</key>
-				<string>#c8c093</string>
+				<string>#c5c9c5</string>
 				<key>selection</key>
 				<string>#2d4f67</string>
 				<key>invisibles</key>
-				<string>#a6a69c</string>
+				<string>#625e5a</string>
 				<key>lineHighlight</key>
-				<string>#2d4f67</string>
+				<string>#1D1C19</string>
 			</dict>
 		</dict>
-
 		<dict>
 			<key>name</key>
 			<string>Comment</string>
 			<key>scope</key>
-			<string>comment, punctuation.definition.comment</string>
+			<string>comment</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
 				<string>#737c73</string>
+				<key>fontStyle</key>
+				<string>italic</string>
 			</dict>
 		</dict>
-
 		<dict>
 			<key>name</key>
 			<string>String</string>
 			<key>scope</key>
-			<string>string, constant.other.symbol</string>
+			<string>string</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
 				<string>#8a9a7b</string>
 			</dict>
 		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Keyword</string>
-			<key>scope</key>
-			<string>keyword, storage</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#8992a7</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Self Keyword</string>
-			<key>scope</key>
-			<string>variable.language.self.rust, variable.language.rust, variable.parameter.self.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#af6863</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Declaration Keywords</string>
-			<key>scope</key>
-			<string>storage.modifier.let.rust, storage.type.let.rust, keyword.declaration.rust, storage.type.rust, storage.modifier.async.rust, keyword.control.await.rust ,keyword.other.fn.rust, keyword.other.unsafe.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#8992a7</string>
-				<key>fontStyle</key>
-				<string>italic</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Bitwise Operators</string>
-			<key>scope</key>
-			<string>keyword.operator.bitwise.rust, keyword.operator.logical.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#af6863</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Mod Use Derive</string>
-			<key>scope</key>
-			<string>keyword.other.rust, keyword.control.import, entity.name.type.mod.rust, meta.attribute.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#af6863</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Macro Names</string>
-			<key>scope</key>
-			<string>entity.name.macro.rust, support.macro.rust, meta.macro.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#af6863</string>
-				<key>fontStyle</key>
-				<string>italic</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Type Names</string>
-			<key>scope</key>
-			<string>entity.name.struct.rust, entity.name.trait.rust, entity.name.type.rust, support.type.rust, meta.function-call.rust entity.name.type.rust, meta.function-call.rust support.type, meta.function.parameters.rust storage.type, meta.function.return-type.rust, meta.function.parameters.rust, meta.function.return-type.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#889d9b</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Enum Names</string>
-			<key>scope</key>
-			<string>entity.name.enum.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#889d9b</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Enum Variants</string>
-			<key>scope</key>
-			<string>constant.other.enum.rust, meta.enum.rust constant.other</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#8e715f</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Const Variables</string>
-			<key>scope</key>
-			<string>variable.other.constant.rust, constant.other.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#8e715f</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Function Calls</string>
-			<key>scope</key>
-			<string>variable.function.rust, meta.function-call.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#8992a7</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Rust Struct Fields</string>
-			<key>scope</key>
-			<string>variable.other.member.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#9c8e6e</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Entity name</string>
-			<key>scope</key>
-			<string>entity.name.function.rust, entity.name.function, meta.function-call.rust entity.name.function.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#8ba4b0</string>
-			</dict>
-		</dict>
-
-		<dict>
-			<key>name</key>
-			<string>Support Function</string>
-			<key>scope</key>
-			<string>support.function, support.function.builtin</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#8992a7</string>
-				<key>fontStyle</key>
-				<string>italic</string>
-			</dict>
-		</dict>
-
 		<dict>
 			<key>name</key>
 			<string>Number</string>
@@ -232,19 +57,573 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#938AA9</string>
+				<string>#a292a3</string>
 			</dict>
 		</dict>
-
+		<dict>
+			<key>name</key>
+			<string>Constant</string>
+			<key>scope</key>
+			<string>constant.language, constant.character, constant.other</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#b6927b</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Keyword</string>
+			<key>scope</key>
+			<string>keyword - keyword.operator - keyword.control.import - keyword.other</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8992a7</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Storage</string>
+			<key>scope</key>
+			<string>storage - storage.type - storage.modifier.lifetime</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8992a7</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Storage Type General</string>
+			<key>scope</key>
+			<string>storage.type - storage.type.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Support Types and Modules</string>
+			<key>scope</key>
+			<string>support - support.function</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Type</string>
+			<key>scope</key>
+			<string>entity.name.type, entity.name.class, entity.name.struct, entity.name.enum, entity.name.trait</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Function Name</string>
+			<key>scope</key>
+			<string>entity.name.function</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ba4b0</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Function Call</string>
+			<key>scope</key>
+			<string>variable.function, support.function</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Parameter Self</string>
+			<key>scope</key>
+			<string>variable.parameter.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Parameter</string>
+			<key>scope</key>
+			<string>variable.parameter</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#a6a69c</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Variable Member Field</string>
+			<key>scope</key>
+			<string>variable.other.member, variable.other.property, variable.other.object.property, meta.field.declaration, meta.struct-block variable.other, variable.other.member.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4b28a</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Module Path Variables</string>
+			<key>scope</key>
+			<string>meta.path.rust variable.other.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Punctuation</string>
+			<key>scope</key>
+			<string>punctuation</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#9e9b93</string>
+			</dict>
+		</dict>
 		<dict>
 			<key>name</key>
 			<string>Operator</string>
 			<key>scope</key>
-			<string>keyword.operator, punctuation</string>
+			<string>keyword.operator - keyword.operator.logical.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Logical Operator as Punctuation</string>
+			<key>scope</key>
+			<string>keyword.operator.logical.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#9e9b93</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Entity Names Default to Aqua</string>
+			<key>scope</key>
+			<string>entity - entity.name.function - entity.name.tag - entity.other.attribute-name</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Import Export Mod Use</string>
+			<key>scope</key>
+			<string>keyword.control.import, keyword.control.export, keyword.control.use, keyword.other.crate, storage.modifier.visibility</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Pub Keyword</string>
+			<key>scope</key>
+			<string>storage.modifier.pub, keyword.other.pub</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Macro</string>
+			<key>scope</key>
+			<string>entity.name.macro, support.macro, entity.name.function.macro</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Annotation Attribute</string>
+			<key>scope</key>
+			<string>meta.annotation, meta.attribute, storage.type.annotation</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Language Variable</string>
+			<key>scope</key>
+			<string>variable.language</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Lifetime</string>
+			<key>scope</key>
+			<string>storage.modifier.lifetime, entity.name.lifetime, entity.name.label, punctuation.definition.lifetime</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Tag</string>
+			<key>scope</key>
+			<string>entity.name.tag</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Tag Attribute</string>
+			<key>scope</key>
+			<string>entity.other.attribute-name</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#b6927b</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Escape Character</string>
+			<key>scope</key>
+			<string>constant.character.escape</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#b6927b</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Regular Expression</string>
+			<key>scope</key>
+			<string>string.regexp</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Invalid</string>
+			<key>scope</key>
+			<string>invalid</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Mod Keyword</string>
+			<key>scope</key>
+			<string>keyword.declaration.module.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Use Keyword</string>
+			<key>scope</key>
+			<string>keyword.declaration.import.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Keywords with Italic</string>
+			<key>scope</key>
+			<string>keyword.control.rust, keyword.declaration.function.rust, keyword.declaration.variable.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8992a7</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Pub Modifier with Italic</string>
+			<key>scope</key>
+			<string>storage.modifier.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8992a7</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Attribute Names in Path</string>
+			<key>scope</key>
+			<string>meta.path.rust variable.annotation.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Attribute Parameters</string>
+			<key>scope</key>
+			<string>meta.annotation.parameters.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Derive Keyword</string>
+			<key>scope</key>
+			<string>variable.annotation.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Closure Parameters</string>
+			<key>scope</key>
+			<string>punctuation.section.parameters.begin.rust, punctuation.section.parameters.end.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#9e9b93</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Accessor in Type Paths</string>
+			<key>scope</key>
+			<string>punctuation.accessor.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Enum Variants Uppercase</string>
+			<key>scope</key>
+			<string>entity.name.constant.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#b6927b</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Storage and Support Types</string>
+			<key>scope</key>
+			<string>storage.type.rust, support.type.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Self and Other Keywords</string>
+			<key>scope</key>
+			<string>keyword.other.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Rust Impl Keyword</string>
+			<key>scope</key>
+			<string>keyword.declaration.impl.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8992a7</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Diff Added</string>
+			<key>scope</key>
+			<string>markup.inserted</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#87a987</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Diff Deleted</string>
+			<key>scope</key>
+			<string>markup.deleted</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4746e</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Diff Changed</string>
+			<key>scope</key>
+			<string>markup.changed</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c4b28a</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Markdown Heading</string>
+			<key>scope</key>
+			<string>markup.heading</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ba4b0</string>
+				<key>fontStyle</key>
+				<string>bold</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Markdown Bold</string>
+			<key>scope</key>
+			<string>markup.bold</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
 				<string>#c5c9c5</string>
+				<key>fontStyle</key>
+				<string>bold</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Markdown Italic</string>
+			<key>scope</key>
+			<string>markup.italic</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#c5c9c5</string>
+				<key>fontStyle</key>
+				<string>italic</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Markdown Code</string>
+			<key>scope</key>
+			<string>markup.inline.raw, markup.fenced_code</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#87a987</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Markdown Link</string>
+			<key>scope</key>
+			<string>markup.underline.link</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#949fb5</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>JSON Key</string>
+			<key>scope</key>
+			<string>support.type.property-name.json</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>YAML Key</string>
+			<key>scope</key>
+			<string>entity.name.tag.yaml</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
 			</dict>
 		</dict>
 	</array>
