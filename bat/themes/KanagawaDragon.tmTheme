@@ -62,6 +62,17 @@
 		</dict>
 		<dict>
 			<key>name</key>
+			<string>Format String Placeholder</string>
+			<key>scope</key>
+			<string>constant.other.placeholder.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8a9a7b</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
 			<string>Constant</string>
 			<key>scope</key>
 			<string>constant.language, constant.character, constant.other</string>
@@ -154,9 +165,20 @@
 		</dict>
 		<dict>
 			<key>name</key>
-			<string>Rust Parameter Self</string>
+			<string>Module Paths</string>
 			<key>scope</key>
-			<string>variable.parameter.rust</string>
+			<string>meta.path.rust variable.other.rust</string>
+			<key>settings</key>
+			<dict>
+				<key>foreground</key>
+				<string>#8ea4a2</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>Language Variable Self</string>
+			<key>scope</key>
+			<string>variable.language</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -171,7 +193,7 @@
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
-				<string>#a6a69c</string>
+				<string>#c5c9c5</string>
 			</dict>
 		</dict>
 		<dict>
@@ -183,17 +205,6 @@
 			<dict>
 				<key>foreground</key>
 				<string>#c4b28a</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>Module Path Variables</string>
-			<key>scope</key>
-			<string>meta.path.rust variable.other.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#8ea4a2</string>
 			</dict>
 		</dict>
 		<dict>
@@ -278,17 +289,6 @@
 			<string>Annotation Attribute</string>
 			<key>scope</key>
 			<string>meta.annotation, meta.attribute, storage.type.annotation</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#c4746e</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>Language Variable</string>
-			<key>scope</key>
-			<string>variable.language</string>
 			<key>settings</key>
 			<dict>
 				<key>foreground</key>
@@ -451,17 +451,6 @@
 			<dict>
 				<key>foreground</key>
 				<string>#9e9b93</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>Rust Accessor in Type Paths</string>
-			<key>scope</key>
-			<string>punctuation.accessor.rust</string>
-			<key>settings</key>
-			<dict>
-				<key>foreground</key>
-				<string>#c4746e</string>
 			</dict>
 		</dict>
 		<dict>
