@@ -4,19 +4,10 @@ return {
 
 		formatters_by_ft = {
 			lua = { "stylua" },
+			rust = { "rustfmt" },
 			c = { "clang-format" },
 			cuda = { "clang-format" },
 			python = { "black" },
-			typescript = { "prettier" },
-			typescriptreact = { "prettier" },
-			javascript = { "prettier" },
-			javascriptreact = { "prettier" },
-			json = { "prettier" },
-			jsonc = { "prettier" },
-			html = { "prettier" },
-			css = { "prettier" },
-			scss = { "prettier" },
-			["*"] = { "trim_whitespace" },
 		},
 		formatters = {
 			["clang-format"] = {
