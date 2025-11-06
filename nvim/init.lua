@@ -22,6 +22,19 @@ vim.opt.cursorline = true
 vim.opt.swapfile = false
 vim.wo.signcolumn = "yes"
 vim.o.ttyfast = true
+
+vim.g.clipboard = {
+	name = "OSC 52",
+	copy = {
+		["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+		["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+	},
+	paste = {
+		["+"] = function() end,
+		["*"] = function() end,
+	},
+}
+
 vim.opt.clipboard = "unnamedplus"
 
 -- Bootstrap lazy.nvim
