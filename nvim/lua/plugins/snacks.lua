@@ -1,8 +1,7 @@
 -- lua/plugins/snacks.lua
 return {
-
 	"folke/snacks.nvim",
-	priority = 999,
+	priority = 1000,
 
 	lazy = false,
 	opts = {
