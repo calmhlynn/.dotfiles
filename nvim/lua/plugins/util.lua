@@ -15,12 +15,27 @@ return {
 				},
 			},
 			picker = {
-				"buffer",
+				"snacks",
 				opts = {
-					auto_preview = true,
-					winborder = "rounded",
-					keymaps = {
-						close = { "q", "<Esc>" },
+					layout = {
+						preset = "dropdown",
+						layout = {
+							backdrop = false,
+							row = 5,
+							width = 0.6,
+							min_width = 80,
+							height = 0.8,
+							border = "none",
+							box = "vertical",
+							{ win = "preview", title = "{preview}", height = 0.7, border = true },
+							{
+								box = "vertical",
+								border = true,
+								title_pos = "center",
+								{ win = "list", border = "none" },
+								{ win = "input", height = 1, border = "top" },
+							},
+						},
 					},
 				},
 			},
