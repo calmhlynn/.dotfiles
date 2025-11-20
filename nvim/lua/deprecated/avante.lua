@@ -35,14 +35,30 @@ return {
 			"MeanderingProgrammer/render-markdown.nvim",
 			opts = {
 				file_types = { "markdown", "Avante" },
+				render_modes = { "n", "c", "i", "v" },
+				anti_conceal = {
+					enabled = false,
+				},
 			},
 			ft = { "markdown", "Avante" },
 		},
 	},
 	config = function()
 		require("avante").setup({
-			provider = "gemini",
+			provider = "claude-code",
 			mode = "agentic",
+			acp_providers = {
+				["claude-code"] = {
+					command = "npx",
+					args = { "@zed-industries/claude-code-acp" },
+					env = {
+						NODE_NO_WARNINGS = "1",
+						ANTHROPIC_API_KEY = vim.fn.json_decode(
+							vim.fn.readfile(vim.fn.expand("~/.claude/.credentials.json"))[1]
+						)["anthropic_api_key"],
+					},
+				},
+			},
 			providers = {
 				claude = {
 					model = "claude-sonnet-4-20250514",
@@ -57,18 +73,84 @@ return {
 					api_key_name = "cmd:pass show api_tokens/gemini",
 				},
 			},
-			input = {
-				provider = "snacks", -- "native" | "dressing" | "snacks"
-				provider_opts = {
-					-- Snacks input configuration
-					title = "Avante Input",
-					icon = " ",
-					placeholder = "Enter your API key...",
+			behaviour = {
+				minimize_diff = false,
+				auto_add_current_file = true,
+				auto_approve_tool_permissions = false,
+				confirmation_ui_style = "inline_buttons",
+				acp_follow_agent_locations = true,
+			},
+			mappings = {
+				diff = {
+					ours = "co",
+					theirs = "ct",
+					all_theirs = "ca",
+					both = "cb",
+					cursor = "cc",
+					next = "]x",
+					prev = "[x",
+				},
+				suggestion = {
+					accept = "<M-l>",
+					next = "<M-]>",
+					prev = "<M-[>",
+					dismiss = "<C-]>",
+				},
+				jump = {
+					next = "]]",
+					prev = "[[",
+				},
+				submit = {
+					normal = "<CR>",
+					insert = "<C-s>",
+				},
+				sidebar = {
+					apply_all = "A",
+					apply_cursor = "a",
+					switch_windows = "<Tab>",
+					reverse_switch_windows = "<S-Tab>",
 				},
 			},
 			windows = {
+				position = "right",
+				wrap = true,
+				width = 30,
+				sidebar_header = {
+					enabled = true,
+					align = "center",
+					rounded = true,
+				},
 				input = {
-					height = 16,
+					prefix = "> ",
+					height = 8,
+				},
+				edit = {
+					border = "rounded",
+					start_insert = true,
+				},
+				ask = {
+					floating = false,
+					start_insert = true,
+					border = "rounded",
+					focus_on_apply = "ours",
+				},
+			},
+			highlights = {
+				diff = {
+					current = "DiffText",
+					incoming = "DiffAdd",
+				},
+			},
+			diff = {
+				autojump = true,
+				list_opener = "copen",
+			},
+			input = {
+				provider = "snacks",
+				provider_opts = {
+					title = "Avante Input",
+					icon = " ",
+					placeholder = "Enter your message...",
 				},
 			},
 		})
