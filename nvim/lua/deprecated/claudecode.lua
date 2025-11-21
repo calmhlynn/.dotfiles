@@ -5,6 +5,7 @@ return {
 	keys = {
 		{ "<leader>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
 		{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>", mode = { "n", "i" }, desc = "Focus Claude" },
+		{ "<leader>ㅁㄹ", "<cmd>ClaudeCodeFocus<cr>", mode = { "n", "i" }, desc = "Focus Claude" },
 		{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
 		{ "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
 		{ "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
@@ -31,12 +32,6 @@ return {
 					},
 				},
 			},
-		},
-		diff_opts = {
-			vertical_split = true,
-			open_in_new_tab = true,
-			auto_close_on_accept = false,
-			keep_terminal_focus = false,
 		},
 	},
 }
