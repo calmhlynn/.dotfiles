@@ -78,25 +78,81 @@ plugins=(
     zsh-completions
     zsh-syntax-highlighting
     zsh-autosuggestions
-    rust
     starship
+    rust
 )
 
 
 # Zellij
-if [[ -x "$(command -v zellij)" ]];
-then
+if [[ -x "$(command -v zellij)" ]]; then
   ZELLIJ_COMPLETION_DIR="${ZSH_CUSTOM:-$ZSH/custom}/plugins/zellij"
   if [[ ! -d "$ZELLIJ_COMPLETION_DIR" ]]; then
     mkdir -p "$ZELLIJ_COMPLETION_DIR"
   fi
-  
+
   if [[ ! -f "$ZELLIJ_COMPLETION_DIR/_zellij" || "$(zellij --version)" != "$(cat "$ZELLIJ_COMPLETION_DIR/.zellij_version" 2>/dev/null)" ]]; then
     zellij setup --generate-completion zsh > "$ZELLIJ_COMPLETION_DIR/_zellij"
     zellij --version > "$ZELLIJ_COMPLETION_DIR/.zellij_version"
   fi
   fpath=("$ZELLIJ_COMPLETION_DIR" $fpath)
   alias zj='zellij'
+
+  function _zellij_tab_name_update() {
+    if [[ -n "$ZELLIJ" ]]; then
+      local dir_name="${PWD##*/}"
+      [[ "$dir_name" == "$USER" ]] && dir_name="~"
+      local tab_name="$dir_name"
+      if [[ -n "$SSH_CONNECTION" ]]; then
+        local host_name="${HOST%%.*}"
+        tab_name="${host_name}:${dir_name}"
+      fi
+      command zellij action rename-tab "$tab_name" 2>/dev/null
+    fi
+  }
+  autoload -Uz add-zsh-hook
+  add-zsh-hook chpwd _zellij_tab_name_update
+  _zellij_tab_name_update
+
+  function ssh() {
+    if [[ -n "$ZELLIJ" ]]; then
+      local arg target_host
+      # Heuristic: Find the last argument that doesn't start with '-'
+      for arg in "$@"; do
+        if [[ "$arg" != -* ]]; then
+          target_host="$arg"
+        fi
+      done
+
+      if [[ -n "$target_host" ]]; then
+        command zellij action rename-tab "$target_host" 2>/dev/null
+      fi
+
+      command ssh "$@"
+      local ret=$?
+
+      # Restore the tab name
+      _zellij_tab_name_update
+
+      return $ret
+    else
+      command ssh "$@"
+    fi
+  }
+fi
+
+# Just
+if [[ -x "$(command -v just)" ]];
+then
+  JUST_COMPLETION_DIR="${ZSH_CUSTOM:-$ZSH/custom}/plugins/just"
+  if [[ ! -d "$JUST_COMPLETION_DIR" ]]; then
+    mkdir -p "$JUST_COMPLETION_DIR"
+  fi
+
+  if [[ ! -f "$JUST_COMPLETION_DIR/_just" || "$(just --version)" != "$(cat "$JUST_COMPLETION_DIR/.just_version" 2>/dev/null)" ]]; then
+    just --completions zsh > "$JUST_COMPLETION_DIR/_just"
+    just --version > "$JUST_COMPLETION_DIR/.just_version"
+  fi
+  fpath=("$JUST_COMPLETION_DIR" $fpath)
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -130,15 +186,10 @@ fi
 
 
 if (( $+commands[lsd])); then
-  alias ls='lsd'
+    alias ls='lsd'
 fi
-
-if (( $+commands[wezterm])); then
-    alias wz='wezterm'
-fi
-
-alias l='ls -lgt --group-directories-first'
-alias la='ls -a --group-directories-first'
-alias lla='ls -lgat --group-directories-first'
-alias lt='ls --tree -t --group-directories-first'
+alias l='ls -lgt'
+alias la='ls -a'
+alias lla='ls -lgat'
+alias lt='ls --tree -t'
 
