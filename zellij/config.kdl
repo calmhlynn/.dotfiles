@@ -1,31 +1,60 @@
-theme "kanagawa-dragon"
-themes {
-    kanagawa-dragon {
-        fg "#c5c9c5"
-        bg "#181616"
-        red "#c4746e"
-        green "#8a9a7b"
-        yellow "#c4b28a"
-        blue "#8ba4b0"
-        magenta "#a292a3"
-        orange "#b6927b"
-        cyan "#8ea4a2"
-        black "#0d0c0c"
-        white "#C8C093"
-    }
-}
-themes {
-    kanagawa {
-        fg "#DCD7BA"
-        bg "#1F1F28"
-        red "#C34043"
-        green "#76946A"
-        yellow "#FF9E3B"
-        blue "#7E9CD8"
-        magenta "#957FB8"
-        orange "#FFA066"
-        cyan "#7FB4CA"
-        black "#16161D"
-        white "#DCD7BA"
+default_shell "/usr/bin/zsh"
+default_layout "default"
+pane_frames false
+theme "kanagawa"
+mouse_mode true
+show_startup_tips false
+copy_on_select true
+scroll_buffer_size 10000
+styled_underlines true
+session_serialization true
+pane_viewport_serialization true
+on_force_close "detach"
+
+keybinds {
+    shared_except "locked" {
+        bind "Ctrl Shift l" { NewPane "right"; SwitchToMode "normal"; }
+        bind "Ctrl Shift m" { NewPane "down"; SwitchToMode "normal"; }
+        bind "Ctrl Shift x" { CloseFocus; SwitchToMode "normal"; }
+        bind "Ctrl Shift f" { SwitchToMode "entersearch"; }
+        bind "Ctrl Shift n" { NewTab; SwitchToMode "normal"; }
+        bind "Ctrl ]" { GoToNextTab; SwitchToMode "normal"; }
+        bind "Ctrl [" { GoToPreviousTab; SwitchToMode "normal"; }
+        bind "Ctrl Shift w" { CloseTab; SwitchToMode "normal"; }
+        bind "Ctrl Shift Left" { Resize "Increase left"; SwitchToMode "normal"; }
+        bind "Ctrl Shift Right" { Resize "Increase right"; SwitchToMode "normal"; }
+        bind "Ctrl Shift Up" { Resize "Increase up"; SwitchToMode "normal"; }
+        bind "Ctrl Shift Down" { Resize "Increase down"; SwitchToMode "normal"; }
+        bind "Ctrl Left" { MoveFocus "left"; SwitchToMode "normal"; }
+        bind "Ctrl Right" { MoveFocus "right"; SwitchToMode "normal"; }
+        bind "Ctrl Up" { MoveFocus "up"; SwitchToMode "normal"; }
+        bind "Ctrl Down" { MoveFocus "down"; SwitchToMode "normal"; }
+        bind "Ctrl Shift z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+        bind "Ctrl Shift b" { BreakPane; SwitchToMode "normal"; }
+
+        bind "Ctrl 1" { GoToTab 1; SwitchToMode "normal"; }
+        bind "Ctrl 2" { GoToTab 2; SwitchToMode "normal"; }
+        bind "Ctrl 3" { GoToTab 3; SwitchToMode "normal"; }
+        bind "Ctrl 4" { GoToTab 4; SwitchToMode "normal"; }
+        bind "Ctrl 5" { GoToTab 5; SwitchToMode "normal"; }
+        bind "Ctrl 6" { GoToTab 6; SwitchToMode "normal"; }
+        bind "Ctrl 7" { GoToTab 7; SwitchToMode "normal"; }
+        bind "Ctrl 8" { GoToTab 8; SwitchToMode "normal"; }
+        bind "Ctrl 9" { GoToTab 9; SwitchToMode "normal"; }
+
+        bind "Ctrl Alt 1" {
+            Run "ssh" "test5@192.168.10.190"
+            SwitchToMode "normal"
+        }
+        bind "Ctrl Alt 2" {
+            Run "ssh" "skjung@192.168.10.192"
+            SwitchToMode "normal"
+        }
+        bind "Ctrl Alt 3" {
+            Run "ssh" "net-test@192.168.10.193"
+            SwitchToMode "normal"
+        }
+
+        bind "Alt q" { Quit; }
     }
 }
