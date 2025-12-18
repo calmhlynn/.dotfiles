@@ -33,9 +33,6 @@ return {
 		zen = {
 			enabled = true,
 		},
-		statuscolumn = {
-			enabled = true,
-		},
 		quickfile = {
 			enabled = true,
 		},

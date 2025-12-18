@@ -41,6 +41,7 @@ return {
 				"gitignore",
 				"diff",
 				"zig",
+				"just",
 			},
 			-- auto install above language parsers
 			auto_install = true,

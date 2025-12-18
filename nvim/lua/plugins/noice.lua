@@ -104,6 +104,22 @@ return {
 				{
 					filter = {
 						event = "msg_show",
+						kind = "emsg",
+						find = "Error in decoration provider",
+					},
+					opts = { skip = true },
+				},
+				{
+					filter = {
+						event = "msg_show",
+						kind = "emsg",
+						find = "nvim_buf_set_extmark",
+					},
+					opts = { skip = true },
+				},
+				{
+					filter = {
+						event = "msg_show",
 						kind = "",
 						find = "written",
 					},

@@ -2,7 +2,11 @@ return {
 	"neovim/nvim-lspconfig",
 	config = function()
 		local on_attach = function(client, bufnr)
-			vim.lsp.inlay_hint.enable(true)
+			vim.schedule(function()
+				pcall(function()
+					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+				end)
+			end)
 
 			vim.keymap.set("n", "[[", "<C-o>", { buffer = bufnr, desc = "Go to Older Position in Jumplist" })
 			vim.keymap.set("n", "]]", "<C-i>", { buffer = bufnr, desc = "Go to Newer Position in Jumplist" })
