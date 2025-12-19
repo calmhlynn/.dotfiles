@@ -42,19 +42,7 @@ keybinds {
         bind "Ctrl 8" { GoToTab 8; SwitchToMode "normal"; }
         bind "Ctrl 9" { GoToTab 9; SwitchToMode "normal"; }
 
-        bind "Ctrl Alt 1" {
-            Run "ssh" "test5@192.168.10.190"
-            SwitchToMode "normal"
-        }
-        bind "Ctrl Alt 2" {
-            Run "ssh" "skjung@192.168.10.192"
-            SwitchToMode "normal"
-        }
-        bind "Ctrl Alt 3" {
-            Run "ssh" "net-test@192.168.10.193"
-            SwitchToMode "normal"
-        }
-
+        bind "Ctrl q" { Detach; }
         bind "Alt q" { Quit; }
     }
 }
