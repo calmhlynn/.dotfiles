@@ -43,8 +43,8 @@ keybinds {
         bind "Alt x" { CloseFocus; SwitchToMode "normal"; }
         bind "Alt f" { SwitchToMode "entersearch"; }
         bind "Alt t" { NewTab; SwitchToMode "normal"; }
-        bind "Shift Left" { GoToPreviousTab; SwitchToMode "normal"; }
-        bind "Shift Right" { GoToNextTab; SwitchToMode "normal"; }
+        bind "Alt [" { GoToPreviousTab; SwitchToMode "normal"; }
+        bind "Alt ]" { GoToNextTab; SwitchToMode "normal"; }
         bind "Alt w" { CloseTab; SwitchToMode "normal"; }
         bind "Alt Left" { Resize "Increase left"; SwitchToMode "normal"; }
         bind "Alt Right" { Resize "Increase right"; SwitchToMode "normal"; }
