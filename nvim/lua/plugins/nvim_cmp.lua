@@ -9,16 +9,24 @@ return {
 			"hrsh7th/cmp-buffer",
 		},
 		config = function()
-			require("cmp").setup({
+			local cmp = require("cmp")
+			cmp.setup({
 				snippet = {
 					expand = function(args)
 						require("luasnip").lsp_expand(args.body)
 					end,
 				},
 				window = {
-					completion = require("cmp").config.window.bordered(),
+					completion = cmp.config.window.bordered({
+						border = "rounded",
+						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+					}),
+					documentation = cmp.config.window.bordered({
+						border = "rounded",
+						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+					}),
 				},
-				sources = require("cmp").config.sources({
+				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
@@ -26,13 +34,13 @@ return {
 					{ name = "buffer" },
 					{ name = "render-markdown" },
 				}),
-				mapping = require("cmp").mapping.preset.insert({
-					["<C-b>"] = require("cmp").mapping.scroll_docs(-4),
-					["<C-f>"] = require("cmp").mapping.scroll_docs(4),
-					["<C-k>"] = require("cmp").mapping.complete(),
-					["<C-e>"] = require("cmp").mapping.abort(),
-					["<C-Space>"] = require("cmp").mapping.confirm({ select = true }),
-					["<Tab>"] = require("cmp").mapping(function(fallback)
+				mapping = cmp.mapping.preset.insert({
+					["<C-b>"] = cmp.mapping.scroll_docs(-4),
+					["<C-f>"] = cmp.mapping.scroll_docs(4),
+					["<C-k>"] = cmp.mapping.complete(),
+					["<C-e>"] = cmp.mapping.abort(),
+					["<C-Space>"] = cmp.mapping.confirm({ select = true }),
+					["<Tab>"] = cmp.mapping(function(fallback)
 						if require("luasnip").locally_jumpable(1) then
 							require("luasnip").jump(1)
 						else
@@ -40,7 +48,7 @@ return {
 						end
 					end, { "i", "s" }),
 
-					["<S-Tab>"] = require("cmp").mapping(function(fallback)
+					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if require("luasnip").locally_jumpable(-1) then
 							require("luasnip").jump(-1)
 						else
