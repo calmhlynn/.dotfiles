@@ -1,14 +1,15 @@
-shell-integration = none
+shell-integration = detect
 
 font-family = "Hack Nerd Font Mono"
 font-family = "Noto Sans Mono CJK KR"
 font-size = 14
 adjust-cell-height = 1
-term = xterm-256color
 
 theme = Kanagawa Dragon
 foreground = #D4D4D4
 
+macos-titlebar-style = hidden
+macos-option-as-alt = true
 gtk-titlebar = false
 window-decoration = false
 window-padding-x = 2
@@ -49,6 +50,22 @@ keybind = ctrl+alt+one=unbind
 keybind = ctrl+alt+two=unbind
 keybind = ctrl+alt+three=unbind
 keybind = alt+q=unbind
+keybind = alt+d=unbind
+keybind = alt+l=unbind
+keybind = alt+m=unbind
+keybind = alt+x=unbind
+keybind = alt+f=unbind
+keybind = alt+t=unbind
+keybind = alt+w=unbind
+keybind = alt+z=unbind
+keybind = alt+b=unbind
+keybind = alt+p=unbind
+keybind = alt+e=unbind
+keybind = alt+s=unbind
+keybind = alt+left=unbind
+keybind = alt+right=unbind
+keybind = alt+up=unbind
+keybind = alt+down=unbind
 keybind = ctrl+one=unbind
 keybind = ctrl+two=unbind
 keybind = ctrl+three=unbind
