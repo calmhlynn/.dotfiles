@@ -41,7 +41,6 @@ if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 zinit wait lucid for \
@@ -50,8 +49,6 @@ zinit wait lucid for \
         zsh-users/zsh-completions \
     atload'_zsh_autosuggest_start' \
         zsh-users/zsh-autosuggestions \
-
-zinit cdreplay
 
 if (( $+commands[nvim] )); then
     export EDITOR='nvim'
