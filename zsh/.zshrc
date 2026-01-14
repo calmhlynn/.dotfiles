@@ -1,6 +1,10 @@
 [[ -o interactive ]] || return
 export LANG=en_US.UTF-8
 
+if [[ -n "$SSH_CONNECTION" ]]; then
+    export TERM='xterm-256color'
+fi
+
 stty stop undef
 
 setopt always_to_end complete_in_word auto_cd
