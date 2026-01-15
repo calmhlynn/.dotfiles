@@ -1,18 +1,17 @@
 [[ -o interactive ]] || return
 export LANG=en_US.UTF-8
 
-if [[ -n "$SSH_CONNECTION" ]]; then
-    export TERM='xterm-256color'
-fi
-
 if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
     source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
+fi
+
+if [[ -n "$SSH_CONNECTION" ]]; then
+    export TERM='xterm-256color'
 fi
 
 stty stop undef
 
 setopt always_to_end complete_in_word auto_cd
-
 HISTSIZE=9000000
 SAVEHIST=9000000
 
@@ -35,7 +34,6 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 zmodload zsh/terminfo
-
 zinit light zsh-users/zsh-history-substring-search
 
 function zvm_after_init() {
@@ -60,6 +58,8 @@ zinit light jeffreytse/zsh-vi-mode
 
 ZCOMPLDIR="${ZINIT[COMPLETIONS_DIR]:-$HOME/.local/share/zinit/completions}"
 
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
 if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
@@ -72,6 +72,15 @@ zinit wait lucid for \
         zsh-users/zsh-completions \
     atload'_zsh_autosuggest_start' \
         zsh-users/zsh-autosuggestions \
+
+
+autoload -Uz compinit bashcompinit
+compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-${ZSH_VERSION}"
+bashcompinit
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 if (( $+commands[nvim] )); then
     export EDITOR='nvim'
@@ -86,63 +95,6 @@ alias l='ls -lgt'
 alias la='ls -a'
 alias lla='ls -lgat'
 alias lt='ls --tree -t'
-
-if (( $+commands[just] )); then
-    [[ ! -f "$ZCOMPLDIR/_just" ]] && just --completions zsh > "$ZCOMPLDIR/_just"
-fi
-
-if (( $+commands[zellij] )); then
-    [[ ! -f "$ZCOMPLDIR/_zellij" ]] && zellij setup --generate-completion zsh > "$ZCOMPLDIR/_zellij"
-
-    alias zj='zellij'
-
-    function _zellij_tab_name_update() {
-        if [[ -n "$ZELLIJ" ]]; then
-            local tab_name="${PWD##*/}"
-            [[ "$tab_name" == "$USER" ]] && tab_name="~"
-            [[ -n "$SSH_CONNECTION" ]] && tab_name="${HOST%%.*}:$tab_name"
-            command zellij action rename-tab "$tab_name" 2>/dev/null
-        fi
-    }
-    autoload -Uz add-zsh-hook
-    add-zsh-hook chpwd _zellij_tab_name_update
-    _zellij_tab_name_update
-
-    function ssh() {
-        if [[ -n "$ZELLIJ" ]]; then
-            local arg target_host
-            for arg in "$@"; do
-                [[ "$arg" != -* ]] && target_host="$arg"
-            done
-            [[ -n "$target_host" ]] && command zellij action rename-tab "$target_host" 2>/dev/null
-            command ssh "$@"
-            local ret=$?
-            _zellij_tab_name_update
-            return $ret
-        else
-            command ssh "$@"
-        fi
-    }
-fi
-
-if (( $+commands[gpgconf] )); then
-    unset SSH_AGENT_PID
-    if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-        export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-    fi
-    gpgconf --launch gpg-agent
-fi
-
-[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
-[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
-
-autoload -Uz compinit bashcompinit
-compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-${ZSH_VERSION}"
-bashcompinit
-
-zstyle ':completion:*' menu select
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
