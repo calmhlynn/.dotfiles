@@ -5,6 +5,10 @@ if [[ -n "$SSH_CONNECTION" ]]; then
     export TERM='xterm-256color'
 fi
 
+if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+    source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
+fi
+
 stty stop undef
 
 setopt always_to_end complete_in_word auto_cd
@@ -31,9 +35,28 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 zmodload zsh/terminfo
+
 zinit light zsh-users/zsh-history-substring-search
-bindkey "${terminfo[kcuu1]}" history-substring-search-up
-bindkey "${terminfo[kcud1]}" history-substring-search-down
+
+function zvm_after_init() {
+    local key_up="${terminfo[kcuu1]:-^[[A}"
+    local key_down="${terminfo[kcud1]:-^[[B}"
+
+    zvm_bindkey viins "$key_up" history-substring-search-up
+    zvm_bindkey viins "$key_down" history-substring-search-down
+
+    local key_shift_right="${terminfo[kRIT]:-^[[1;2C}"
+    local key_shift_left="${terminfo[kLFT]:-^[[1;2D}"
+
+    zvm_bindkey viins "$key_shift_right" vi-forward-word
+    zvm_bindkey viins "$key_shift_left" vi-backward-word
+
+    zvm_bindkey vicmd "$key_shift_right" vi-forward-word
+    zvm_bindkey vicmd "$key_shift_left" vi-backward-word
+}
+
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
 
 ZCOMPLDIR="${ZINIT[COMPLETIONS_DIR]:-$HOME/.local/share/zinit/completions}"
 
