@@ -1,0 +1,15 @@
+[Unit]
+Description=LSP Multiplexer Server (lspmux)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=%h/.cargo/bin/lspmux server
+Environment="PATH=%h/.cargo/bin:/usr/local/bin:/usr/bin:/bin"
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
