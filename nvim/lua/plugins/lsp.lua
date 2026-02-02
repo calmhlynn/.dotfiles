@@ -1,6 +1,14 @@
 return {
 	"neovim/nvim-lspconfig",
 	config = function()
+		vim.diagnostic.config({
+			virtual_text = true,
+			signs = true,
+			underline = true,
+			update_in_insert = false,
+			severity_sort = true,
+		})
+
 		local on_attach = function(client, bufnr)
 			vim.schedule(function()
 				pcall(function()
@@ -48,50 +56,6 @@ return {
 		-- 		vim.bo.expandtab = true -- Use spaces instead of tabs
 		-- 	end,
 		-- })
-
-		-- Rust
-		vim.g.rustaceanvim = function()
-			return {
-				-- other rustacean settings. --
-				server = {
-					on_attach = function(client, bufnr)
-						on_attach(client, bufnr)
-
-						-- vim.keymap.set("n", "<leader>d", function()
-						-- 	vim.cmd.RustLsp({ "debuggables" })
-						-- end, { buffer = bufnr })
-
-						vim.keymap.set("n", "<leader>t", function()
-							vim.cmd.RustLsp({ "testables" })
-						end, { buffer = bufnr })
-
-						vim.keymap.set("n", "<leader>em", function()
-							vim.cmd.RustLsp({ "expandMacro" })
-						end, { buffer = bufnr })
-
-						vim.keymap.set("n", "<leader>rp", function()
-							vim.cmd.RustLsp({ "rebuildProcMacros" })
-						end, { buffer = bufnr })
-
-						vim.keymap.set("n", "<leader>rd", function()
-							vim.cmd.RustLsp({ "renderDiagnostic" })
-						end, { buffer = bufnr })
-
-						vim.keymap.set("n", "<leader>pm", function()
-							vim.cmd.RustLsp({ "parentModule" })
-						end, { buffer = bufnr })
-
-						vim.keymap.set("n", "<leader>fc", function()
-							vim.cmd.RustLsp({ "flyCheck" })
-						end, { buffer = bufnr })
-
-						vim.keymap.set("n", "<leader>c", function()
-							vim.cmd.RustLsp({ "openCargo" })
-						end, { buffer = bufnr })
-					end,
-				},
-			}
-		end
 
 		-- python
 		vim.lsp.config("pyright", {
