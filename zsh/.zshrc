@@ -33,22 +33,25 @@ source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-zmodload zsh/terminfo
 zinit light zsh-users/zsh-history-substring-search
 
 function zvm_after_init() {
-    local key_up="${terminfo[kcuu1]:-^[[A}"
-    local key_down="${terminfo[kcud1]:-^[[B}"
+
+    local key_up=$'\e[A'       # Normal mode
+    local key_down=$'\e[B'     # Normal mode
+    local key_up_app=$'\eOA'   # Application mode 
+    local key_down_app=$'\eOB' # Application mode 
 
     zvm_bindkey viins "$key_up" history-substring-search-up
+    zvm_bindkey viins "$key_up_app" history-substring-search-up
     zvm_bindkey viins "$key_down" history-substring-search-down
+    zvm_bindkey viins "$key_down_app" history-substring-search-down
 
-    local key_shift_right="${terminfo[kRIT]:-^[[1;2C}"
-    local key_shift_left="${terminfo[kLFT]:-^[[1;2D}"
+    local key_shift_right=$'\e[1;2C'
+    local key_shift_left=$'\e[1;2D'
 
     zvm_bindkey viins "$key_shift_right" vi-forward-word
     zvm_bindkey viins "$key_shift_left" vi-backward-word
-
     zvm_bindkey vicmd "$key_shift_right" vi-forward-word
     zvm_bindkey vicmd "$key_shift_left" vi-backward-word
 }
