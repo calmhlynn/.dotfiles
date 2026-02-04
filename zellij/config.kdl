@@ -1,23 +1,7 @@
-themes {
-    kanagawa-dragon {
-        fg "#c5c9c5"
-        bg "#181616"
-        black "#0d0c0c"
-        red "#c4746e"
-        green "#8a9a7b"
-        yellow "#C8C093"
-        blue "#8ba4b0"
-        magenta "#a292a3"
-        cyan "#8ea49e"
-        white "#a6a69c"
-        orange "#b6927b"
-    }
-}
-
 default_shell "/usr/bin/zsh"
 default_layout "default"
-pane_frames false
-theme "kanagawa-dragon"
+pane_frames true
+theme "kanagawa"
 mouse_mode true
 show_startup_tips false
 copy_on_select true
@@ -59,6 +43,8 @@ keybinds {
 
         bind "Alt p" { ToggleFloatingPanes; SwitchToMode "normal"; }
         bind "Alt e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
+        bind "Alt n" { NewPane "stacked"; SwitchToMode "normal"; }
+
         bind "Alt s" {
             LaunchOrFocusPlugin "session-manager" {
                 floating true
