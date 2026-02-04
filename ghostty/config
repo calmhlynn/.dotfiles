@@ -3,19 +3,16 @@ shell-integration = detect
 font-family = "Hack Nerd Font Mono"
 font-family = "Noto Sans Mono CJK KR"
 font-size = 14
-adjust-cell-height = 1
 
 theme = Kanagawa Dragon
 foreground = #D4D4D4
+
+bell-features = system,attention,border
 
 macos-titlebar-style = hidden
 macos-option-as-alt = true
 gtk-titlebar = false
 window-decoration = false
-window-padding-x = 2
-window-padding-y = 2
-window-width = 120
-window-height = 30
 resize-overlay = never
 gtk-single-instance = true
 
@@ -49,30 +46,4 @@ keybind = ctrl+down=unbind
 keybind = ctrl+alt+one=unbind
 keybind = ctrl+alt+two=unbind
 keybind = ctrl+alt+three=unbind
-keybind = alt+q=unbind
-keybind = alt+d=unbind
-keybind = alt+l=unbind
-keybind = alt+m=unbind
-keybind = alt+x=unbind
-keybind = alt+f=unbind
-keybind = alt+t=unbind
-keybind = alt+w=unbind
-keybind = alt+z=unbind
-keybind = alt+b=unbind
-keybind = alt+p=unbind
-keybind = alt+e=unbind
-keybind = alt+s=unbind
-keybind = alt+left=unbind
-keybind = alt+right=unbind
-keybind = alt+up=unbind
-keybind = alt+down=unbind
-keybind = ctrl+one=unbind
-keybind = ctrl+two=unbind
-keybind = ctrl+three=unbind
-keybind = ctrl+four=unbind
-keybind = ctrl+five=unbind
-keybind = ctrl+six=unbind
-keybind = ctrl+seven=unbind
-keybind = ctrl+eight=unbind
-keybind = ctrl+nine=unbind
 keybind = ctrl+shift+r=reload_config
