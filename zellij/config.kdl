@@ -13,7 +13,7 @@ on_force_close "detach"
 simplified_ui true
 default_mode "normal"
 auto_layout true
-
+advanced_mouse_actions false
 
 web_client {
     font "Hack Nerd Font Mono, JetBrainsMono Nerd Font, SF Mono, Menlo, Roboto Mono, Droid Sans Mono, Monaco, Consolas, monospace"
