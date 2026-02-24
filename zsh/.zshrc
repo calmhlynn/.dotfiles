@@ -87,6 +87,10 @@ elif (( $+commands[vim] )); then
     export EDITOR='vim'
 fi
 
+if (( $+commands[tmux] )); then
+    alias t='tmux'
+fi
+
 if (( $+commands[lsd] )); then
     alias ls='lsd'
 fi
