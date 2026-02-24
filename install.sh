@@ -17,8 +17,6 @@ detect_pkg_manager() {
         echo "dnf"
     elif command -v pacman &>/dev/null; then
         echo "pacman"
-    elif command -v zypper &>/dev/null; then
-        echo "zypper"
     else
         error "unsupported package manager"
     fi
@@ -46,9 +44,6 @@ install_system_packages() {
             ;;
         pacman)
             sudo pacman -Syu --noconfirm --needed zsh git git-lfs tmux curl unzip base-devel fzf
-            ;;
-        zypper)
-            sudo zypper install -y zsh git git-lfs tmux curl unzip gcc gcc-c++ make fzf
             ;;
     esac
 
@@ -95,6 +90,11 @@ install_neovim() {
 }
 
 install_ghostty() {
+    if [[ -n "${SSH_CLIENT:-}" || -n "${SSH_TTY:-}" || -n "${SSH_CONNECTION:-}" ]]; then
+        warn "SSH session detected — skipping ghostty (GUI terminal)"
+        return
+    fi
+
     if command -v ghostty &>/dev/null; then
         info "ghostty already installed"
         return
@@ -104,14 +104,19 @@ install_ghostty() {
     if [[ "$OS" == "Darwin" ]]; then
         brew install --cask ghostty
     else
-        local pm
-        pm="$(detect_pkg_manager)"
-        case "$pm" in
-            apt)    sudo apt-get install -y ghostty ;;
-            dnf)    sudo dnf install -y ghostty ;;
-            pacman) sudo pacman -S --noconfirm --needed ghostty ;;
-            zypper) sudo zypper install -y ghostty ;;
-        esac
+        local version arch url install_dir
+        install_dir="$HOME/.local/bin"
+
+        version="$(curl -fsSL "https://api.github.com/repos/pkgforge-dev/ghostty-appimage/releases/latest" \
+            | grep '"tag_name"' | cut -d'"' -f4 | sed 's/^v//')"
+        arch="$(uname -m)"
+
+        url="https://github.com/pkgforge-dev/ghostty-appimage/releases/download/v${version}/Ghostty-${version}-${arch}.AppImage"
+
+        mkdir -p "$install_dir"
+        curl -fsSL -o "${install_dir}/ghostty" "$url"
+        chmod +x "${install_dir}/ghostty"
+        info "ghostty ${version} installed to ${install_dir}/ghostty"
     fi
 }
 
