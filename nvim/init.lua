@@ -20,6 +20,7 @@ vim.opt.timeoutlen = 500
 vim.opt.ttimeoutlen = 100
 vim.opt.cursorline = true
 vim.opt.swapfile = false
+vim.opt.autoread = true
 vim.wo.signcolumn = "yes"
 vim.o.ttyfast = true
 
@@ -61,44 +62,31 @@ require("lazy").setup({
 	},
 })
 
-vim.api.nvim_create_autocmd("WinEnter", {
-	group = vim.api.nvim_create_augroup("snacks_auto_quit_all_tabs", { clear = true }),
-	pattern = "*",
-	desc = "Quit nvim if only special (non-file) buffers remain and no unsaved changes",
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+	group = vim.api.nvim_create_augroup("auto_reload_file", { clear = true }),
+	desc = "Auto reload file when changed externally",
+	command = "silent! checktime",
+})
+
+vim.api.nvim_create_autocmd("QuitPre", {
+	group = vim.api.nvim_create_augroup("snacks_auto_quit", { clear = true }),
+	desc = "Close snacks windows before quitting so :q exits cleanly",
 	callback = function()
-		-- vim.defer_fn to execute after window state stabilizes
-		vim.defer_fn(function()
-			local real_file_open = false
-			local has_modified_buffer = false
-
-			-- 1. Check all buffers first for modified status
-			for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-				if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_option(bufnr, "buftype") == "" then
-					if vim.api.nvim_buf_get_option(bufnr, "modified") then
-						has_modified_buffer = true
-						break
-					end
-				end
+		local snacks_windows = {}
+		local floating_windows = {}
+		local windows = vim.api.nvim_list_wins()
+		for _, w in ipairs(windows) do
+			local filetype = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(w) })
+			if filetype:match("snacks_") ~= nil then
+				table.insert(snacks_windows, w)
+			elseif vim.api.nvim_win_get_config(w).relative ~= "" then
+				table.insert(floating_windows, w)
 			end
-
-			-- 2. Check all tab pages for real files
-			for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
-				for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
-					local bufnr = vim.api.nvim_win_get_buf(win)
-					if vim.api.nvim_buf_get_option(bufnr, "buftype") == "" then
-						real_file_open = true
-						break
-					end
-				end
-				if real_file_open then
-					break
-				end
+		end
+		if 1 == #windows - #floating_windows - #snacks_windows then
+			for _, w in ipairs(snacks_windows) do
+				vim.api.nvim_win_close(w, true)
 			end
-
-			-- 3. Only quit if no real files are open and no modified buffers exist
-			if not real_file_open and not has_modified_buffer then
-				vim.cmd("qall!")
-			end
-		end, 50) -- 50ms delay for stability
+		end
 	end,
 })

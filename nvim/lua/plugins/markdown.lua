@@ -46,6 +46,7 @@ return {
 					custom = {},
 				},
 
+				latex = { enabled = false },
 				completions = { lsp = { enabled = true } },
 			})
 			vim.keymap.set("n", "<leader>m", ":RenderMarkdown toggle<CR>", { silent = true })
