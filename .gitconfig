@@ -1,8 +1,6 @@
 # vim: noexpandtab sw=8
-[user]
-	name = calmhlynn
-	email = barca105@naver.com
-    signingkey = "E201D1FA43538FCC"
+[include]
+	path = ~/.gitconfig.local
 [core]
 	editor = nvim
 	excludesfile = ~/.gitexclude
@@ -11,8 +9,7 @@
 	autocrlf = no
 	quotepath = no
 	precomposeunicode = yes
-[core]
-    pager = delta
+	pager = delta
 [interactive]
     diffFilter = delta --color-only
 [delta]
@@ -46,9 +43,6 @@
 	autosquash = true
 [commit]
 	verbose = true
-	gpgsign = yes
-[tag]
-	gpgsign = true
 [rerere]
 	enabled = true
 [stash]

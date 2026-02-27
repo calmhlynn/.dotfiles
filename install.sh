@@ -201,7 +201,7 @@ create_symlinks() {
     link "$DOTFILES/bat"             "$HOME/.config/bat"
     link "$DOTFILES/ghostty"         "$HOME/.config/ghostty"
     link "$DOTFILES/.gitconfig"      "$HOME/.gitconfig"
-    link "$DOTFILES/sshconfig"       "$HOME/.ssh/config"
+    link "$DOTFILES/.gitexclude"     "$HOME/.gitexclude"
 
     if [[ "$OS" == "Linux" ]]; then
         link "$DOTFILES/systemd/user/lspmux.service" \
@@ -254,6 +254,18 @@ PLIST
     fi
 }
 
+install_tmux_plugins() {
+    local tpm_dir="$HOME/.tmux/plugins/tpm"
+
+    if [[ ! -d "$tpm_dir" ]]; then
+        info "installing TPM"
+        git clone https://github.com/tmux-plugins/tpm "$tpm_dir"
+    fi
+
+    info "installing tmux plugins"
+    "$tpm_dir/bin/install_plugins"
+}
+
 setup_shell() {
     local zsh_path
     zsh_path="$(which zsh)"
@@ -295,9 +307,15 @@ main() {
     install_fonts
     create_symlinks
     setup_path
+    install_tmux_plugins
     setup_lspmux_service
     setup_shell
     post_install
+
+    if [[ -x "$HOME/.sdotfiles/install.sh" ]]; then
+        info "running private dotfiles installer"
+        "$HOME/.sdotfiles/install.sh"
+    fi
 
     info "done! restart your shell or run: exec zsh"
 }

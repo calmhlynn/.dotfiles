@@ -1,5 +1,0 @@
-Host github.com
-  HostName github.com
-  User git
-  IdentityAgent /run/user/1000/gnupg/S.gpg-agent.ssh
-

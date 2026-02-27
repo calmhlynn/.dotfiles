@@ -1,0 +1,70 @@
+# === OS ===
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+nohup.out
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# === Editor / IDE ===
+
+# Vim / Neovim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]*.un~
+Session.vim
+Sessionx.vim
+.netrwhist
+tags
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.vsix
+
+# JetBrains
+.idea/
+*.iml
+cmake-build-*/
+
+# Emacs
+\#*\#
+.#*
+
+# === Security (safety net) ===
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+
+# === Common temp / build ===
+*.log
+*.bak
+*.tmp
+*.temp
+*.orig
+*.pid
