@@ -184,19 +184,6 @@ return {
 			end
 		end, { silent = true, expr = true, desc = "Scroll backward in hover" })
 
-		-- Show diagnostics in floating window
-		vim.keymap.set("n", "<leader>d", function()
-			vim.diagnostic.open_float(nil, {
-				border = "rounded",
-				source = "always",
-				prefix = " ",
-			})
-		end, { desc = "Show Diagnostics" })
-
-		-- Navigate diagnostics
-		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous Diagnostic" })
-		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next Diagnostic" })
-
 		-- Noice commands
 		vim.keymap.set("n", "<leader>nd", "<cmd>NoiceDismiss<CR>", { desc = "Dismiss Noice Messages" })
 		vim.keymap.set("n", "<leader>nh", "<cmd>NoiceHistory<CR>", { desc = "Noice History" })
