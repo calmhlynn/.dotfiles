@@ -65,21 +65,26 @@ fi
 
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
-zinit wait lucid for \
-    zdharma-continuum/fast-syntax-highlighting \
-    atpull'zinit creinstall -q .' \
-        zsh-users/zsh-completions \
-    atload'_zsh_autosuggest_start' \
-        zsh-users/zsh-autosuggestions \
-
+zinit ice atpull'zinit creinstall -q .'
+zinit light zsh-users/zsh-completions
 
 autoload -Uz compinit bashcompinit
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump-${ZSH_VERSION}"
 bashcompinit
+zinit cdreplay -q
+
+zinit wait lucid for \
+    zdharma-continuum/fast-syntax-highlighting \
+    atload'_zsh_autosuggest_start' \
+        zsh-users/zsh-autosuggestions
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
+
+__git_remote_repositories() {}
+__git_local_repositories() {}
+_cmdambivalent() { (( CURRENT > 1 )) && _normal; }
 
 if (( $+commands[nvim] )); then
     export EDITOR='nvim'
