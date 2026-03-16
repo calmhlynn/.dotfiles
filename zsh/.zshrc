@@ -107,3 +107,4 @@ alias lt='ls --tree -t'
 if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
 fi
+export PATH="$HOME/.local/bin:$PATH"
