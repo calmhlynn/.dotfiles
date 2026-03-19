@@ -39,3 +39,4 @@ keybind = ctrl+shift+down=unbind
 keybind = ctrl+alt+left=unbind
 keybind = ctrl+alt+right=unbind
 keybind = ctrl+shift+r=reload_config
+keybind = shift+enter=text:\x1b[13;2u
