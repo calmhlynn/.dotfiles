@@ -140,14 +140,18 @@ install_rust() {
 }
 
 install_cargo_tools() {
-    local -a crates=(starship lsd bat ripgrep git-delta stylua)
+    local -a crates=(starship lsd bat ripgrep git-delta stylua tree-sitter-cli)
 
     for crate in "${crates[@]}"; do
         if cargo install --list | grep -q "^${crate} "; then
             info "$crate already installed"
         else
             info "installing $crate"
-            cargo install "$crate"
+            if [[ "$crate" == "tree-sitter-cli" ]]; then
+                cargo install --locked "$crate"
+            else
+                cargo install "$crate"
+            fi
         fi
     done
 }
@@ -213,6 +217,36 @@ create_symlinks() {
 
 }
 
+install_treesitter() {
+    local parsers=(
+        rust c cpp toml lua json javascript python typescript tsx yaml html css
+        markdown markdown_inline graphql bash vim vimdoc dockerfile regex gitignore
+        diff zig just
+    )
+    local parser parser_expr="" ts_install_cmd
+
+    for parser in "${parsers[@]}"; do
+        parser_expr="${parser_expr:+${parser_expr}, }'${parser}'"
+    done
+    ts_install_cmd="+lua require('nvim-treesitter').install({ ${parser_expr} }):wait(300000)"
+
+    if ! command -v nvim &>/dev/null; then
+        warn "skipping Tree-sitter install: nvim not found"
+        return
+    fi
+
+    if ! command -v tree-sitter &>/dev/null; then
+        warn "skipping Tree-sitter install: tree-sitter CLI not found"
+        return
+    fi
+
+    info "syncing Neovim plugins"
+    nvim --headless "+Lazy! sync" +qa
+
+    info "installing Tree-sitter parsers"
+    nvim --headless "$ts_install_cmd" +qa
+}
+
 install_tmux_plugins() {
     local tpm_dir="$HOME/.tmux/plugins/tpm"
 
@@ -266,6 +300,7 @@ main() {
     install_fonts
     create_symlinks
     setup_path
+    install_treesitter
     install_tmux_plugins
     setup_shell
     post_install
