@@ -1,61 +1,59 @@
-return {
+local parsers = {
+	"rust",
+	"c",
+	"cpp",
+	"toml",
+	"lua",
+	"json",
+	"javascript",
+	"python",
+	"typescript",
+	"tsx",
+	"yaml",
+	"html",
+	"css",
+	"markdown",
+	"markdown_inline",
+	"graphql",
+	"bash",
+	"vim",
+	"vimdoc",
+	"dockerfile",
+	"regex",
+	"gitignore",
+	"diff",
+	"zig",
+	"just",
+}
 
+return {
 	"nvim-treesitter/nvim-treesitter",
+	branch = "main",
+	lazy = false,
 	build = ":TSUpdate",
 	config = function()
-		require("nvim-treesitter.configs").setup({
-			modules = {}, -- Add missing field
-			sync_install = false, -- Add missing field
-			ignore_install = {}, -- Add missing field
-			-- enable syntax highlighting
-			highlight = {
-				enable = true,
-			},
-			-- enable indentation
-			indent = { enable = true },
-			-- enable autotagging (w/ nvim-ts-autotag plugin)
-			autotag = {
-				enable = true,
-			},
-			-- ensure these language parsers are installed
-			ensure_installed = {
-				"rust",
-				"c",
-				"toml",
-				"lua",
-				"json",
-				"javascript",
-				"python",
-				"typescript",
-				"tsx",
-				"yaml",
-				"html",
-				"css",
-				"markdown",
-				"markdown_inline",
-				"graphql",
-				"bash",
-				"vim",
-				"dockerfile",
-				"regex",
-				"gitignore",
-				"diff",
-				"zig",
-				"just",
-			},
-			-- auto install above language parsers
-			auto_install = true,
-			rainbow = {
-				enable = true,
-				extended_mode = true,
-				max_file_lines = nil,
-			},
+		require("nvim-treesitter").setup({})
+
+		vim.api.nvim_create_user_command("TSInstallConfigured", function()
+			require("nvim-treesitter").install(parsers)
+		end, { desc = "Install configured Tree-sitter parsers" })
+
+		vim.api.nvim_create_autocmd("FileType", {
+			group = vim.api.nvim_create_augroup("treesitter_enable", { clear = true }),
+			callback = function(ev)
+				pcall(vim.treesitter.start, ev.buf)
+
+				local ok, lang = pcall(vim.treesitter.language.get_lang, vim.bo[ev.buf].filetype)
+				if not ok or not lang then
+					return
+				end
+
+				local has_indent_query, query = pcall(vim.treesitter.query.get, lang, "indents")
+				if has_indent_query and query then
+					vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end
+			end,
+			desc = "Enable Tree-sitter for supported filetypes",
 		})
-		vim.keymap.set(
-			"n",
-			"<leader>rr",
-			"<Cmd>TSDisable rainbow|TSEnable rainbow<CR>",
-			{ desc = "Toggle Treesitter Rainbow" }
-		)
 	end,
 }
