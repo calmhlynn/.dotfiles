@@ -52,6 +52,7 @@ require("lazy").setup({
 })
 
 require("keymaps")
+require("statusline").setup()
 
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
 	group = vim.api.nvim_create_augroup("auto_reload_file", { clear = true }),
