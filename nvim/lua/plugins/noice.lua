@@ -189,14 +189,6 @@ return {
 		vim.keymap.set("n", "<leader>nh", "<cmd>NoiceHistory<CR>", { desc = "Noice History" })
 		vim.keymap.set("n", "<leader>nl", "<cmd>NoiceLast<CR>", { desc = "Noice Last Message" })
 		vim.keymap.set("n", "<leader>ne", "<cmd>NoiceErrors<CR>", { desc = "Noice Errors" })
-
-		-- Configure LSP handlers for bordered windows
-		local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-		function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-			opts = opts or {}
-			opts.border = opts.border or "rounded"
-			return orig_util_open_floating_preview(contents, syntax, opts, ...)
-		end
 	end,
 	dependencies = {
 		"MunifTanjim/nui.nvim",

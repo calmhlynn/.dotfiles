@@ -62,6 +62,9 @@ return {
 						path = 2, -- 0 = just filename, 1 = relative path, 2 = absolute path
 					},
 				},
+				lualine_c = {
+					{ vim.ui.progress_status },
+				},
 			},
 		})
 	end,

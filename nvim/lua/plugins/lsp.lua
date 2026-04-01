@@ -34,7 +34,7 @@ return {
 
 		-- TypeScript
 		vim.lsp.config("tsserver", {
-			root_dir = require("lspconfig").util.root_pattern("package.json"),
+			root_markers = { "package.json" },
 			cmd = { "pnpm", "typescript-language-server", "--stdio" },
 			single_file_support = false,
 			settings = {
@@ -118,5 +118,8 @@ return {
 			pattern = "markdown",
 			command = "set wrap | set textwidth=80",
 		})
+
+		vim.lsp.enable({ "clangd", "pyright", "eslint", "tsserver", "tailwindcss", "lua_ls" })
+		vim.lsp.codelens.enable(true)
 	end,
 }

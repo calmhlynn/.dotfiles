@@ -36,26 +36,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			end)
 		end)
 
-		vim.keymap.set("n", "[[", "<C-o>", { buffer = bufnr, desc = "Go to Older Position in Jumplist" })
-		vim.keymap.set("n", "]]", "<C-i>", { buffer = bufnr, desc = "Go to Newer Position in Jumplist" })
+		vim.keymap.set("n", "[[", "<C-o>", { buf = bufnr, desc = "Go to Older Position in Jumplist" })
+		vim.keymap.set("n", "]]", "<C-i>", { buf = bufnr, desc = "Go to Newer Position in Jumplist" })
 
-		vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Next Diagnostic" })
-		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Previous Diagnostic" })
+		local S = vim.diagnostic.severity
+		for _, m in ipairs({
+			{ "]d", 1,  nil,      "Next Diagnostic" },
+			{ "[d", -1, nil,      "Previous Diagnostic" },
+			{ "]e", 1,  S.ERROR,  "Next Error" },
+			{ "[e", -1, S.ERROR,  "Previous Error" },
+			{ "]w", 1,  S.WARN,   "Next Warning" },
+			{ "[w", -1, S.WARN,   "Previous Warning" },
+		}) do
+			vim.keymap.set("n", m[1], function()
+				vim.diagnostic.jump({ count = m[2], severity = m[3] })
+			end, { buf = bufnr, desc = m[4] })
+		end
 
-		vim.keymap.set("n", "]e", function()
-			vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
-		end, { buffer = bufnr, desc = "Next Error" })
-		vim.keymap.set("n", "[e", function()
-			vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
-		end, { buffer = bufnr, desc = "Previous Error" })
-
-		vim.keymap.set("n", "]w", function()
-			vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN })
-		end, { buffer = bufnr, desc = "Next Warning" })
-		vim.keymap.set("n", "[w", function()
-			vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN })
-		end, { buffer = bufnr, desc = "Previous Warning" })
-
-		vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { buffer = bufnr, desc = "Show Diagnostic" })
+		vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { buf = bufnr, desc = "Show Diagnostic" })
 	end,
 })

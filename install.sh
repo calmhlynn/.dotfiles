@@ -54,8 +54,16 @@ install_neovim() {
     local install_dir="$HOME/.local/nvim"
 
     if [[ -d "$install_dir" ]]; then
-        info "neovim already installed at $install_dir"
-        return
+        local installed_ver latest_ver
+        installed_ver="$("$install_dir/bin/nvim" --version 2>/dev/null | head -1 | awk '{print $2}')"
+        latest_ver="$(curl -fsSL "https://api.github.com/repos/neovim/neovim/releases/latest" \
+            | grep '"tag_name"' | cut -d'"' -f4)"
+        if [[ "$installed_ver" == "$latest_ver" ]]; then
+            info "neovim $installed_ver is already up to date"
+            return
+        fi
+        info "upgrading neovim: $installed_ver → $latest_ver"
+        rm -rf "$install_dir"
     fi
 
     info "installing neovim from GitHub releases"

@@ -11,37 +11,37 @@ return {
 					end,
 					on_attach = function(_, bufnr)
 						-- Override ftplugin/rust.vim [[/]] motion mappings
-						vim.keymap.set("n", "[[", "<C-o>", { buffer = bufnr, desc = "Go to Older Position in Jumplist" })
-						vim.keymap.set("n", "]]", "<C-i>", { buffer = bufnr, desc = "Go to Newer Position in Jumplist" })
+						vim.keymap.set("n", "[[", "<C-o>", { buf = bufnr, desc = "Go to Older Position in Jumplist" })
+						vim.keymap.set("n", "]]", "<C-i>", { buf = bufnr, desc = "Go to Newer Position in Jumplist" })
 
 						-- Rust specific keymaps
 						vim.keymap.set("n", "<leader>t", function()
 							vim.cmd.RustLsp({ "testables" })
-						end, { buffer = bufnr })
+						end, { buf = bufnr })
 
 						vim.keymap.set("n", "<leader>em", function()
 							vim.cmd.RustLsp({ "expandMacro" })
-						end, { buffer = bufnr })
+						end, { buf = bufnr })
 
 						vim.keymap.set("n", "<leader>rp", function()
 							vim.cmd.RustLsp({ "rebuildProcMacros" })
-						end, { buffer = bufnr })
+						end, { buf = bufnr })
 
 						vim.keymap.set("n", "<leader>rd", function()
 							vim.cmd.RustLsp({ "renderDiagnostic" })
-						end, { buffer = bufnr })
+						end, { buf = bufnr })
 
 						vim.keymap.set("n", "<leader>pm", function()
 							vim.cmd.RustLsp({ "parentModule" })
-						end, { buffer = bufnr })
+						end, { buf = bufnr })
 
 						vim.keymap.set("n", "<leader>fc", function()
 							vim.cmd.RustLsp({ "flyCheck" })
-						end, { buffer = bufnr })
+						end, { buf = bufnr })
 
 						vim.keymap.set("n", "<leader>c", function()
 							vim.cmd.RustLsp({ "openCargo" })
-						end, { buffer = bufnr })
+						end, { buf = bufnr })
 					end,
 				},
 			}
