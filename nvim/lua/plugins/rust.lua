@@ -6,9 +6,6 @@ return {
 		init = function()
 			vim.g.rustaceanvim = {
 				server = {
-					cmd = function()
-						return { "lspmux", "client", "--server-path", "rust-analyzer" }
-					end,
 					on_attach = function(_, bufnr)
 						-- Override ftplugin/rust.vim [[/]] motion mappings
 						vim.keymap.set("n", "[[", "<C-o>", { buf = bufnr, desc = "Go to Older Position in Jumplist" })

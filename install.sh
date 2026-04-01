@@ -140,7 +140,7 @@ install_rust() {
 }
 
 install_cargo_tools() {
-    local -a crates=(starship lsd bat ripgrep git-delta stylua lspmux)
+    local -a crates=(starship lsd bat ripgrep git-delta stylua)
 
     for crate in "${crates[@]}"; do
         if cargo install --list | grep -q "^${crate} "; then
@@ -211,55 +211,6 @@ create_symlinks() {
     link "$DOTFILES/.gitconfig"      "$HOME/.gitconfig"
     link "$DOTFILES/.gitexclude"     "$HOME/.gitexclude"
 
-    if [[ "$OS" == "Linux" ]]; then
-        link "$DOTFILES/systemd/user/lspmux.service" \
-             "$HOME/.config/systemd/user/lspmux.service"
-    fi
-}
-
-setup_lspmux_service() {
-    if [[ "$OS" == "Linux" ]]; then
-        info "enabling lspmux systemd service"
-        systemctl --user daemon-reload
-        systemctl --user enable --now lspmux.service
-    elif [[ "$OS" == "Darwin" ]]; then
-        local plist_dir="$HOME/Library/LaunchAgents"
-        local plist="$plist_dir/com.lspmux.plist"
-        local cargo_bin="${CARGO_HOME:-$HOME/.cargo}/bin/lspmux"
-
-        if [[ -f "$plist" ]]; then
-            info "lspmux LaunchAgent already exists"
-            return
-        fi
-
-        info "creating lspmux LaunchAgent"
-        mkdir -p "$plist_dir"
-        cat > "$plist" <<PLIST
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>com.lspmux</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>${cargo_bin}</string>
-        <string>server</string>
-    </array>
-    <key>RunAtLoad</key>
-    <true/>
-    <key>KeepAlive</key>
-    <true/>
-    <key>StandardOutPath</key>
-    <string>/tmp/lspmux.out.log</string>
-    <key>StandardErrorPath</key>
-    <string>/tmp/lspmux.err.log</string>
-</dict>
-</plist>
-PLIST
-        launchctl load "$plist"
-    fi
 }
 
 install_tmux_plugins() {
@@ -316,7 +267,6 @@ main() {
     create_symlinks
     setup_path
     install_tmux_plugins
-    setup_lspmux_service
     setup_shell
     post_install
 
