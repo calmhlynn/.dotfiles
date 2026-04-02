@@ -209,7 +209,7 @@ create_symlinks() {
 
     link "$DOTFILES/zsh/.zshrc"      "$HOME/.zshrc"
     link "$DOTFILES/nvim"            "$HOME/.config/nvim"
-    link "$DOTFILES/tmux/tmux.conf"  "$HOME/.config/tmux/tmux.conf"
+    link "$DOTFILES/tmux"            "$HOME/.config/tmux"
     link "$DOTFILES/bat"             "$HOME/.config/bat"
     link "$DOTFILES/ghostty"         "$HOME/.config/ghostty"
     link "$DOTFILES/.gitconfig"      "$HOME/.gitconfig"
@@ -256,7 +256,11 @@ install_tmux_plugins() {
     fi
 
     info "installing tmux plugins"
+    local tpm_session="_tpm_install"
+    tmux new-session -d -s "$tpm_session" 2>/dev/null || true
+    tmux set-environment -g TMUX_PLUGIN_MANAGER_PATH "$HOME/.tmux/plugins/"
     "$tpm_dir/bin/install_plugins"
+    tmux kill-session -t "$tpm_session" 2>/dev/null || true
 }
 
 setup_shell() {
