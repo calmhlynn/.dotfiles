@@ -89,39 +89,6 @@ return {
 					})
 				end
 
-				-- Noice.nvim overrides (only if plugin is installed)
-				if pcall(require, "noice") then
-					overrides = vim.tbl_deep_extend("force", overrides, {
-						-- Cmdline popup
-						NoiceCmdlinePopup = {
-							fg = palette.fujiWhite,
-						},
-						NoiceCmdlinePopupBorder = {
-							fg = palette.dragonGray,
-						},
-
-						-- Cmdline
-						NoiceCmdline = {
-							fg = palette.fujiWhite,
-						},
-						NoiceCmdlineIcon = {
-							fg = palette.crystalBlue,
-						},
-						NoiceCmdlineIconCmdline = {
-							fg = palette.dragonGreen,
-						},
-						NoiceCmdlineIconFilter = {
-							fg = palette.autumnYellow,
-						},
-						NoiceCmdlineIconLua = {
-							fg = palette.dragonBlue,
-						},
-						NoiceCmdlineIconSearch = {
-							fg = palette.waveRed,
-						},
-					})
-				end
-
 				return overrides
 			end,
 		})

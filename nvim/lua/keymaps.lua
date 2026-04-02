@@ -31,9 +31,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local bufnr = ev.buf
 
 		vim.schedule(function()
-			pcall(function()
-				vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-			end)
+			pcall(vim.lsp.inlay_hint.enable, true, { bufnr = bufnr })
+			pcall(vim.lsp.semantic_tokens.enable, false, { bufnr = bufnr })
 		end)
 
 		vim.keymap.set("n", "[[", "<C-o>", { buf = bufnr, desc = "Go to Older Position in Jumplist" })

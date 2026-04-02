@@ -43,16 +43,16 @@ return {
 			enabled = true,
 		},
 		dim = {
-			enabled = true,
+			enabled = false,
 		},
 		indent = {
-			enabled = true,
+			enabled = false,
 		},
 		lazygit = {
 			enabled = true,
 		},
 		notifier = {
-			enabled = false,
+			enabled = true,
 		},
 		toggle = {
 			enabled = true,

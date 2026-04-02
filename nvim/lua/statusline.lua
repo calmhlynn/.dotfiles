@@ -115,31 +115,11 @@ local function git_segment(ctx)
 end
 
 local function diagnostic_segment(ctx)
-	local ok_count, counts = pcall(vim.diagnostic.count, ctx.bufnr)
-	if not ok_count or type(counts) ~= "table" or not next(counts) then
+	local status = vim.diagnostic.status(ctx.bufnr)
+	if status == "" then
 		return ""
 	end
-
-	local severities = {
-		{ key = vim.diagnostic.severity.ERROR, label = "E", hl = "StatusLineDiagError" },
-		{ key = vim.diagnostic.severity.WARN, label = "W", hl = "StatusLineDiagWarn" },
-		{ key = vim.diagnostic.severity.INFO, label = "I", hl = "StatusLineDiagInfo" },
-		{ key = vim.diagnostic.severity.HINT, label = "H", hl = "StatusLineDiagHint" },
-	}
-	local parts = {}
-
-	for _, item in ipairs(severities) do
-		local count = counts[item.key] or 0
-		if count > 0 then
-			table.insert(parts, "%#" .. item.hl .. "# " .. item.label .. count)
-		end
-	end
-
-	if #parts == 0 then
-		return ""
-	end
-
-	return separator() .. table.concat(parts, "") .. " "
+	return separator() .. " " .. status .. " "
 end
 
 local function progress_segment()
@@ -249,22 +229,6 @@ function M.apply_highlights()
 	vim.api.nvim_set_hl(0, "StatusLineDiffDelete", {
 		bg = colors.dragonBackground,
 		fg = colors.dragonRed,
-	})
-	vim.api.nvim_set_hl(0, "StatusLineDiagError", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonRed,
-	})
-	vim.api.nvim_set_hl(0, "StatusLineDiagWarn", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonOrange,
-	})
-	vim.api.nvim_set_hl(0, "StatusLineDiagInfo", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonBlue,
-	})
-	vim.api.nvim_set_hl(0, "StatusLineDiagHint", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonGreen,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineProgress", {
 		bg = colors.dragonBackground,

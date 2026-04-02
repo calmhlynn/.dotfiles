@@ -24,7 +24,10 @@ vim.opt.autoread = true
 vim.wo.signcolumn = "yes"
 vim.o.ttyfast = true
 vim.opt.winborder = "rounded"
-
+vim.opt.shortmess:append("WS")
+vim.opt.pumborder = "rounded"
+vim.opt.pummaxwidth = 50
+vim.opt.cmdheight = 0
 vim.g.clipboard = "osc52"
 vim.opt.clipboard = "unnamedplus"
 
@@ -53,6 +56,7 @@ require("lazy").setup({
 
 require("keymaps")
 require("statusline").setup()
+
 
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
 	group = vim.api.nvim_create_augroup("auto_reload_file", { clear = true }),
