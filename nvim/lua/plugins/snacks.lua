@@ -13,8 +13,7 @@ return {
 				local floating_windows = {}
 				local windows = vim.api.nvim_list_wins()
 				for _, w in ipairs(windows) do
-					local filetype =
-						vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(w) })
+					local filetype = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(w) })
 					if filetype:match("snacks_") ~= nil then
 						table.insert(snacks_windows, w)
 					elseif vim.api.nvim_win_get_config(w).relative ~= "" then
@@ -30,34 +29,16 @@ return {
 		})
 	end,
 	opts = {
-		bigfile = {
-			enabled = true,
-		},
-		image = {
-			enabled = true,
-		},
-		input = {
-			enabled = true,
-		},
 		explorer = {
 			enabled = true,
 		},
-		dim = {
-			enabled = false,
-		},
 		indent = {
-			enabled = false,
-		},
-		lazygit = {
 			enabled = true,
 		},
 		notifier = {
 			enabled = true,
 		},
 		toggle = {
-			enabled = true,
-		},
-		zen = {
 			enabled = true,
 		},
 		quickfile = {
@@ -135,86 +116,13 @@ return {
 			end,
 			desc = "File Explorer",
 		},
-		{
-			"<C-\\>i",
-			function()
-				Snacks.input()
-			end,
-			desc = "Input",
-		},
-		{
-			"<C-\\>lg",
-			function()
-				Snacks.lazygit()
-			end,
-			desc = "lazygit",
-		},
-		{
-			"<C-\\>de",
-			function()
-				Snacks.dim.enable()
-			end,
-			desc = "dim enable",
-		},
-
-		{
-			"<C-\\>dd",
-			function()
-				Snacks.dim.disable()
-			end,
-			desc = "dim disable",
-		},
-		{
-			"<C-\\>z",
-			function()
-				Snacks.zen()
-			end,
-			desc = "zen mode",
-		},
-
 		-- picker
-		{
-			"<C-\\><space>",
-			function()
-				Snacks.picker.smart()
-			end,
-			desc = "Smart Find Files",
-		},
-		{
-			"<C-\\>g",
-			function()
-				Snacks.picker.grep()
-			end,
-			desc = "Grep",
-		},
-		{
-			"<C-\\>f",
-			function()
-				Snacks.picker.files()
-			end,
-			desc = "Find files",
-		},
-		{
-			"<C-\\>b",
-			function()
-				Snacks.picker.buffers()
-			end,
-			desc = "Buffers",
-		},
 		{
 			"<C-\\>m",
 			function()
 				Snacks.picker.man()
 			end,
 			desc = "Man Pages",
-		},
-		{
-
-			"<C-\\>h",
-			function()
-				Snacks.picker.command_history()
-			end,
-			desc = "Command History",
 		},
 		{
 			"<C-\\>ss",
@@ -231,75 +139,11 @@ return {
 			desc = "LSP Workspace Symbols",
 		},
 		{
-			"<C-\\>l",
-			function()
-				Snacks.picker.lines()
-			end,
-			desc = "Buffer Lines",
-		},
-		{
 			"<C-\\>n",
 			function()
 				Snacks.notifier.show_history()
 			end,
 			desc = "Notification History",
-		},
-		{
-			"@b",
-			function()
-				Snacks.picker.git_branches()
-			end,
-			desc = "Git Branches",
-		},
-		{
-			"@l",
-			function()
-				Snacks.picker.git_log()
-			end,
-			desc = "Git Log",
-		},
-		{
-			"@L",
-			function()
-				Snacks.picker.git_log_line()
-			end,
-			desc = "Git Log Line",
-		},
-		{
-			"@s",
-			function()
-				Snacks.picker.git_status()
-			end,
-			desc = "Git Status",
-		},
-		{
-			"@S",
-			function()
-				Snacks.picker.git_stash()
-			end,
-			desc = "Git Stash",
-		},
-		{
-			"@d",
-			function()
-				Snacks.picker.git_diff()
-			end,
-			desc = "Git Diff (Hunks)",
-		},
-		{
-			"@f",
-			function()
-				Snacks.picker.git_log_file()
-			end,
-			desc = "Git Log File",
-		},
-
-		{
-			"<C-\\>uC",
-			function()
-				Snacks.picker.colorschemes()
-			end,
-			desc = "Colorschemes",
 		},
 		{
 			"t",
@@ -309,54 +153,11 @@ return {
 			desc = "Terminal Toggle",
 		},
 		{
-			"gd",
-			function()
-				Snacks.picker.lsp_definitions()
-			end,
-			desc = "Goto Definition",
-		},
-		{
-			"gD",
-			function()
-				Snacks.picker.lsp_declarations()
-			end,
-			desc = "Goto Declaration",
-		},
-		{
 			"gr",
 			function()
 				Snacks.picker.lsp_references()
 			end,
 			desc = "References",
-		},
-		{
-			"gI",
-			function()
-				Snacks.picker.lsp_implementations()
-			end,
-			desc = "Goto Implementation",
-		},
-		{
-			"gy",
-			function()
-				Snacks.picker.lsp_type_definitions()
-			end,
-			desc = "Goto T[y]pe Definition",
-		},
-		{
-			"<C-\\>k",
-			function()
-				Snacks.picker.keymaps()
-			end,
-			desc = "Keymaps",
-		},
-
-		{
-			"<C-\\>j",
-			function()
-				Snacks.picker.jumps()
-			end,
-			desc = "Jumps",
 		},
 	},
 }

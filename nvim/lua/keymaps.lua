@@ -52,6 +52,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			end, { buf = bufnr, desc = m[4] })
 		end
 
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buf = bufnr, desc = "Goto Definition" })
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buf = bufnr, desc = "Goto Declaration" })
+		vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buf = bufnr, desc = "Goto Implementation" })
+		vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { buf = bufnr, desc = "Goto Type Definition" })
+
 		vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { buf = bufnr, desc = "Show Diagnostic" })
+		vim.keymap.set({ "n", "v" }, "<leader>ac", vim.lsp.buf.code_action, { buf = bufnr, desc = "Code Action" })
+		vim.keymap.set("n", "<leader>D", function()
+			if #vim.lsp.get_clients({ bufnr = bufnr, method = "workspace/diagnostic" }) > 0 then
+				vim.lsp.buf.workspace_diagnostics()
+				vim.defer_fn(function()
+					vim.diagnostic.setqflist({ open = true })
+				end, 200)
+				return
+			end
+
+			vim.diagnostic.setqflist({ open = true })
+		end, { buf = bufnr, desc = "Workspace Diagnostics" })
 	end,
 })

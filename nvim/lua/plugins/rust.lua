@@ -7,10 +7,6 @@ return {
 			vim.g.rustaceanvim = {
 				server = {
 					on_attach = function(_, bufnr)
-						-- Override ftplugin/rust.vim [[/]] motion mappings
-						vim.keymap.set("n", "[[", "<C-o>", { buf = bufnr, desc = "Go to Older Position in Jumplist" })
-						vim.keymap.set("n", "]]", "<C-i>", { buf = bufnr, desc = "Go to Newer Position in Jumplist" })
-
 						-- Rust specific keymaps
 						vim.keymap.set("n", "<leader>t", function()
 							vim.cmd.RustLsp({ "testables" })
