@@ -37,6 +37,16 @@ return {
 		keys = {
 			{ "<C-\\>g", "<cmd>RG<CR>", desc = "Grep" },
 			{ "<C-\\>f", "<cmd>Files<CR>", desc = "Find files" },
+			{
+				"<C-\\>F",
+				function()
+					local saved = vim.env.FZF_DEFAULT_COMMAND
+					vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --no-ignore --glob '!.git/*'"
+					vim.cmd("Files")
+					vim.env.FZF_DEFAULT_COMMAND = saved
+				end,
+				desc = "Find all files (no gitignore)",
+			},
 			{ "<C-\\>b", "<cmd>Buffers<CR>", desc = "Buffers" },
 			{ "<C-\\>h", "<cmd>History:<CR>", desc = "Command History" },
 			{ "<C-\\>H", "<cmd>History<CR>", desc = "Recent Files" },
@@ -49,12 +59,13 @@ return {
 			{ "<C-\\>uC", "<cmd>Colors<CR>", desc = "Colorschemes" },
 			{ "<C-\\>k", "<cmd>Maps<CR>", desc = "Keymaps" },
 			{ "<C-\\>j", "<cmd>Jumps<CR>", desc = "Jumps" },
-			{ "<C-\\>G", "<cmd>GFiles<CR>", desc = "Git Files" },
 			{ "<C-\\>s", git_status_files, desc = "Git Status Files" },
 			{ "<C-\\>c", "<cmd>Commits<CR>", desc = "Git Log" },
 			{ "<C-\\>lf", "<cmd>BCommits<CR>", desc = "Git Log File" },
 		},
 		init = function()
+			vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --glob '!.git/*'"
+
 			vim.g.fzf_layout = {
 				window = {
 					width = 0.9,
