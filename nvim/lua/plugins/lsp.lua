@@ -129,32 +129,9 @@ return {
 		})
 
 		vim.api.nvim_create_autocmd("LspAttach", {
-			group = vim.api.nvim_create_augroup("lsp_rust_codelens", { clear = true }),
-			callback = function(ev)
-				local client = vim.lsp.get_client_by_id(ev.data.client_id)
-				if not client or vim.bo[ev.buf].filetype ~= "rust" then
-					return
-				end
-				if not client:supports_method("textDocument/codeLens") then
-					return
-				end
-
-				vim.lsp.codelens.enable(true, { bufnr = ev.buf })
-				vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-					group = vim.api.nvim_create_augroup("lsp_rust_codelens_" .. ev.buf, { clear = true }),
-					buffer = ev.buf,
-					callback = function()
-						vim.lsp.codelens.refresh({ bufnr = ev.buf })
-					end,
-					desc = "Refresh Rust code lenses",
-				})
-			end,
-		})
-
-		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("lsp_float_keymaps", { clear = true }),
 			callback = function(ev)
-				local opts = { buf = ev.buf }
+				local opts = { buffer = ev.buf }
 
 				vim.keymap.set("n", "K", function()
 					vim.lsp.buf.hover(lsp_float)
@@ -162,8 +139,7 @@ return {
 				vim.keymap.set("n", "gK", function()
 					vim.lsp.buf.signature_help(lsp_float)
 				end, vim.tbl_extend("force", opts, { desc = "LSP Signature Help" }))
-
-				end,
+			end,
 		})
 
 		vim.lsp.enable({ "clangd", "pyright", "eslint", "tsserver", "tailwindcss", "lua_ls" })
