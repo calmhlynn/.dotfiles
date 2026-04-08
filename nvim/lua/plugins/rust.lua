@@ -10,31 +10,31 @@ return {
 						-- Rust specific keymaps
 						vim.keymap.set("n", "<leader>t", function()
 							vim.cmd.RustLsp({ "testables" })
-						end, { buf = bufnr })
+						end, { buffer = bufnr })
 
 						vim.keymap.set("n", "<leader>em", function()
 							vim.cmd.RustLsp({ "expandMacro" })
-						end, { buf = bufnr })
+						end, { buffer = bufnr })
 
 						vim.keymap.set("n", "<leader>rp", function()
 							vim.cmd.RustLsp({ "rebuildProcMacros" })
-						end, { buf = bufnr })
+						end, { buffer = bufnr })
 
 						vim.keymap.set("n", "<leader>rd", function()
 							vim.cmd.RustLsp({ "renderDiagnostic" })
-						end, { buf = bufnr })
+						end, { buffer = bufnr })
 
 						vim.keymap.set("n", "<leader>pm", function()
 							vim.cmd.RustLsp({ "parentModule" })
-						end, { buf = bufnr })
+						end, { buffer = bufnr })
 
 						vim.keymap.set("n", "<leader>fc", function()
 							vim.cmd.RustLsp({ "flyCheck" })
-						end, { buf = bufnr })
+						end, { buffer = bufnr })
 
 						vim.keymap.set("n", "<leader>c", function()
 							vim.cmd.RustLsp({ "openCargo" })
-						end, { buf = bufnr })
+						end, { buffer = bufnr })
 					end,
 				},
 			}

@@ -35,8 +35,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			pcall(vim.lsp.semantic_tokens.enable, false, { bufnr = bufnr })
 		end)
 
-		vim.keymap.set("n", "[[", "<C-o>", { buf = bufnr, desc = "Go to Older Position in Jumplist" })
-		vim.keymap.set("n", "]]", "<C-i>", { buf = bufnr, desc = "Go to Newer Position in Jumplist" })
+		vim.keymap.set("n", "[[", "<C-o>", { buffer = bufnr, desc = "Go to Older Position in Jumplist" })
+		vim.keymap.set("n", "]]", "<C-i>", { buffer = bufnr, desc = "Go to Newer Position in Jumplist" })
 
 		local S = vim.diagnostic.severity
 		for _, m in ipairs({
@@ -49,16 +49,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		}) do
 			vim.keymap.set("n", m[1], function()
 				vim.diagnostic.jump({ count = m[2], severity = m[3] })
-			end, { buf = bufnr, desc = m[4] })
+			end, { buffer = bufnr, desc = m[4] })
 		end
 
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buf = bufnr, desc = "Goto Definition" })
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buf = bufnr, desc = "Goto Declaration" })
-		vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buf = bufnr, desc = "Goto Implementation" })
-		vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { buf = bufnr, desc = "Goto Type Definition" })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Goto Definition" })
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Goto Declaration" })
+		vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Goto Implementation" })
+		vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Goto Type Definition" })
 
-		vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { buf = bufnr, desc = "Show Diagnostic" })
-		vim.keymap.set({ "n", "v" }, "<leader>ac", vim.lsp.buf.code_action, { buf = bufnr, desc = "Code Action" })
+		vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { buffer = bufnr, desc = "Show Diagnostic" })
+		vim.keymap.set({ "n", "v" }, "<leader>ac", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code Action" })
 		vim.keymap.set("n", "<leader>D", function()
 			if #vim.lsp.get_clients({ bufnr = bufnr, method = "workspace/diagnostic" }) > 0 then
 				vim.lsp.buf.workspace_diagnostics()
@@ -69,6 +69,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			end
 
 			vim.diagnostic.setqflist({ open = true })
-		end, { buf = bufnr, desc = "Workspace Diagnostics" })
+		end, { buffer = bufnr, desc = "Workspace Diagnostics" })
 	end,
 })
