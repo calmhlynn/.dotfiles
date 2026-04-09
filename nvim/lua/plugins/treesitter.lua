@@ -41,6 +41,11 @@ return {
 		vim.api.nvim_create_autocmd("FileType", {
 			group = vim.api.nvim_create_augroup("treesitter_enable", { clear = true }),
 			callback = function(ev)
+				if vim.bo[ev.buf].filetype == "rust" then
+					vim.bo[ev.buf].syntax = "rust"
+					return
+				end
+
 				pcall(vim.treesitter.start, ev.buf)
 
 				local ok, lang = pcall(vim.treesitter.language.get_lang, vim.bo[ev.buf].filetype)
