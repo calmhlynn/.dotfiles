@@ -60,6 +60,14 @@ require("keymaps")
 require("statusline").setup()
 
 
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("treesitter_highlight", { clear = true }),
+	desc = "Enable built-in Tree-sitter highlighting",
+	callback = function(ev)
+		pcall(vim.treesitter.start, ev.buf)
+	end,
+})
+
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
 	group = vim.api.nvim_create_augroup("auto_reload_file", { clear = true }),
 	desc = "Auto reload file when changed externally",

@@ -235,11 +235,6 @@ install_treesitter() {
         return
     fi
 
-    if ! command -v tree-sitter &>/dev/null; then
-        warn "skipping Tree-sitter install: tree-sitter CLI not found"
-        return
-    fi
-
     info "syncing Neovim plugins"
     nvim --headless "+Lazy! sync" +qa
 
