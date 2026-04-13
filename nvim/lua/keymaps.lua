@@ -34,17 +34,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			pcall(vim.lsp.inlay_hint.enable, true, { bufnr = bufnr })
 		end)
 
-		vim.keymap.set("n", "[[", "<C-o>", { buffer = bufnr, desc = "Go to Older Position in Jumplist" })
-		vim.keymap.set("n", "]]", "<C-i>", { buffer = bufnr, desc = "Go to Newer Position in Jumplist" })
-
 		local S = vim.diagnostic.severity
 		for _, m in ipairs({
-			{ "]d", 1,  nil,      "Next Diagnostic" },
-			{ "[d", -1, nil,      "Previous Diagnostic" },
-			{ "]e", 1,  S.ERROR,  "Next Error" },
-			{ "[e", -1, S.ERROR,  "Previous Error" },
-			{ "]w", 1,  S.WARN,   "Next Warning" },
-			{ "[w", -1, S.WARN,   "Previous Warning" },
+			{ "]d", 1, nil, "Next Diagnostic" },
+			{ "[d", -1, nil, "Previous Diagnostic" },
+			{ "]e", 1, S.ERROR, "Next Error" },
+			{ "[e", -1, S.ERROR, "Previous Error" },
+			{ "]w", 1, S.WARN, "Next Warning" },
+			{ "[w", -1, S.WARN, "Previous Warning" },
 		}) do
 			vim.keymap.set("n", m[1], function()
 				vim.diagnostic.jump({ count = m[2], severity = m[3] })

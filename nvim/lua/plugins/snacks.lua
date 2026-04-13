@@ -32,6 +32,9 @@ return {
 		explorer = {
 			enabled = true,
 		},
+		bigfile = {
+			enabled = true,
+		},
 		indent = {
 			enabled = true,
 		},
@@ -46,6 +49,27 @@ return {
 		},
 		picker = {
 			enabled = true,
+			layout = {
+				preset = "default",
+			},
+			layouts = {
+				default = {
+					layout = {
+						box = "horizontal",
+						width = 0.8,
+						min_width = 120,
+						height = 0.8,
+						{
+							box = "vertical",
+							border = true,
+							title = "{title} {live} {flags}",
+							{ win = "input", height = 1, border = "bottom" },
+							{ win = "list", border = "none" },
+						},
+						{ win = "preview", title = "{preview}", border = true, width = 0.6 },
+					},
+				},
+			},
 			previewers = {
 				diff = {
 					builtin = false,
@@ -53,6 +77,11 @@ return {
 						"delta",
 						"--paging=never",
 					},
+				},
+			},
+			sources = {
+				git_log = {
+					preview = "git_log",
 				},
 			},
 			actions = {
@@ -118,6 +147,77 @@ return {
 		},
 		-- picker
 		{
+			"<C-\\>g",
+			function()
+				Snacks.picker.grep()
+			end,
+			desc = "Grep",
+		},
+		{
+			"<C-\\>f",
+			function()
+				Snacks.picker.files()
+			end,
+			desc = "Find files",
+		},
+		{
+			"<C-\\>F",
+			function()
+				Snacks.picker.files({
+					hidden = true,
+					ignored = true,
+					follow = true,
+					exclude = {
+						".git",
+						".git/*",
+					},
+				})
+			end,
+			desc = "Find all files (no gitignore)",
+		},
+		{
+			"<C-\\>b",
+			function()
+				Snacks.picker.buffers()
+			end,
+			desc = "Buffers",
+		},
+		{
+			"<C-\\>h",
+			function()
+				Snacks.picker.command_history()
+			end,
+			desc = "Command History",
+		},
+		{
+			"<C-\\>H",
+			function()
+				Snacks.picker.recent()
+			end,
+			desc = "Recent Files",
+		},
+		{
+			"<C-\\>/",
+			function()
+				Snacks.picker.search_history()
+			end,
+			desc = "Search History",
+		},
+		{
+			"<C-\\>l",
+			function()
+				Snacks.picker.lines()
+			end,
+			desc = "Buffer Lines",
+		},
+		{
+			"<C-\\>:",
+			function()
+				Snacks.picker.commands()
+			end,
+			desc = "Commands",
+		},
+		{
 			"<C-\\>m",
 			function()
 				Snacks.picker.man()
@@ -141,9 +241,58 @@ return {
 		{
 			"<C-\\>n",
 			function()
-				Snacks.notifier.show_history()
+				Snacks.picker.notifications()
 			end,
 			desc = "Notification History",
+		},
+		{
+			"<C-\\>uC",
+			function()
+				Snacks.picker.colorschemes()
+			end,
+			desc = "Colorschemes",
+		},
+		{
+			"<C-\\>k",
+			function()
+				Snacks.picker.keymaps()
+			end,
+			desc = "Keymaps",
+		},
+		{
+			"<C-\\>j",
+			function()
+				Snacks.picker.jumps()
+			end,
+			desc = "Jumps",
+		},
+		{
+			"<C-\\>s",
+			function()
+				Snacks.picker.git_status()
+			end,
+			desc = "Git Status Files",
+		},
+		{
+			"<C-\\>d",
+			function()
+				Snacks.picker.git_diff()
+			end,
+			desc = "Git Diff (Hunks)",
+		},
+		{
+			"<C-\\>c",
+			function()
+				Snacks.picker.git_log()
+			end,
+			desc = "Git Log",
+		},
+		{
+			"<C-\\>lf",
+			function()
+				Snacks.picker.git_log_file()
+			end,
+			desc = "Git Log File",
 		},
 		{
 			"t",

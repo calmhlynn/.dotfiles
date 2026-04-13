@@ -31,8 +31,6 @@ vim.opt.cmdheight = 0
 vim.g.clipboard = "osc52"
 vim.opt.clipboard = "unnamedplus"
 
-vim.g.no_rust_maps = 1
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -58,7 +56,6 @@ require("lazy").setup({
 
 require("keymaps")
 require("statusline").setup()
-
 
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("treesitter_highlight", { clear = true }),
