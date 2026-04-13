@@ -267,7 +267,7 @@ return {
 			desc = "Jumps",
 		},
 		{
-			"<C-\\>gs",
+			"<C-\\>Gs",
 			function()
 				Snacks.picker.git_status()
 			end,
