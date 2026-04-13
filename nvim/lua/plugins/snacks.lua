@@ -225,14 +225,14 @@ return {
 			desc = "Man Pages",
 		},
 		{
-			"<C-\\>ss",
+			"<C-\\>S",
 			function()
 				Snacks.picker.lsp_symbols()
 			end,
 			desc = "LSP Symbols",
 		},
 		{
-			"<C-\\>sS",
+			"<C-\\>s",
 			function()
 				Snacks.picker.lsp_workspace_symbols()
 			end,
@@ -267,7 +267,7 @@ return {
 			desc = "Jumps",
 		},
 		{
-			"<C-\\>s",
+			"<C-\\>gs",
 			function()
 				Snacks.picker.git_status()
 			end,
