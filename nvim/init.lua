@@ -54,6 +54,7 @@ require("lazy").setup({
 	},
 })
 
+require("cmp")
 require("keymaps")
 require("statusline").setup()
 
