@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("lsp_completion_trigger_" .. ev.buf, { clear = true }),
 				buffer = ev.buf,
 				callback = function()
-					vim.lsp.completion.get()
+					vim.schedule(vim.lsp.completion.get)
 				end,
 			})
 		end
