@@ -1,15 +1,15 @@
 local M = {}
 
 local colors = {
-	bg = "#1c1c1c",
-	fg = "#bcbcbc",
-	dark = "#1c1c1c",
-	muted = "#8a8a8a",
-	inactive = "#4e4e4e",
-	red = "#d75f5f",
-	green = "#87af87",
-	blue = "#87afd7",
-	orange = "#d7af87",
+	bg = "#1e1e2e",
+	fg = "#cdd6f4",
+	dark = "#11111b",
+	muted = "#7f849c",
+	inactive = "#45475a",
+	red = "#f38ba8",
+	green = "#a6e3a1",
+	blue = "#89b4fa",
+	orange = "#fab387",
 }
 
 local group = vim.api.nvim_create_augroup("builtin_statusline", { clear = true })
