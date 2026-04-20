@@ -1,15 +1,15 @@
 local M = {}
 
 local colors = {
-	dragonBlack = "#0D0C0C",
-	dragonGray = "#A6A69C",
-	dragonLightGray = "#C5C9C5",
-	dragonBackground = "#181616",
-	dragonRed = "#C4746E",
-	dragonGreen = "#87A987",
-	dragonBlue = "#8BA4B0",
-	dragonOrange = "#B6927B",
-	inactiveGray = "#625e5a",
+	bg = "#1c1c1c",
+	fg = "#bcbcbc",
+	dark = "#1c1c1c",
+	muted = "#8a8a8a",
+	inactive = "#4e4e4e",
+	red = "#d75f5f",
+	green = "#87af87",
+	blue = "#87afd7",
+	orange = "#d7af87",
 }
 
 local group = vim.api.nvim_create_augroup("builtin_statusline", { clear = true })
@@ -199,72 +199,72 @@ end
 
 function M.apply_highlights()
 	vim.api.nvim_set_hl(0, "StatusLineBase", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonLightGray,
+		bg = colors.bg,
+		fg = colors.fg,
 	})
 	vim.api.nvim_set_hl(0, "StatusLine", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonLightGray,
+		bg = colors.bg,
+		fg = colors.fg,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineNC", {
-		bg = colors.inactiveGray,
-		fg = colors.dragonGray,
+		bg = colors.inactive,
+		fg = colors.muted,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineSeparator", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonGray,
+		bg = colors.bg,
+		fg = colors.muted,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineGit", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonGreen,
+		bg = colors.bg,
+		fg = colors.green,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineDiffAdd", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonGreen,
+		bg = colors.bg,
+		fg = colors.green,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineDiffChange", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonOrange,
+		bg = colors.bg,
+		fg = colors.orange,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineDiffDelete", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonRed,
+		bg = colors.bg,
+		fg = colors.red,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineProgress", {
-		bg = colors.dragonBackground,
-		fg = colors.dragonOrange,
+		bg = colors.bg,
+		fg = colors.orange,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineMeta", {
-		bg = colors.inactiveGray,
-		fg = colors.dragonLightGray,
+		bg = colors.inactive,
+		fg = colors.fg,
 	})
 	vim.api.nvim_set_hl(0, "StatusLinePos", {
-		bg = colors.dragonGray,
-		fg = colors.dragonBlack,
+		bg = colors.muted,
+		fg = colors.dark,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineFileNormal", {
-		bg = colors.dragonGray,
-		fg = colors.dragonBlack,
+		bg = colors.muted,
+		fg = colors.dark,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineFileInsert", {
-		bg = colors.dragonRed,
-		fg = colors.dragonBlack,
+		bg = colors.red,
+		fg = colors.dark,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineFileVisual", {
-		bg = colors.dragonOrange,
-		fg = colors.dragonBlack,
+		bg = colors.orange,
+		fg = colors.dark,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineFileReplace", {
-		bg = colors.dragonBlue,
-		fg = colors.dragonBlack,
+		bg = colors.blue,
+		fg = colors.dark,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineFileCommand", {
-		bg = colors.dragonGreen,
-		fg = colors.dragonBlack,
+		bg = colors.green,
+		fg = colors.dark,
 	})
 	vim.api.nvim_set_hl(0, "StatusLineFileInactive", {
-		bg = colors.inactiveGray,
-		fg = colors.dragonGray,
+		bg = colors.inactive,
+		fg = colors.muted,
 	})
 end
 
