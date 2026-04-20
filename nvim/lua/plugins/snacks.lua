@@ -2,6 +2,9 @@ require("snacks").setup({
 	explorer = {
 		enabled = true,
 	},
+	indent = {
+		enabled = true,
+	},
 	notifier = {
 		enabled = true,
 	},
@@ -19,12 +22,12 @@ require("snacks").setup({
 					height = 0.8,
 					{
 						box = "vertical",
-						border = true,
+						border = "rounded",
 						title = "{title} {live} {flags}",
 						{ win = "input", height = 1, border = "bottom" },
 						{ win = "list", border = "none" },
 					},
-					{ win = "preview", title = "{preview}", border = true, width = 0.6 },
+					{ win = "preview", title = "{preview}", border = "rounded", width = 0.6 },
 				},
 			},
 		},
