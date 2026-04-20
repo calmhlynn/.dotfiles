@@ -22,8 +22,7 @@ vim.opt.pummaxwidth = 50
 vim.opt.cmdheight = 0
 vim.g.clipboard = "osc52"
 vim.opt.clipboard = "unnamedplus"
-vim.opt.list = true
-vim.opt.listchars = { leadmultispace = "│ ", trail = "·", tab = "  " }
+vim.opt.termguicolors = true
 
 -- Pre-load plugin configuration (must be set before vim.pack.add)
 vim.g.tmux_navigator_no_mappings = 1
@@ -75,6 +74,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 
 -- Install and load plugins
 vim.pack.add({
+	"https://github.com/catppuccin/nvim",
 	"https://github.com/folke/snacks.nvim",
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	"https://github.com/stevearc/conform.nvim",
@@ -91,10 +91,8 @@ vim.pack.add({
 	"https://github.com/windwp/nvim-autopairs",
 })
 
--- Colorscheme
-vim.cmd.colorscheme("catppuccin")
-
--- Plugin setup
+-- Plugin setup (catppuccin must load first)
+require("plugins.catppuccin")
 require("plugins.snacks")
 require("plugins.treesitter")
 require("plugins.conform")
