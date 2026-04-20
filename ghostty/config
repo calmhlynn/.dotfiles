@@ -5,7 +5,7 @@ font-family = "Hack Nerd Font Mono"
 font-family = "Noto Sans Mono CJK KR"
 font-size = 14
 
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 
 bell-features = system,attention,border
 
