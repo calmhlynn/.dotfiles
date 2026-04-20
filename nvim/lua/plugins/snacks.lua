@@ -2,19 +2,7 @@ require("snacks").setup({
 	explorer = {
 		enabled = true,
 	},
-	bigfile = {
-		enabled = true,
-	},
-	indent = {
-		enabled = true,
-	},
 	notifier = {
-		enabled = true,
-	},
-	toggle = {
-		enabled = true,
-	},
-	quickfile = {
 		enabled = true,
 	},
 	picker = {
@@ -66,42 +54,6 @@ require("snacks").setup({
 						"sidekick_send",
 						mode = { "n", "i" },
 					},
-				},
-			},
-		},
-	},
-	terminal = {
-		enabled = true,
-		win = {
-			bo = {
-				filetype = "terminal",
-			},
-			wo = {
-				winbar = "",
-			},
-			width = 0.2,
-			height = 0.2,
-		},
-	},
-
-	styles = {
-		terminal = {
-			keys = {
-				q = {
-					"<C-q>",
-					"<C-\\><C-n>",
-					mode = "t",
-					expr = true,
-					desc = "escape to normal mode",
-				},
-				term_normal = {
-					"<C-t>",
-					function()
-						Snacks.terminal.toggle()
-					end,
-					mode = "t",
-					expr = true,
-					desc = "escape to normal mode",
 				},
 			},
 		},
@@ -160,5 +112,28 @@ vim.keymap.set("n", "<C-\\>Gs", function() Snacks.picker.git_status() end, { des
 vim.keymap.set("n", "<C-\\>d", function() Snacks.picker.git_diff() end, { desc = "Git Diff (Hunks)" })
 vim.keymap.set("n", "<C-\\>c", function() Snacks.picker.git_log() end, { desc = "Git Log" })
 vim.keymap.set("n", "<C-\\>lf", function() Snacks.picker.git_log_file() end, { desc = "Git Log File" })
-vim.keymap.set("n", "t", function() Snacks.terminal.toggle() end, { desc = "Terminal Toggle" })
+-- Terminal toggle (built-in)
+local term_buf = nil
+local term_win = nil
+local function toggle_terminal()
+	if term_win and vim.api.nvim_win_is_valid(term_win) then
+		vim.api.nvim_win_hide(term_win)
+		term_win = nil
+		return
+	end
+	if term_buf and vim.api.nvim_buf_is_valid(term_buf) then
+		vim.cmd("botright split")
+		term_win = vim.api.nvim_get_current_win()
+		vim.api.nvim_win_set_buf(term_win, term_buf)
+	else
+		vim.cmd("botright split | terminal")
+		term_buf = vim.api.nvim_get_current_buf()
+		term_win = vim.api.nvim_get_current_win()
+	end
+	vim.api.nvim_win_set_height(term_win, math.floor(vim.o.lines * 0.2))
+	vim.cmd("startinsert")
+end
+vim.keymap.set("n", "t", toggle_terminal, { desc = "Terminal Toggle" })
+vim.keymap.set("t", "<C-t>", toggle_terminal, { desc = "Terminal Toggle" })
+vim.keymap.set("t", "<C-q>", [[<C-\><C-n>]], { desc = "Terminal Normal Mode" })
 vim.keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, { desc = "References" })

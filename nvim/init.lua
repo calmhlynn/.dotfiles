@@ -22,6 +22,8 @@ vim.opt.pummaxwidth = 50
 vim.opt.cmdheight = 0
 vim.g.clipboard = "osc52"
 vim.opt.clipboard = "unnamedplus"
+vim.opt.list = true
+vim.opt.listchars = { leadmultispace = "│ ", trail = "·", tab = "  " }
 
 -- Pre-load plugin configuration (must be set before vim.pack.add)
 vim.g.tmux_navigator_no_mappings = 1
@@ -117,6 +119,22 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "Enable built-in Tree-sitter highlighting",
 	callback = function(ev)
 		pcall(vim.treesitter.start, ev.buf)
+	end,
+})
+
+-- Bigfile: disable heavy features for large files
+vim.api.nvim_create_autocmd("BufReadPre", {
+	group = vim.api.nvim_create_augroup("bigfile", { clear = true }),
+	desc = "Disable heavy features for large files",
+	callback = function(ev)
+		local max_filesize = 1024 * 1024 -- 1MB
+		local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(ev.buf))
+		if ok and stats and stats.size > max_filesize then
+			vim.bo[ev.buf].syntax = ""
+			vim.bo[ev.buf].swapfile = false
+			vim.bo[ev.buf].undolevels = -1
+			vim.b[ev.buf].bigfile = true
+		end
 	end,
 })
 

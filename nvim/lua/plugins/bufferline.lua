@@ -3,6 +3,9 @@ require("bufferline").setup({
 		mode = "buffers",
 		numbers = "ordinal",
 		diagnostics = "nvim_lsp",
+		custom_filter = function(buf)
+			return vim.bo[buf].buftype ~= "terminal"
+		end,
 	},
 })
 
