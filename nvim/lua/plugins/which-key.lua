@@ -1,11 +1,7 @@
-return {
-	"folke/which-key.nvim",
-	event = "VeryLazy",
-	opts = {
-		preset = "helix",
-		delay = 200,
-		win = {
-			border = "rounded",
-		},
+require("which-key").setup({
+	preset = "helix",
+	delay = 200,
+	win = {
+		border = "rounded",
 	},
-}
+})

@@ -26,16 +26,8 @@ local parsers = {
 	"just",
 }
 
-return {
-	"nvim-treesitter/nvim-treesitter",
-	branch = "main",
-	lazy = false,
-	build = ":TSUpdate",
-	config = function()
-		require("nvim-treesitter").setup({})
+require("nvim-treesitter").setup({})
 
-		vim.api.nvim_create_user_command("TSInstallConfigured", function()
-			require("nvim-treesitter").install(parsers)
-		end, { desc = "Install configured Tree-sitter parsers" })
-	end,
-}
+vim.api.nvim_create_user_command("TSInstallConfigured", function()
+	require("nvim-treesitter").install(parsers)
+end, { desc = "Install configured Tree-sitter parsers" })
