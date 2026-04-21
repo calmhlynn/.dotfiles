@@ -280,11 +280,31 @@ setup_path() {
     export PATH="$HOME/.local/bin:${CARGO_HOME:-$HOME/.cargo}/bin:$PATH"
 }
 
-post_install() {
-    if command -v bat &>/dev/null; then
-        info "rebuilding bat cache"
-        bat cache --build
+setup_bat_theme() {
+    local themes_dir
+    themes_dir="$(bat --config-dir 2>/dev/null)/themes"
+
+    if ! command -v bat &>/dev/null; then
+        warn "skipping bat theme setup: bat not found"
+        return
     fi
+
+    mkdir -p "$themes_dir"
+
+    local theme_file="${DOTFILES}/bat/themes/Catppuccin Mocha.tmTheme"
+    if [[ ! -f "$themes_dir/Catppuccin Mocha.tmTheme" ]]; then
+        if [[ -f "$theme_file" ]]; then
+            cp "$theme_file" "$themes_dir/"
+        else
+            info "downloading Catppuccin Mocha theme for bat"
+            curl -fsSL \
+                "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme" \
+                -o "$themes_dir/Catppuccin Mocha.tmTheme"
+        fi
+    fi
+
+    info "rebuilding bat cache"
+    bat cache --build
 }
 
 main() {
@@ -302,7 +322,7 @@ main() {
     install_treesitter
     install_tmux_plugins
     setup_shell
-    post_install
+    setup_bat_theme
 
     if [[ -x "$HOME/.sdotfiles/install.sh" ]]; then
         info "running private dotfiles installer"
