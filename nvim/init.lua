@@ -74,7 +74,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 
 -- Install and load plugins
 vim.pack.add({
-	"https://github.com/catppuccin/nvim",
+	{ src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 	"https://github.com/folke/snacks.nvim",
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	"https://github.com/stevearc/conform.nvim",
