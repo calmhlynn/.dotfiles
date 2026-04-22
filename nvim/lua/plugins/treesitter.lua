@@ -2,6 +2,7 @@ local parsers = {
 	"rust",
 	"c",
 	"cpp",
+	"cuda",
 	"toml",
 	"lua",
 	"json",

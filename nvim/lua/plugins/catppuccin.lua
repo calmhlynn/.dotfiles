@@ -8,6 +8,7 @@ require("catppuccin").setup({
 			DiagnosticUnderlineWarn = { undercurl = true, sp = colors.yellow },
 			DiagnosticUnderlineInfo = { undercurl = true, sp = colors.sky },
 			DiagnosticUnderlineHint = { undercurl = true, sp = colors.teal },
+			["@markup.raw.block"] = { link = "Normal" },
 		}
 	end,
 	integrations = {
