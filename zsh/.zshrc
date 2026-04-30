@@ -7,6 +7,8 @@ fi
 
 stty stop undef
 
+bindkey -e
+
 setopt always_to_end complete_in_word auto_cd
 HISTSIZE=9000000
 SAVEHIST=9000000
@@ -31,29 +33,15 @@ autoload -Uz _zinit
 
 zinit light zsh-users/zsh-history-substring-search
 
-function zvm_after_init() {
+bindkey $'\e[A' history-substring-search-up      # Normal mode up
+bindkey $'\e[B' history-substring-search-down    # Normal mode down
+bindkey $'\eOA' history-substring-search-up      # Application mode up
+bindkey $'\eOB' history-substring-search-down    # Application mode down
 
-    local key_up=$'\e[A'       # Normal mode
-    local key_down=$'\e[B'     # Normal mode
-    local key_up_app=$'\eOA'   # Application mode 
-    local key_down_app=$'\eOB' # Application mode 
-
-    zvm_bindkey viins "$key_up" history-substring-search-up
-    zvm_bindkey viins "$key_up_app" history-substring-search-up
-    zvm_bindkey viins "$key_down" history-substring-search-down
-    zvm_bindkey viins "$key_down_app" history-substring-search-down
-
-    local key_shift_right=$'\e[1;2C'
-    local key_shift_left=$'\e[1;2D'
-
-    zvm_bindkey viins "$key_shift_right" vi-forward-word
-    zvm_bindkey viins "$key_shift_left" vi-backward-word
-    zvm_bindkey vicmd "$key_shift_right" vi-forward-word
-    zvm_bindkey vicmd "$key_shift_left" vi-backward-word
-}
+bindkey $'\e[1;2C' forward-word                  # Shift+Right
+bindkey $'\e[1;2D' backward-word                 # Shift+Left
 
 zinit ice depth=1
-zinit light jeffreytse/zsh-vi-mode
 
 ZCOMPLDIR="${ZINIT[COMPLETIONS_DIR]:-$HOME/.local/share/zinit/completions}"
 
