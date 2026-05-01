@@ -15,7 +15,7 @@
 [delta]
     navigate = true
     line-numbers = true
-    syntax-theme = KanagawaDragon
+    syntax-theme = Catppuccin Mocha
 [merge]
     conflictStyle = zdiff3
 [init]
