@@ -114,3 +114,6 @@
     grep     = grep --color -n                                               # grep with color & line numbers
     rb       = remote -v                                                     # show remote URLs
     tree     = "!_() { git ls-tree --name-only -r HEAD | sed 's|[^/]*/|   |g'; }; _"    # display project file tree
+[user]
+	email = barca105@naver.com
+	name = calmhlynn
