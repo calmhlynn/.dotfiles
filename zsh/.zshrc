@@ -96,3 +96,7 @@ if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
 fi
 export PATH="$HOME/.local/bin:$PATH"
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd (){ print -n '\e[2 q' }
+
