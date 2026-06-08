@@ -28,6 +28,22 @@ vim.opt.termguicolors = true
 vim.g.tmux_navigator_no_mappings = 1
 vim.g.rustaceanvim = {
 	server = {
+		default_settings = {
+			["rust-analyzer"] = {
+				files = {
+					watcher = "server",
+				},
+				checkOnSave = true,
+				check = {
+					command = "clippy",
+					extraArgs = { "--no-deps" },
+				},
+				cargo = {
+					targetDir = true,
+					features = "all",
+				},
+			},
+		},
 		on_attach = function(_, bufnr)
 			vim.keymap.set("n", "<leader>t", function()
 				vim.cmd.RustLsp({ "testables" })
