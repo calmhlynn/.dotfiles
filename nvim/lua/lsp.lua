@@ -156,34 +156,39 @@ vim.lsp.config("eslint", {
 	},
 })
 
--- TypeScript
-vim.lsp.config("tsserver", {
-	root_markers = { "package.json" },
-	cmd = { "pnpm", "typescript-language-server", "--stdio" },
+-- TypeScript / JavaScript (vtsls)
+vim.lsp.config("vtsls", {
+	cmd = node_cmd("vtsls"),
+	root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
 	single_file_support = false,
 	settings = {
 		typescript = {
-			enable = true,
-			format = { semicolons = "remove" },
-			insertSpaceAfterCommaDelimiter = true,
-			insertSpaceAfterSemicolonInForStatements = true,
-			insertSpaceBeforeAndAfterBinaryOperators = true,
-			insertSpaceAfterKeywordsInControlFlowStatements = true,
-			insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
-			insertSpaceBeforeFunctionParenthesis = true,
+			format = {
+				semicolons = "remove",
+				insertSpaceAfterCommaDelimiter = true,
+				insertSpaceAfterSemicolonInForStatements = true,
+				insertSpaceBeforeAndAfterBinaryOperators = true,
+				insertSpaceAfterKeywordsInControlFlowStatements = true,
+				insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+				insertSpaceBeforeFunctionParenthesis = true,
+			},
 		},
 		javascript = {
-			enable = true,
-			format = { semicolons = "remove" },
-			insertSpaceAfterCommaDelimiter = true,
-			insertSpaceAfterSemicolonInForStatements = true,
-			insertSpaceBeforeAndAfterBinaryOperators = true,
-			insertSpaceAfterKeywordsInControlFlowStatements = true,
-			insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
-			insertSpaceBeforeFunctionParenthesis = true,
+			format = {
+				semicolons = "remove",
+				insertSpaceAfterCommaDelimiter = true,
+				insertSpaceAfterSemicolonInForStatements = true,
+				insertSpaceBeforeAndAfterBinaryOperators = true,
+				insertSpaceAfterKeywordsInControlFlowStatements = true,
+				insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+				insertSpaceBeforeFunctionParenthesis = true,
+			},
 		},
 	},
-	filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+	filetypes = {
+		"javascript", "javascriptreact", "javascript.jsx",
+		"typescript", "typescriptreact", "typescript.tsx",
+	},
 })
 
 -- TailwindCSS
@@ -199,6 +204,7 @@ vim.lsp.config("tailwindcss", {
 		"tailwind.config.mjs", "tailwind.config.ts",
 		"postcss.config.js", "postcss.config.cjs",
 		"postcss.config.mjs", "postcss.config.ts",
+		"package.json", "tsconfig.json",
 		".git",
 	},
 	capabilities = {
@@ -250,7 +256,7 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
-vim.lsp.enable({ "clangd", "pyright", "eslint", "tsserver", "tailwindcss", "lua_ls" })
+vim.lsp.enable({ "clangd", "pyright", "eslint", "vtsls", "tailwindcss", "lua_ls" })
 
 -- Diagnostics
 vim.diagnostic.config({
