@@ -31,7 +31,8 @@ vim.g.rustaceanvim = {
 		default_settings = {
 			["rust-analyzer"] = {
 				files = {
-					watcher = "server",
+					watcher = "client",
+					exclude = { "target", ".git" },
 				},
 				checkOnSave = true,
 				check = {
@@ -44,6 +45,7 @@ vim.g.rustaceanvim = {
 				},
 			},
 		},
+		lspmux = { enable = false },
 		on_attach = function(_, bufnr)
 			vim.keymap.set("n", "<leader>t", function()
 				vim.cmd.RustLsp({ "testables" })
