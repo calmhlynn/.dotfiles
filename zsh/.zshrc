@@ -98,5 +98,5 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd (){ print -n '\e[2 q' }
+add-zsh-hook precmd (){ print -n '\e[5 q' }
 
