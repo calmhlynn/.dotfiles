@@ -4,16 +4,18 @@ onboarding = false
 channel = "stable"
 
 [ui]
-agent_panel_sort = "priority"
+agent_panel_sort = "spaces"
 show_agent_labels_on_pane_borders = true
 hide_tab_bar_when_single_tab = true
 
 [ui.toast]
-delivery = "terminal"
+delivery = "system"
 delay_seconds = 1
-
-[experimental]
-pane_history = true
 
 [keys]
 focus_agent = "prefix+alt+1..9"
+previous_agent = "prefix+,"
+next_agent = "prefix+."
+previous_workspace = "prefix+["
+next_workspace = "prefix+]"
+copy_mode = ""
