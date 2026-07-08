@@ -21,25 +21,27 @@ vim.opt.pumborder = "rounded"
 vim.opt.pummaxwidth = 50
 vim.opt.cmdheight = 0
 
-local osc52 = require("vim.ui.clipboard.osc52")
-local clip_cache = { ["+"] = { { "" }, "v" }, ["*"] = { { "" }, "v" } }
-local function osc52_copy(reg)
-	local base = osc52.copy(reg)
-	return function(lines, regtype)
-		clip_cache[reg] = { lines, regtype }
-		base(lines, regtype)
+if vim.env.SSH_CONNECTION then
+	local osc52 = require("vim.ui.clipboard.osc52")
+	local clip_cache = { ["+"] = { { "" }, "v" }, ["*"] = { { "" }, "v" } }
+	local function osc52_copy(reg)
+		local base = osc52.copy(reg)
+		return function(lines, regtype)
+			clip_cache[reg] = { lines, regtype }
+			base(lines, regtype)
+		end
 	end
-end
-local function cached_paste(reg)
-	return function()
-		return clip_cache[reg]
+	local function cached_paste(reg)
+		return function()
+			return clip_cache[reg]
+		end
 	end
+	vim.g.clipboard = {
+		name = "osc52-copy-only",
+		copy = { ["+"] = osc52_copy("+"), ["*"] = osc52_copy("*") },
+		paste = { ["+"] = cached_paste("+"), ["*"] = cached_paste("*") },
+	}
 end
-vim.g.clipboard = {
-	name = "osc52-copy-only",
-	copy = { ["+"] = osc52_copy("+"), ["*"] = osc52_copy("*") },
-	paste = { ["+"] = cached_paste("+"), ["*"] = cached_paste("*") },
-}
 vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
 
