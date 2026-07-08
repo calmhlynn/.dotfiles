@@ -4,3 +4,4 @@
 *.swo
 *~
 tmux/plugins/
+bat/themes
