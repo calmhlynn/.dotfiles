@@ -37,13 +37,13 @@ install_system_packages() {
             ;;
         apt)
             sudo apt-get update
-            sudo apt-get install -y zsh git git-lfs tmux curl unzip build-essential fzf
+            sudo apt-get install -y zsh git git-lfs tmux curl unzip build-essential clang pkg-config fontconfig fzf
             ;;
         dnf)
-            sudo dnf install -y zsh git git-lfs tmux curl unzip gcc gcc-c++ make fzf
+            sudo dnf install -y zsh git git-lfs tmux curl unzip gcc gcc-c++ make clang pkgconf-pkg-config fontconfig fzf
             ;;
         pacman)
-            sudo pacman -Syu --noconfirm --needed zsh git git-lfs tmux curl unzip base-devel fzf
+            sudo pacman -Syu --noconfirm --needed zsh git git-lfs tmux curl unzip base-devel clang pkgconf fontconfig fzf
             ;;
     esac
 
