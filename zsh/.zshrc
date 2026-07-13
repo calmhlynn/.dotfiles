@@ -93,13 +93,7 @@ alias lla='ls -lgat'
 alias lt='ls --tree -t'
 
 if (( $+commands[herdr] )); then
-  _herdr_comp="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/completions/_herdr"
-  if [[ ! -s $_herdr_comp || $commands[herdr] -nt $_herdr_comp ]]; then
-    mkdir -p "${_herdr_comp:h}"
-    herdr completion zsh >| "$_herdr_comp" 2>/dev/null || rm -f "$_herdr_comp"
-  fi
-  [[ -s $_herdr_comp ]] && fpath=("${_herdr_comp:h}" $fpath)
-  unset _herdr_comp
+  source <(herdr completion zsh)
 fi
 
 
