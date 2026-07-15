@@ -92,6 +92,13 @@ alias la='ls -a'
 alias lla='ls -lgat'
 alias lt='ls --tree -t'
 
+if [[ $OSTYPE == linux* ]] && (( $+commands[systemctl] )); then
+    alias sc='systemctl'
+    alias ssc='sudo systemctl'
+    compdef sc=systemctl
+    compdef ssc=systemctl
+fi
+
 if (( $+commands[herdr] )); then
   source <(herdr completion zsh)
 fi
