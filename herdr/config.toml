@@ -23,3 +23,7 @@ focus_pane_left = "prefix+left"
 focus_pane_down = "prefix+down"
 focus_pane_up = "prefix+up"
 focus_pane_right = "prefix+right"
+
+[theme]
+name = "terminal"
+auto_switch = false

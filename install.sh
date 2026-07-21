@@ -212,7 +212,7 @@ create_symlinks() {
     link "$DOTFILES/tmux"            "$HOME/.config/tmux"
     link "$DOTFILES/bat"             "$HOME/.config/bat"
     link "$DOTFILES/ghostty"         "$HOME/.config/ghostty"
-    link "$DOTFILES/herdr/config.toml" "$HOME/.config/herdr/config.toml"
+    link "$DOTFILES/herdr" "$HOME/.config/herdr"
     link "$DOTFILES/.gitconfig"      "$HOME/.gitconfig"
     link "$DOTFILES/.gitexclude"     "$HOME/.gitexclude"
 
