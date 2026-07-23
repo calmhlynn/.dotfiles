@@ -27,8 +27,17 @@ local parsers = {
 	"just",
 }
 
-require("nvim-treesitter").setup({})
+local ts = require("nvim-treesitter")
+ts.setup({})
 
-vim.api.nvim_create_user_command("TSInstallConfigured", function()
-	require("nvim-treesitter").install(parsers)
-end, { desc = "Install configured Tree-sitter parsers" })
+local installed = ts.get_installed("parsers")
+local missing = vim.tbl_filter(function(lang)
+	return not vim.list_contains(installed, lang)
+end, parsers)
+
+if #missing > 0 then
+	local handle = ts.install(missing)
+	if vim.list_contains(vim.v.argv, "--headless") then
+		handle:wait(300000)
+	end
+end

@@ -219,28 +219,13 @@ create_symlinks() {
 }
 
 install_treesitter() {
-    local parsers=(
-        rust c cpp toml lua json javascript python typescript tsx yaml html css
-        markdown markdown_inline graphql bash vim vimdoc dockerfile regex gitignore
-        diff zig just
-    )
-    local parser parser_expr="" ts_install_cmd
-
-    for parser in "${parsers[@]}"; do
-        parser_expr="${parser_expr:+${parser_expr}, }'${parser}'"
-    done
-    ts_install_cmd="+lua require('nvim-treesitter').install({ ${parser_expr} }):wait(300000)"
-
     if ! command -v nvim &>/dev/null; then
-        warn "skipping Tree-sitter install: nvim not found"
+        warn "skipping Neovim bootstrap: nvim not found"
         return
     fi
 
-    info "syncing Neovim plugins"
-    nvim --headless "+Lazy! sync" +qa
-
-    info "installing Tree-sitter parsers"
-    nvim --headless "$ts_install_cmd" +qa
+    info "bootstrapping Neovim plugins and Tree-sitter parsers"
+    nvim --headless +qa
 }
 
 install_tmux_plugins() {
