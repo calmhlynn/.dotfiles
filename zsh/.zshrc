@@ -1,6 +1,9 @@
 [[ -o interactive ]] || return
 export LANG=en_US.UTF-8
 
+typeset -U path PATH
+path=("$HOME/.local/bin" $path)
+
 if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
     source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
 fi
@@ -107,7 +110,7 @@ fi
 if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
 fi
-export PATH="$HOME/.local/bin:$PATH"
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd (){ print -n '\e[5 q' }
+
