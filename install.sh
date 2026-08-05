@@ -5,6 +5,7 @@ set -euo pipefail
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS="$(uname -s)"
 FAILED_STEPS=""
+NVIM_CHANNEL="stable"
 
 info()  { printf '\033[1;34m[INFO]\033[0m  %s\n' "$1"; }
 warn()  { printf '\033[1;33m[WARN]\033[0m  %s\n' "$1"; }
@@ -87,55 +88,92 @@ setup_git_lfs() {
     git lfs install --skip-repo
 }
 
-install_neovim() {
-    local install_dir="$HOME/.local/nvim"
-
-    if [[ -d "$install_dir" ]]; then
-        local installed_ver latest_ver
-        installed_ver="$("$install_dir/bin/nvim" --version 2>/dev/null | head -1 | awk '{print $2}')" || installed_ver=""
-        latest_ver="$(curl -fsSL "https://api.github.com/repos/neovim/neovim/releases/latest" \
-            | grep '"tag_name"' | cut -d'"' -f4)" || latest_ver=""
-        if [[ -z "$latest_ver" ]]; then
-            warn "cannot query latest neovim release, keeping ${installed_ver:-existing} install"
-            return
-        fi
-        if [[ "$installed_ver" == "$latest_ver" ]]; then
-            info "neovim $installed_ver is already up to date"
-            return
-        fi
-        info "upgrading neovim: $installed_ver → $latest_ver"
-        rm -rf "$install_dir"
-    fi
-
-    info "installing neovim from GitHub releases"
+nvim_tarball() {
     local arch
     arch="$(uname -m)"
 
-    local tarball
     if [[ "$OS" == "Darwin" ]]; then
         case "$arch" in
-            arm64)  tarball="nvim-macos-arm64.tar.gz" ;;
-            x86_64) tarball="nvim-macos-x86_64.tar.gz" ;;
+            arm64)  echo "nvim-macos-arm64.tar.gz" ;;
+            x86_64) echo "nvim-macos-x86_64.tar.gz" ;;
             *)      error "unsupported architecture: $arch" ;;
         esac
     else
         case "$arch" in
-            x86_64)  tarball="nvim-linux-x86_64.tar.gz" ;;
-            aarch64) tarball="nvim-linux-arm64.tar.gz" ;;
+            x86_64)  echo "nvim-linux-x86_64.tar.gz" ;;
+            aarch64) echo "nvim-linux-arm64.tar.gz" ;;
             *)       error "unsupported architecture: $arch" ;;
         esac
     fi
+}
 
-    local url="https://github.com/neovim/neovim/releases/latest/download/${tarball}"
-    local tmp
+nvim_install_dir() {
+    if [[ "${1:-$NVIM_CHANNEL}" == "nightly" ]]; then
+        echo "$HOME/.local/nvim-nightly"
+    else
+        echo "$HOME/.local/nvim"
+    fi
+}
+
+link_nvim() {
+    local channel dir
+
+    mkdir -p "$HOME/.local/bin"
+    ln -sf "$(nvim_install_dir)/bin/nvim" "$HOME/.local/bin/nvim"
+
+    for channel in stable nightly; do
+        dir="$(nvim_install_dir "$channel")"
+        if [[ -x "$dir/bin/nvim" ]]; then
+            ln -sf "$dir/bin/nvim" "$HOME/.local/bin/nvim-$channel"
+        fi
+    done
+}
+
+nvim_stable_is_current() {
+    local install_dir="$1" installed_ver latest_ver
+
+    installed_ver="$("$install_dir/bin/nvim" --version 2>/dev/null | head -1 | awk '{print $2}')" || installed_ver=""
+    latest_ver="$(curl -fsSL "https://api.github.com/repos/neovim/neovim/releases/latest" \
+        | grep '"tag_name"' | cut -d'"' -f4)" || latest_ver=""
+
+    if [[ -z "$latest_ver" ]]; then
+        warn "cannot query latest neovim release, keeping ${installed_ver:-existing} install"
+        return 0
+    fi
+    if [[ "$installed_ver" == "$latest_ver" ]]; then
+        info "neovim $installed_ver is already up to date"
+        return 0
+    fi
+
+    info "upgrading neovim: $installed_ver → $latest_ver"
+    return 1
+}
+
+install_neovim() {
+    local install_dir url tmp
+    install_dir="$(nvim_install_dir)"
+
+    if [[ "$NVIM_CHANNEL" == "nightly" ]]; then
+        url="https://github.com/neovim/neovim/releases/download/nightly/$(nvim_tarball)"
+    else
+        url="https://github.com/neovim/neovim/releases/latest/download/$(nvim_tarball)"
+        if [[ -d "$install_dir" ]] && nvim_stable_is_current "$install_dir"; then
+            link_nvim
+            return
+        fi
+    fi
+
+    info "installing neovim ($NVIM_CHANNEL) from GitHub releases"
     tmp="$(mktemp -d)"
 
     mkdir -p "$HOME/.local/bin"
     curl -fsSL "$url" | tar xz -C "$tmp" --strip-components=1
+    rm -rf "$install_dir"
     mv "$tmp" "$install_dir"
 
-    ln -sf "$install_dir/bin/nvim" "$HOME/.local/bin/nvim"
+    link_nvim
     info "neovim installed to $install_dir"
+    "$install_dir/bin/nvim" --version | head -1
 }
 
 install_appimage_runtime() {
@@ -406,8 +444,13 @@ install_private_dotfiles() {
 }
 
 main() {
+    case "${1:-stable}" in
+        stable|nightly) NVIM_CHANNEL="${1:-stable}" ;;
+        *) error "usage: install.sh [stable|nightly]" ;;
+    esac
+
     info "dotfiles installer — $(date)"
-    info "OS: $OS | DOTFILES: $DOTFILES"
+    info "OS: $OS | DOTFILES: $DOTFILES | nvim: $NVIM_CHANNEL"
 
     setup_path
 
@@ -434,7 +477,8 @@ main() {
         exit 1
     fi
 
-    info "done! restart your shell or run: exec zsh"
+    info "done! nvim → $(nvim_install_dir)"
+    info "restart your shell or run: exec zsh"
 }
 
 main "$@"
