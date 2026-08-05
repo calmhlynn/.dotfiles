@@ -26,16 +26,6 @@ local function set_popup_border(winid)
 	end
 end
 
-vim.api.nvim_create_autocmd("CompleteChanged", {
-	group = vim.api.nvim_create_augroup("completion_popup_border", { clear = true }),
-	callback = function()
-		vim.schedule(function()
-			local info = vim.fn.complete_info({ "selected" })
-			set_popup_border(info.preview_winid)
-		end)
-	end,
-})
-
 if vim.api.nvim__complete_set then
 	local orig = vim.api.nvim__complete_set
 	vim.api.nvim__complete_set = function(index, opts)

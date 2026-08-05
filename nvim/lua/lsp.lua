@@ -70,7 +70,7 @@ vim.lsp.config("pyright", {
 	},
 	on_attach = function(client, bufnr)
 		vim.api.nvim_buf_create_user_command(bufnr, "LspPyrightOrganizeImports", function()
-			client.request("workspace/executeCommand", {
+			client:request("workspace/executeCommand", {
 				command = "pyright.organizeimports",
 				arguments = { vim.uri_from_bufnr(bufnr) },
 			}, nil, bufnr)
@@ -160,7 +160,7 @@ vim.lsp.config("eslint", {
 vim.lsp.config("vtsls", {
 	cmd = node_cmd("vtsls"),
 	root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
-	single_file_support = false,
+	workspace_required = true,
 	settings = {
 		typescript = {
 			format = {
@@ -240,9 +240,7 @@ local lua_rm2 = { ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "
 vim.lsp.config("lua_ls", {
 	cmd = { "lua-language-server" },
 	filetypes = { "lua" },
-	root_markers = vim.fn.has("nvim-0.11.3") == 1
-		and { lua_rm1, lua_rm2, { ".git" } }
-		or vim.list_extend(vim.list_extend(lua_rm1, lua_rm2), { ".git" }),
+	root_markers = { lua_rm1, lua_rm2, { ".git" } },
 	settings = {
 		Lua = {
 			runtime = { version = "LuaJIT" },

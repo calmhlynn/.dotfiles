@@ -1,4 +1,5 @@
 vim.g.mapleader = ";"
+vim.g.loaded_nvim_dir_plugin = 1
 vim.opt.number = true
 vim.opt.tabstop = 4
 vim.opt.scrolloff = 4
@@ -173,10 +174,4 @@ vim.api.nvim_create_autocmd("BufReadPre", {
 			vim.b[ev.buf].bigfile = true
 		end
 	end,
-})
-
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
-	group = vim.api.nvim_create_augroup("auto_reload_file", { clear = true }),
-	desc = "Auto reload file when changed externally",
-	command = "silent! checktime",
 })
