@@ -64,17 +64,17 @@ install_system_packages() {
                 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
                 setup_path
             fi
-            brew install zsh git git-lfs tmux curl unzip fzf
+            brew install zsh git git-lfs tmux curl unzip sevenzip fzf
             ;;
         apt)
             sudo apt-get update || warn "apt-get update failed, using cached package lists"
-            sudo apt-get install -y zsh git git-lfs tmux curl unzip build-essential clang pkg-config fontconfig fzf
+            sudo apt-get install -y zsh git git-lfs tmux curl unzip p7zip-full build-essential clang pkg-config fontconfig fzf
             ;;
         dnf)
-            sudo dnf install -y zsh git git-lfs tmux curl unzip gcc gcc-c++ make clang pkgconf-pkg-config fontconfig fzf
+            sudo dnf install -y zsh git git-lfs tmux curl unzip 7zip gcc gcc-c++ make clang pkgconf-pkg-config fontconfig fzf
             ;;
         pacman)
-            sudo pacman -Syu --noconfirm --needed zsh git git-lfs tmux curl unzip base-devel clang pkgconf fontconfig fzf
+            sudo pacman -Syu --noconfirm --needed zsh git git-lfs tmux curl unzip p7zip base-devel clang pkgconf fontconfig fzf
             ;;
     esac
 }
@@ -274,15 +274,9 @@ install_cargo_tools() {
     done
 }
 
-install_fonts() {
-    local font_dir font_url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip"
-    local tmp_zip
-
-    if [[ "$OS" == "Darwin" ]]; then
-        font_dir="$HOME/Library/Fonts"
-    else
-        font_dir="$HOME/.local/share/fonts"
-    fi
+install_hack_font() {
+    local font_dir="$1" tmp_zip
+    local url="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip"
 
     if ls "$font_dir"/Hack*Nerd* &>/dev/null; then
         info "Hack Nerd Font already installed"
@@ -290,15 +284,63 @@ install_fonts() {
     fi
 
     info "installing Hack Nerd Font"
-    mkdir -p "$font_dir"
     tmp_zip="$(mktemp)"
-    if ! curl -fsSL -o "$tmp_zip" "$font_url"; then
+    if ! curl -fsSL -o "$tmp_zip" "$url"; then
         rm -f "$tmp_zip"
-        warn "font download failed"
+        warn "Hack Nerd Font download failed"
         return
     fi
     unzip -o "$tmp_zip" -d "$font_dir" '*.ttf'
     rm -f "$tmp_zip"
+}
+
+install_sarasa_font() {
+    local font_dir="$1" dest="$1/SarasaMonoK"
+    local sevenzip url tmp_dir api_json
+
+    if ls "$dest"/SarasaMonoK-*.ttf &>/dev/null; then
+        info "Sarasa Mono K already installed"
+        return
+    fi
+
+    sevenzip="$(command -v 7z || command -v 7zz || true)"
+    if [[ -z "$sevenzip" ]]; then
+        warn "7z not found, skipping Sarasa Mono K"
+        return
+    fi
+
+    api_json="$(curl -fsSL "https://api.github.com/repos/be5invis/Sarasa-Gothic/releases/latest")" || api_json=""
+    url="$(grep -m1 -oE 'https://[^"]+/SarasaMonoK-TTF-[0-9.]+\.7z' <<<"$api_json")" || url=""
+    if [[ -z "$url" ]]; then
+        warn "cannot find Sarasa Mono K release asset"
+        return
+    fi
+
+    info "installing Sarasa Mono K"
+    tmp_dir="$(mktemp -d)"
+    if ! curl -fsSL -o "$tmp_dir/sarasa.7z" "$url"; then
+        rm -rf "$tmp_dir"
+        warn "Sarasa Mono K download failed"
+        return
+    fi
+
+    mkdir -p "$dest"
+    "$sevenzip" x -y -o"$dest" "$tmp_dir/sarasa.7z" >/dev/null || warn "Sarasa Mono K extraction failed"
+    rm -rf "$tmp_dir"
+}
+
+install_fonts() {
+    local font_dir
+
+    if [[ "$OS" == "Darwin" ]]; then
+        font_dir="$HOME/Library/Fonts"
+    else
+        font_dir="$HOME/.local/share/fonts"
+    fi
+    mkdir -p "$font_dir"
+
+    install_hack_font "$font_dir"
+    install_sarasa_font "$font_dir"
 
     if [[ "$OS" != "Darwin" ]]; then
         fc-cache -f "$font_dir" || warn "fc-cache failed"

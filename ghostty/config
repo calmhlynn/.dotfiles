@@ -2,7 +2,7 @@ shell-integration-features = ssh-terminfo,ssh-env
 shell-integration = detect
 
 font-family = "Hack Nerd Font Mono"
-font-family = "Noto Sans Mono CJK KR"
+font-family = "Sarasa Mono K"
 font-size = 14
 
 theme = Catppuccin Mocha
