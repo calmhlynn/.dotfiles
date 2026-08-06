@@ -11,6 +11,9 @@ require("snacks").setup({
 	notifier = {
 		enabled = true,
 	},
+	image = {
+		enabled = true,
+	},
 	picker = {
 		enabled = true,
 		layout = {
