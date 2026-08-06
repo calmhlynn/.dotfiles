@@ -132,7 +132,7 @@ link_nvim() {
 nvim_stable_is_current() {
     local install_dir="$1" installed_ver latest_ver
 
-    installed_ver="$("$install_dir/bin/nvim" --version 2>/dev/null | head -1 | awk '{print $2}')" || installed_ver=""
+    installed_ver="$("$install_dir/bin/nvim" --version 2>/dev/null | awk 'NR==1{print $2}')" || installed_ver=""
     latest_ver="$(curl -fsSL "https://api.github.com/repos/neovim/neovim/releases/latest" \
         | grep '"tag_name"' | cut -d'"' -f4)" || latest_ver=""
 
@@ -173,7 +173,7 @@ install_neovim() {
 
     link_nvim
     info "neovim installed to $install_dir"
-    "$install_dir/bin/nvim" --version | head -1
+    "$install_dir/bin/nvim" --version | awk 'NR==1'
 }
 
 install_appimage_runtime() {
