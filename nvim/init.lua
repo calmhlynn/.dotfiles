@@ -46,7 +46,6 @@ end
 vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
 
--- Pre-load plugin configuration (must be set before vim.pack.add)
 vim.g.tmux_navigator_no_mappings = 1
 vim.g.rustaceanvim = {
 	server = {
@@ -100,7 +99,6 @@ vim.g.rustaceanvim = {
 	},
 }
 
--- Build hooks (must be created before vim.pack.add)
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(ev)
 		if ev.data.spec.name == "nvim-treesitter" then
@@ -112,7 +110,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	end,
 })
 
--- Install and load plugins
 vim.pack.add({
 	{ src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
 	"https://github.com/folke/snacks.nvim",
@@ -131,7 +128,6 @@ vim.pack.add({
 	"https://github.com/windwp/nvim-autopairs",
 })
 
--- Plugin setup (catppuccin must load first)
 require("plugins.catppuccin")
 require("plugins.snacks")
 require("plugins.treesitter")
@@ -146,7 +142,6 @@ require("plugins.bufferline")
 require("plugins.render-markdown")
 require("plugins.autopairs")
 
--- Core modules
 require("lsp")
 require("completion")
 require("keymaps")
@@ -160,12 +155,11 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Bigfile: disable heavy features for large files
 vim.api.nvim_create_autocmd("BufReadPre", {
 	group = vim.api.nvim_create_augroup("bigfile", { clear = true }),
 	desc = "Disable heavy features for large files",
 	callback = function(ev)
-		local max_filesize = 1024 * 1024 -- 1MB
+		local max_filesize = 1024 * 1024
 		local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(ev.buf))
 		if ok and stats and stats.size > max_filesize then
 			vim.bo[ev.buf].syntax = ""

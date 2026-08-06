@@ -18,8 +18,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Workaround: completeopt=popup info window border
--- (completepopup option not yet ported to Neovim: neovim/neovim#38248)
 local function set_popup_border(winid)
 	if winid and winid >= 0 and vim.api.nvim_win_is_valid(winid) then
 		pcall(vim.api.nvim_win_set_config, winid, { border = "rounded" })
@@ -35,12 +33,10 @@ if vim.api.nvim__complete_set then
 	end
 end
 
--- Confirm selection
 vim.keymap.set("i", "<C-Space>", function()
 	return vim.fn.pumvisible() == 1 and "<C-y>" or "<C-Space>"
 end, { expr = true, desc = "Confirm completion" })
 
--- Snippet jumping (vim.snippet replaces LuaSnip)
 vim.keymap.set({ "i", "s" }, "<Tab>", function()
 	if vim.snippet.active({ direction = 1 }) then
 		return "<Cmd>lua vim.snippet.jump(1)<CR>"

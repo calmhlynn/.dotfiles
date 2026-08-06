@@ -36,13 +36,13 @@ autoload -Uz _zinit
 
 zinit light zsh-users/zsh-history-substring-search
 
-bindkey $'\e[A' history-substring-search-up      # Normal mode up
-bindkey $'\e[B' history-substring-search-down    # Normal mode down
-bindkey $'\eOA' history-substring-search-up      # Application mode up
-bindkey $'\eOB' history-substring-search-down    # Application mode down
+bindkey $'\e[A' history-substring-search-up
+bindkey $'\e[B' history-substring-search-down
+bindkey $'\eOA' history-substring-search-up
+bindkey $'\eOB' history-substring-search-down
 
-bindkey $'\e[1;2C' forward-word                  # Shift+Right
-bindkey $'\e[1;2D' backward-word                 # Shift+Left
+bindkey $'\e[1;2C' forward-word
+bindkey $'\e[1;2D' backward-word
 
 zinit ice depth=1
 
@@ -105,7 +105,6 @@ fi
 if (( $+commands[herdr] )); then
   source <(herdr completion zsh)
 fi
-
 
 if (( $+commands[starship] )); then
     eval "$(starship init zsh)"

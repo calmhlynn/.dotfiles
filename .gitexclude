@@ -1,6 +1,4 @@
-# === OS ===
 
-# macOS
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -8,7 +6,6 @@
 .Spotlight-V100
 .Trashes
 
-# Linux
 *~
 .fuse_hidden*
 .directory
@@ -16,15 +13,11 @@
 .nfs*
 nohup.out
 
-# Windows
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# === Editor / IDE ===
-
-# Vim / Neovim
 [._]*.s[a-v][a-z]
 [._]*.sw[a-p]
 [._]*.un~
@@ -33,7 +26,6 @@ Sessionx.vim
 .netrwhist
 tags
 
-# VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -41,16 +33,13 @@ tags
 !.vscode/extensions.json
 *.vsix
 
-# JetBrains
 .idea/
 *.iml
 cmake-build-*/
 
-# Emacs
-\#*\#
-.#*
+\
+.
 
-# === Security (safety net) ===
 .env
 .env.*
 !.env.example
@@ -61,7 +50,6 @@ cmake-build-*/
 *.pfx
 *.jks
 
-# === Common temp / build ===
 *.log
 *.bak
 *.tmp

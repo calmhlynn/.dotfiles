@@ -1,4 +1,3 @@
--- Helper: prefer project-local node_modules binary over global
 local function node_cmd(binary)
 	return function(dispatchers, config)
 		local cmd = binary
@@ -12,7 +11,6 @@ local function node_cmd(binary)
 	end
 end
 
--- C / C++
 vim.lsp.config("clangd", {
 	cmd = { "clangd" },
 	filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
@@ -51,7 +49,6 @@ vim.lsp.config("clangd", {
 	end,
 })
 
--- Python
 vim.lsp.config("pyright", {
 	cmd = { "pyright-langserver", "--stdio" },
 	filetypes = { "python" },
@@ -78,7 +75,6 @@ vim.lsp.config("pyright", {
 	end,
 })
 
--- ESLint
 vim.lsp.config("eslint", {
 	cmd = node_cmd("vscode-eslint-language-server"),
 	filetypes = {
@@ -156,7 +152,6 @@ vim.lsp.config("eslint", {
 	},
 })
 
--- TypeScript / JavaScript (vtsls)
 vim.lsp.config("vtsls", {
 	cmd = node_cmd("vtsls"),
 	root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
@@ -191,7 +186,6 @@ vim.lsp.config("vtsls", {
 	},
 })
 
--- TailwindCSS
 vim.lsp.config("tailwindcss", {
 	cmd = node_cmd("tailwindcss-language-server"),
 	filetypes = {
@@ -234,7 +228,6 @@ vim.lsp.config("tailwindcss", {
 	},
 })
 
--- Lua
 local lua_rm1 = { ".emmyrc.json", ".luarc.json", ".luarc.jsonc" }
 local lua_rm2 = { ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml" }
 vim.lsp.config("lua_ls", {
@@ -256,7 +249,6 @@ vim.lsp.config("lua_ls", {
 
 vim.lsp.enable({ "clangd", "pyright", "eslint", "vtsls", "tailwindcss", "lua_ls" })
 
--- Diagnostics
 vim.diagnostic.config({
 	virtual_text = false,
 	signs = true,

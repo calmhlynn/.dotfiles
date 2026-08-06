@@ -1,4 +1,3 @@
-# vim: noexpandtab sw=8
 [include]
 	path = ~/.gitconfig.local
 [core]
@@ -61,59 +60,48 @@
 	process = git-lfs filter-process
 	required = true
 [alias]
-    # Branch & status
-    st       = status -sb                                                   # show short status with branch info
-    ss       = status -s                                                    # show short status
-    br       = branch                                                       # list branches
-    co       = checkout                                                     # switch branches
-    nb       = "!_() { git checkout -b \"$1\"; }; _"                        # create & switch to new branch
-    mb       = "!_() { git branch --merged | grep -v '\\*\\|main\\|master' | xargs git branch -D; }; _"  # delete merged branches
+    st       = status -sb
+    ss       = status -s
+    br       = branch
+    co       = checkout
+    nb       = "!_() { git checkout -b \"$1\"; }; _"
+    mb       = "!_() { git branch --merged | grep -v '\\*\\|main\\|master' | xargs git branch -D; }; _"
 
-    # Commit
-    ca       = commit -a                                                    # add all & commit
-    amend    = commit --amend --no-edit                                     # amend last commit without editing
+    ca       = commit -a
+    amend    = commit --amend --no-edit
 
-    # Log visualization
     g        = "log --graph --decorate --all \
 				--pretty='format:%C(auto)%h%d %s %C(brightgreen)%an %x1b[38;5;239m%cr%x1b[0m'"
 
+    ds       = diff --staged
+    dc       = diff
 
-    # Plain diffs
-    ds       = diff --staged                                                # show staged diff
-    dc       = diff                                                         # show unstaged diff
+    ia       = add -p
+    fco      = "!_() { git branch --all | fzf --ansi --preview 'git log --color=always -n50 --pretty=format:\"%Cgreen%h%Creset %s\" {}' | sed 's/.* //' | xargs git checkout; }; _"
+    ff       = "!_() { git ls-files | fzf; }; _"
 
-    # Interactive add & checkout (requires fzf)
-    ia       = add -p                                                        # interactive add
-    fco      = "!_() { git branch --all | fzf --ansi --preview 'git log --color=always -n50 --pretty=format:\"%Cgreen%h%Creset %s\" {}' | sed 's/.* //' | xargs git checkout; }; _"  # fuzzy branch checkout
-    ff       = "!_() { git ls-files | fzf; }; _"                             # fuzzy find file
+    up       = "!_() { git pull --rebase && git push; }; _"
 
-    # Pull & push
-    up       = "!_() { git pull --rebase && git push; }; _"                 # pull-rebase then push
+    ri       = rebase -i
+    continue = rebase --continue
+    skip     = rebase --skip
+    abort    = rebase --abort
 
-    # Rebase
-    ri       = rebase -i                                                    # interactive rebase
-    continue = rebase --continue                                            # continue rebase
-    skip     = rebase --skip                                                # skip patch
-    abort    = rebase --abort                                               # abort rebase
+    stg      = stash
+    stl      = stash list
+    stp      = stash pop
+    fs       = "!_() { git stash list | fzf; }; _"
+    fsp      = "!_() { git stash list | fzf | awk '{print $1}' | xargs git stash apply; }; _"
 
-    # Stash
-    stg      = stash                                                        # stash changes
-    stl      = stash list                                                   # list stash entries
-    stp      = stash pop                                                    # apply stash
-    fs       = "!_() { git stash list | fzf; }; _"                          # fuzzy find stash entry
-    fsp      = "!_() { git stash list | fzf | awk '{print $1}' | xargs git stash apply; }; _"  # apply selected stash
+    clean    = clean -fd
+    undo     = reset --soft HEAD^
+    hard     = reset --hard
 
-    # Clean & reset
-    clean    = clean -fd                                                    # remove untracked files & dirs
-    undo     = reset --soft HEAD^                                           # undo last commit, keep changes
-    hard     = reset --hard                                                 # hard reset to HEAD
-
-    # Others
-    cp       = cherry-pick                                                   # cherry-pick commit
-    tagg     = "!_() { git tag -a \"$1\" -m \"$2\"; }; _"                    # create annotated tag
-    grep     = grep --color -n                                               # grep with color & line numbers
-    rb       = remote -v                                                     # show remote URLs
-    tree     = "!_() { git ls-tree --name-only -r HEAD | sed 's|[^/]*/|   |g'; }; _"    # display project file tree
+    cp       = cherry-pick
+    tagg     = "!_() { git tag -a \"$1\" -m \"$2\"; }; _"
+    grep     = grep --color -n
+    rb       = remote -v
+    tree     = "!_() { git ls-tree --name-only -r HEAD | sed 's|[^/]*/|   |g'; }; _"
 [user]
 	email = barca105@naver.com
 	name = calmhlynn

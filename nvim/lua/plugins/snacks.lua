@@ -92,7 +92,6 @@ vim.api.nvim_create_autocmd("QuitPre", {
 	end,
 })
 
--- Keymaps (converted from lazy.nvim keys spec)
 vim.keymap.set("n", "<Space>s", function()
 	Snacks.explorer()
 end, { desc = "File Explorer" })
@@ -161,7 +160,6 @@ end, { desc = "Git Log" })
 vim.keymap.set("n", "<C-\\>lf", function()
 	Snacks.picker.git_log_file()
 end, { desc = "Git Log File" })
--- Terminal toggle (built-in)
 local term_buf = nil
 local term_win = nil
 local function toggle_terminal()
