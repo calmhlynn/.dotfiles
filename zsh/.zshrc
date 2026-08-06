@@ -5,6 +5,7 @@ typeset -U path PATH
 path=("$HOME/.local/bin" $path)
 
 if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+    [[ -x /snap/bin/ghostty ]] && export GHOSTTY_BIN_DIR=/snap/bin
     source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
 fi
 
