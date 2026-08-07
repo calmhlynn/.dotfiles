@@ -1,6 +1,7 @@
 require("catppuccin").setup({
 	flavour = "mocha",
 	term_colors = true,
+	styles = { comments = {} },
 	custom_highlights = function(colors)
 		return {
 			LspInlayHint = { fg = colors.overlay0, bg = "NONE" },
@@ -9,6 +10,7 @@ require("catppuccin").setup({
 			DiagnosticUnderlineInfo = { undercurl = true, sp = colors.sky },
 			DiagnosticUnderlineHint = { undercurl = true, sp = colors.teal },
 			["@markup.raw.block"] = { link = "Normal" },
+			["@comment.documentation"] = { fg = "#a9cbc6" },
 		}
 	end,
 	integrations = {
