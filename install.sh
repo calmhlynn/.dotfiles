@@ -257,7 +257,7 @@ install_cargo_tools() {
         return
     fi
 
-    local -a crates=(starship lsd bat ripgrep git-delta stylua tree-sitter-cli)
+    local -a crates=(starship lsd bat ripgrep git-delta stylua zoxide tree-sitter-cli)
     local installed
     installed="$(cargo install --list)" || installed=""
 

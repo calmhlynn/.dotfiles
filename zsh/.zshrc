@@ -111,6 +111,11 @@ if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
 fi
 
+if (( $+commands[zoxide] )); then
+    eval "$(zoxide init zsh)"
+    unalias zi 2>/dev/null
+fi
+
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd (){ print -n '\e[5 q' }
 
