@@ -379,6 +379,7 @@ create_symlinks() {
     link "$DOTFILES/bat"             "$HOME/.config/bat"
     link "$DOTFILES/ghostty"         "$HOME/.config/ghostty"
     link "$DOTFILES/herdr" "$HOME/.config/herdr"
+    link "$DOTFILES/leaf"            "$HOME/.config/leaf"
     link "$DOTFILES/.gitconfig"      "$HOME/.gitconfig"
     link "$DOTFILES/.gitexclude"     "$HOME/.gitexclude"
 
