@@ -107,6 +107,10 @@ if (( $+commands[herdr] )); then
   source <(herdr completion zsh)
 fi
 
+if (( $+commands[leaf] )); then
+    source <(leaf --auto-complete zsh:dump)
+fi
+
 if (( $+commands[starship] )); then
     eval "$(starship init zsh)"
 fi
