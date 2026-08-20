@@ -7,3 +7,4 @@ tmux/plugins/
 bat/themes
 herdr/session.json
 herdr/.plugins.lock
+herdr/release-notes.json
