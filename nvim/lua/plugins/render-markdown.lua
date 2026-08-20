@@ -40,6 +40,33 @@ vim.treesitter.query.set(
   (#set! priority 250))]]
 )
 
+-- rustdoc treats a fenced block without an info string as Rust code
+vim.treesitter.query.add_predicate("rust-doc-code?", function(match, _, source, pred)
+	if type(source) ~= "number" or vim.bo[source].filetype ~= "rust" then
+		return false
+	end
+	local node = (match[pred[2]] or {})[1]
+	if not node then
+		return false
+	end
+	for child in node:iter_children() do
+		if child:type() == "info_string" then
+			return false
+		end
+	end
+	return true
+end, { force = true })
+
+vim.treesitter.query.set(
+	"markdown",
+	"injections",
+	[[;; extends
+((fenced_code_block
+  (code_fence_content) @injection.content) @_block
+  (#rust-doc-code? @_block)
+  (#set! injection.language "rust"))]]
+)
+
 require("render-markdown").setup({
 	file_types = { "markdown", "rust" },
 	render_modes = { "n", "v", "i", "c" },
