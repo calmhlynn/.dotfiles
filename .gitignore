@@ -4,8 +4,7 @@
 *.swo
 *~
 tmux/plugins/
-bat/themes/*
-!bat/themes/KanagawaDragon.tmTheme
+bat/themes
 herdr/session.json
 herdr/.plugins.lock
 herdr/release-notes.json

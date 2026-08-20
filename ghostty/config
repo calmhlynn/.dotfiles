@@ -5,7 +5,7 @@ font-family = "Hack Nerd Font Mono"
 font-family = "Sarasa Mono K"
 font-size = 14
 
-theme = Kanagawa Dragon
+theme = Catppuccin Mocha
 
 bell-features = system,attention,border
 

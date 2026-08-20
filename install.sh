@@ -460,8 +460,21 @@ setup_bat_theme() {
         return
     fi
 
-    if [[ ! -f "${DOTFILES}/bat/themes/KanagawaDragon.tmTheme" ]]; then
-        warn "bat theme missing: bat/themes/KanagawaDragon.tmTheme"
+    local themes_dir
+    themes_dir="$(bat --config-dir)/themes"
+
+    mkdir -p "$themes_dir"
+
+    local theme_file="${DOTFILES}/bat/themes/Catppuccin Mocha.tmTheme"
+    if [[ ! -f "$themes_dir/Catppuccin Mocha.tmTheme" ]]; then
+        if [[ -f "$theme_file" ]]; then
+            cp "$theme_file" "$themes_dir/"
+        else
+            info "downloading Catppuccin Mocha theme for bat"
+            curl -fsSL \
+                "https://github.com/catppuccin/bat/raw/main/themes/Catppuccin%20Mocha.tmTheme" \
+                -o "$themes_dir/Catppuccin Mocha.tmTheme"
+        fi
     fi
 
     info "rebuilding bat cache"
