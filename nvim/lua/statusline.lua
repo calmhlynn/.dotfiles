@@ -1,16 +1,23 @@
 local M = {}
 
-local colors = {
-	bg = "#1e1e2e",
-	fg = "#cdd6f4",
-	dark = "#11111b",
-	muted = "#7f849c",
-	inactive = "#45475a",
-	red = "#f38ba8",
-	green = "#a6e3a1",
-	blue = "#89b4fa",
-	orange = "#fab387",
-}
+-- Derived from the active Catppuccin flavour so the ColorScheme autocmd below
+-- actually follows a flavour change instead of re-applying frozen hex values.
+local function palette()
+	local c = require("catppuccin.palettes").get_palette()
+	return {
+		bg = c.base,
+		fg = c.text,
+		dark = c.crust,
+		muted = c.overlay1,
+		inactive = c.surface1,
+		red = c.red,
+		green = c.green,
+		blue = c.blue,
+		orange = c.peach,
+	}
+end
+
+local colors = palette()
 
 local group = vim.api.nvim_create_augroup("builtin_statusline", { clear = true })
 
@@ -198,6 +205,8 @@ function M.render()
 end
 
 function M.apply_highlights()
+	colors = palette()
+
 	vim.api.nvim_set_hl(0, "StatusLineBase", {
 		bg = colors.bg,
 		fg = colors.fg,
