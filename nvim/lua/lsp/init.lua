@@ -23,3 +23,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, vim.tbl_extend("force", opts, { desc = "LSP Signature Help" }))
 	end,
 })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("lsp_folding", { clear = true }),
+	desc = "Prefer LSP folding over Tree-sitter where the server supports it",
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if not client or not client:supports_method("textDocument/foldingRange") then
+			return
+		end
+
+		for _, win in ipairs(vim.fn.win_findbuf(ev.buf)) do
+			vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+			vim.wo[win][0].foldtext = "v:lua.vim.lsp.foldtext()"
+		end
+	end,
+})

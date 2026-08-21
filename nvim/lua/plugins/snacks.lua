@@ -185,7 +185,12 @@ local function toggle_terminal()
 		term_buf = vim.api.nvim_get_current_buf()
 		term_win = vim.api.nvim_get_current_win()
 	end
-	vim.api.nvim_win_set_height(term_win, math.floor(vim.o.lines * 0.2))
+	local height = math.floor(vim.o.lines * 0.2)
+	if vim.api.nvim_win_resize then
+		vim.api.nvim_win_resize(term_win, -1, height)
+	else
+		vim.api.nvim_win_set_height(term_win, height)
+	end
 	vim.cmd("startinsert")
 end
 vim.keymap.set("n", "t", toggle_terminal, { desc = "Terminal Toggle" })
