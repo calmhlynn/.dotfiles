@@ -6,7 +6,6 @@ require("crates").setup({
 		completion = true,
 		hover = true,
 	},
-
 	completion = {
 		crates = {
 			enabled = true,
@@ -16,5 +15,5 @@ require("crates").setup({
 	},
 })
 
-vim.keymap.set("n", "<Leader>cf", ":Crates show_features_popup<CR>", { desc = "Crates show features popup" })
-vim.keymap.set("n", "<Leader>cp", ":Crates focus_popup<CR>", { desc = "Crates focus popup" })
+vim.keymap.set("n", "<leader>cf", "<cmd>Crates show_features_popup<cr>", { desc = "Crates show features popup" })
+vim.keymap.set("n", "<leader>cp", "<cmd>Crates focus_popup<cr>", { desc = "Crates focus popup" })
