@@ -1,6 +1,7 @@
 require("snacks").setup({
 	bigfile = {
 		enabled = true,
+		size = 1024 * 1024,
 	},
 	explorer = {
 		enabled = true,
@@ -54,21 +55,6 @@ require("snacks").setup({
 				preview = "git_log",
 			},
 		},
-		actions = {
-			sidekick_send = function(...)
-				return require("sidekick.cli.picker.snacks").send(...)
-			end,
-		},
-		win = {
-			input = {
-				keys = {
-					["<a-a>"] = {
-						"sidekick_send",
-						mode = { "n", "i" },
-					},
-				},
-			},
-		},
 	},
 })
 
@@ -95,12 +81,12 @@ vim.api.nvim_create_autocmd("QuitPre", {
 	end,
 })
 
+-- Explorer
 vim.keymap.set("n", "<Space>s", function()
 	Snacks.explorer()
 end, { desc = "File Explorer" })
-vim.keymap.set("n", "<C-\\>g", function()
-	Snacks.picker.grep()
-end, { desc = "Grep" })
+
+-- Files
 vim.keymap.set("n", "<C-\\>f", function()
 	Snacks.picker.files()
 end, { desc = "Find files" })
@@ -112,9 +98,17 @@ vim.keymap.set("n", "<C-\\>F", function()
 		exclude = { ".git", ".git/*" },
 	})
 end, { desc = "Find all files (no gitignore)" })
+vim.keymap.set("n", "<C-\\>g", function()
+	Snacks.picker.grep()
+end, { desc = "Grep" })
 vim.keymap.set("n", "<C-\\>b", function()
 	Snacks.picker.buffers()
 end, { desc = "Buffers" })
+vim.keymap.set("n", "<C-\\>l", function()
+	Snacks.picker.lines()
+end, { desc = "Buffer Lines" })
+
+-- History
 vim.keymap.set("n", "<C-\\>h", function()
 	Snacks.picker.command_history()
 end, { desc = "Command History" })
@@ -124,33 +118,19 @@ end, { desc = "Recent Files" })
 vim.keymap.set("n", "<C-\\>/", function()
 	Snacks.picker.search_history()
 end, { desc = "Search History" })
-vim.keymap.set("n", "<C-\\>l", function()
-	Snacks.picker.lines()
-end, { desc = "Buffer Lines" })
-vim.keymap.set("n", "<C-\\>:", function()
-	Snacks.picker.commands()
-end, { desc = "Commands" })
-vim.keymap.set("n", "<C-\\>m", function()
-	Snacks.picker.man()
-end, { desc = "Man Pages" })
-vim.keymap.set("n", "<C-\\>S", function()
-	Snacks.picker.lsp_symbols()
-end, { desc = "LSP Symbols" })
-vim.keymap.set("n", "<C-\\>s", function()
-	Snacks.picker.lsp_workspace_symbols()
-end, { desc = "LSP Workspace Symbols" })
-vim.keymap.set("n", "<C-\\>n", function()
-	Snacks.picker.notifications()
-end, { desc = "Notification History" })
-vim.keymap.set("n", "<C-\\>uC", function()
-	Snacks.picker.colorschemes()
-end, { desc = "Colorschemes" })
-vim.keymap.set("n", "<C-\\>k", function()
-	Snacks.picker.keymaps()
-end, { desc = "Keymaps" })
 vim.keymap.set("n", "<C-\\>j", function()
 	Snacks.picker.jumps()
 end, { desc = "Jumps" })
+
+-- LSP
+vim.keymap.set("n", "<C-\\>s", function()
+	Snacks.picker.lsp_workspace_symbols()
+end, { desc = "LSP Workspace Symbols" })
+vim.keymap.set("n", "<C-\\>S", function()
+	Snacks.picker.lsp_symbols()
+end, { desc = "LSP Symbols" })
+
+-- Git
 vim.keymap.set("n", "<C-\\>Gs", function()
 	Snacks.picker.git_status()
 end, { desc = "Git Status Files" })
@@ -160,9 +140,34 @@ end, { desc = "Git Diff (Hunks)" })
 vim.keymap.set("n", "<C-\\>c", function()
 	Snacks.picker.git_log()
 end, { desc = "Git Log" })
-vim.keymap.set("n", "<C-\\>lf", function()
+vim.keymap.set("n", "<C-\\>C", function()
 	Snacks.picker.git_log_file()
 end, { desc = "Git Log File" })
+
+-- Vim internals
+vim.keymap.set("n", "<C-\\>:", function()
+	Snacks.picker.commands()
+end, { desc = "Commands" })
+vim.keymap.set("n", "<C-\\>k", function()
+	Snacks.picker.keymaps()
+end, { desc = "Keymaps" })
+vim.keymap.set("n", "<C-\\>m", function()
+	Snacks.picker.man()
+end, { desc = "Man Pages" })
+vim.keymap.set("n", "<C-\\>n", function()
+	Snacks.picker.notifications()
+end, { desc = "Notification History" })
+vim.keymap.set("n", "<C-\\>uC", function()
+	Snacks.picker.colorschemes()
+end, { desc = "Colorschemes" })
+
+-- References: overrides Nvim's own `grr` so the rest of the `gr*` defaults
+-- (grn/gra/gri/grt/grx) stay reachable without a timeoutlen wait.
+vim.keymap.set("n", "grr", function()
+	Snacks.picker.lsp_references()
+end, { desc = "References" })
+
+-- Terminal
 local term_buf = nil
 local term_win = nil
 local function toggle_terminal()
@@ -186,6 +191,3 @@ end
 vim.keymap.set("n", "t", toggle_terminal, { desc = "Terminal Toggle" })
 vim.keymap.set("t", "<C-t>", toggle_terminal, { desc = "Terminal Toggle" })
 vim.keymap.set("t", "<C-q>", [[<C-\><C-n>]], { desc = "Terminal Normal Mode" })
-vim.keymap.set("n", "gr", function()
-	Snacks.picker.lsp_references()
-end, { desc = "References" })

@@ -1,20 +1,33 @@
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 vim.opt.complete = ".,b,f"
 
+local completion_group = vim.api.nvim_create_augroup("lsp_completion", { clear = true })
+
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("lsp_completion", { clear = true }),
+	group = completion_group,
+	desc = "Enable LSP completion and trigger it as you type",
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client and client:supports_method("textDocument/completion") then
-			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = false })
-			vim.api.nvim_create_autocmd("InsertCharPre", {
-				group = vim.api.nvim_create_augroup("lsp_completion_trigger_" .. ev.buf, { clear = true }),
-				buffer = ev.buf,
-				callback = function()
-					vim.schedule(vim.lsp.completion.get)
-				end,
-			})
+		if not client or not client:supports_method("textDocument/completion") then
+			return
 		end
+
+		vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = false })
+
+		-- One trigger per buffer, not per attached client, so a second client
+		-- (eslint alongside vtsls, say) does not register a duplicate.
+		if vim.b[ev.buf].lsp_completion_trigger then
+			return
+		end
+		vim.b[ev.buf].lsp_completion_trigger = true
+
+		vim.api.nvim_create_autocmd("InsertCharPre", {
+			group = completion_group,
+			buffer = ev.buf,
+			callback = function()
+				vim.schedule(vim.lsp.completion.get)
+			end,
+		})
 	end,
 })
 

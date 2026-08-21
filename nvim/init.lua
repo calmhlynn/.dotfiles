@@ -21,7 +21,10 @@ vim.opt.shortmess:append("WS")
 vim.opt.pumborder = "rounded"
 vim.opt.pummaxwidth = 50
 vim.opt.cmdheight = 0
+vim.opt.termguicolors = true
 
+-- Over SSH the OSC52 provider can only write, so cache what we copy to make
+-- the matching paste work inside this session.
 if vim.env.SSH_CONNECTION then
 	local osc52 = require("vim.ui.clipboard.osc52")
 	local clip_cache = { ["+"] = { { "" }, "v" }, ["*"] = { { "" }, "v" } }
@@ -43,8 +46,8 @@ if vim.env.SSH_CONNECTION then
 		paste = { ["+"] = cached_paste("+"), ["*"] = cached_paste("*") },
 	}
 end
+
 vim.opt.clipboard = "unnamedplus"
-vim.opt.termguicolors = true
 
 vim.g.tmux_navigator_no_mappings = 1
 vim.g.rustaceanvim = {
@@ -68,38 +71,40 @@ vim.g.rustaceanvim = {
 		},
 		lspmux = { enable = false },
 		on_attach = function(_, bufnr)
-			vim.keymap.set("n", "<leader>t", function()
+			vim.keymap.set("n", "<leader>tt", function()
 				vim.cmd.RustLsp({ "testables" })
-			end, { buffer = bufnr })
+			end, { buffer = bufnr, desc = "Rust Testables" })
 
 			vim.keymap.set("n", "<leader>em", function()
 				vim.cmd.RustLsp({ "expandMacro" })
-			end, { buffer = bufnr })
+			end, { buffer = bufnr, desc = "Rust Expand Macro" })
 
 			vim.keymap.set("n", "<leader>rp", function()
 				vim.cmd.RustLsp({ "rebuildProcMacros" })
-			end, { buffer = bufnr })
+			end, { buffer = bufnr, desc = "Rust Rebuild Proc Macros" })
 
 			vim.keymap.set("n", "<leader>rd", function()
 				vim.cmd.RustLsp({ "renderDiagnostic" })
-			end, { buffer = bufnr })
+			end, { buffer = bufnr, desc = "Rust Render Diagnostic" })
 
-			vim.keymap.set("n", "<leader>pm", function()
+			vim.keymap.set("n", "<leader>mp", function()
 				vim.cmd.RustLsp({ "parentModule" })
-			end, { buffer = bufnr })
+			end, { buffer = bufnr, desc = "Rust Parent Module" })
 
 			vim.keymap.set("n", "<leader>fc", function()
 				vim.cmd.RustLsp({ "flyCheck" })
-			end, { buffer = bufnr })
+			end, { buffer = bufnr, desc = "Rust Fly Check" })
 
-			vim.keymap.set("n", "<leader>c", function()
+			vim.keymap.set("n", "<leader>co", function()
 				vim.cmd.RustLsp({ "openCargo" })
-			end, { buffer = bufnr })
+			end, { buffer = bufnr, desc = "Rust Open Cargo.toml" })
 		end,
 	},
 }
 
 vim.api.nvim_create_autocmd("PackChanged", {
+	group = vim.api.nvim_create_augroup("pack_treesitter_update", { clear = true }),
+	desc = "Run TSUpdate when nvim-treesitter changes",
 	callback = function(ev)
 		if ev.data.spec.name == "nvim-treesitter" then
 			if not ev.data.active then
@@ -120,7 +125,6 @@ vim.pack.add({
 	"https://github.com/williamboman/mason.nvim",
 	{ src = "https://github.com/mrcjkb/rustaceanvim", version = vim.version.range("^9") },
 	{ src = "https://github.com/saecki/crates.nvim", version = "stable" },
-	"https://github.com/NvChad/nvim-colorizer.lua",
 	"https://github.com/christoomey/vim-tmux-navigator",
 	"https://github.com/nvim-tree/nvim-web-devicons",
 	{ src = "https://github.com/akinsho/bufferline.nvim", version = vim.version.range("*") },
@@ -136,7 +140,6 @@ require("plugins.gitsigns")
 require("plugins.which-key")
 require("plugins.mason")
 require("plugins.crates")
-require("plugins.colorizer")
 require("plugins.tmux-navigator")
 require("plugins.bufferline")
 require("plugins.render-markdown")
@@ -152,20 +155,5 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "Enable built-in Tree-sitter highlighting",
 	callback = function(ev)
 		pcall(vim.treesitter.start, ev.buf)
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufReadPre", {
-	group = vim.api.nvim_create_augroup("bigfile", { clear = true }),
-	desc = "Disable heavy features for large files",
-	callback = function(ev)
-		local max_filesize = 1024 * 1024
-		local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(ev.buf))
-		if ok and stats and stats.size > max_filesize then
-			vim.bo[ev.buf].syntax = ""
-			vim.bo[ev.buf].swapfile = false
-			vim.bo[ev.buf].undolevels = -1
-			vim.b[ev.buf].bigfile = true
-		end
 	end,
 })
