@@ -9,17 +9,27 @@ vim.diagnostic.config({
 	severity_sort = true,
 })
 
-local lsp_float = { border = "rounded", focusable = true, max_width = 80, max_height = 20, silent = false, wrap = true }
+--- Size the float against the current terminal so long hovers are not cut off.
+local function lsp_float()
+	return {
+		border = "rounded",
+		focusable = true,
+		max_width = math.floor(vim.o.columns * 0.8),
+		max_height = math.floor(vim.o.lines * 0.6),
+		silent = false,
+		wrap = true,
+	}
+end
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp_float_keymaps", { clear = true }),
 	callback = function(ev)
 		local opts = { buffer = ev.buf }
 		vim.keymap.set("n", "K", function()
-			vim.lsp.buf.hover(lsp_float)
+			vim.lsp.buf.hover(lsp_float())
 		end, vim.tbl_extend("force", opts, { desc = "LSP Hover" }))
 		vim.keymap.set("n", "gK", function()
-			vim.lsp.buf.signature_help(lsp_float)
+			vim.lsp.buf.signature_help(lsp_float())
 		end, vim.tbl_extend("force", opts, { desc = "LSP Signature Help" }))
 	end,
 })
