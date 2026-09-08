@@ -26,12 +26,6 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevelstart = 99
 
-if vim.fn.has("nvim-0.13") == 1 then
-	-- Keep the cursor centered at the end of the file, which 'scrolloff' alone
-	-- cannot do. Added in Nvim 0.13.
-	vim.opt.scrolloffpad = 999
-end
-
 -- Over SSH the OSC52 provider can only write, so cache what we copy to make
 -- the matching paste work inside this session.
 if vim.env.SSH_CONNECTION then
