@@ -56,3 +56,5 @@ cmake-build-*/
 *.temp
 *.orig
 *.pid
+
+**/.claude/settings.local.json
