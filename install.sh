@@ -5,7 +5,7 @@ set -euo pipefail
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS="$(uname -s)"
 FAILED_STEPS=""
-NVIM_CHANNEL="stable"
+NVIM_DIR="$HOME/.local/nvim"
 
 info()  { printf '\033[1;34m[INFO]\033[0m  %s\n' "$1"; }
 warn()  { printf '\033[1;33m[WARN]\033[0m  %s\n' "$1"; }
@@ -107,29 +107,12 @@ nvim_tarball() {
     fi
 }
 
-nvim_install_dir() {
-    if [[ "${1:-$NVIM_CHANNEL}" == "nightly" ]]; then
-        echo "$HOME/.local/nvim-nightly"
-    else
-        echo "$HOME/.local/nvim"
-    fi
-}
-
 link_nvim() {
-    local channel dir
-
     mkdir -p "$HOME/.local/bin"
-    ln -sf "$(nvim_install_dir)/bin/nvim" "$HOME/.local/bin/nvim"
-
-    for channel in stable nightly; do
-        dir="$(nvim_install_dir "$channel")"
-        if [[ -x "$dir/bin/nvim" ]]; then
-            ln -sf "$dir/bin/nvim" "$HOME/.local/bin/nvim-$channel"
-        fi
-    done
+    ln -sf "$NVIM_DIR/bin/nvim" "$HOME/.local/bin/nvim"
 }
 
-nvim_stable_is_current() {
+nvim_is_current() {
     local install_dir="$1" installed_ver latest_ver
 
     installed_ver="$("$install_dir/bin/nvim" --version 2>/dev/null | awk 'NR==1{print $2}')" || installed_ver=""
@@ -150,30 +133,25 @@ nvim_stable_is_current() {
 }
 
 install_neovim() {
-    local install_dir url tmp
-    install_dir="$(nvim_install_dir)"
+    local url tmp
+    url="https://github.com/neovim/neovim/releases/latest/download/$(nvim_tarball)"
 
-    if [[ "$NVIM_CHANNEL" == "nightly" ]]; then
-        url="https://github.com/neovim/neovim/releases/download/nightly/$(nvim_tarball)"
-    else
-        url="https://github.com/neovim/neovim/releases/latest/download/$(nvim_tarball)"
-        if [[ -d "$install_dir" ]] && nvim_stable_is_current "$install_dir"; then
-            link_nvim
-            return
-        fi
+    if [[ -d "$NVIM_DIR" ]] && nvim_is_current "$NVIM_DIR"; then
+        link_nvim
+        return
     fi
 
-    info "installing neovim ($NVIM_CHANNEL) from GitHub releases"
+    info "installing neovim from GitHub releases"
     tmp="$(mktemp -d)"
 
     mkdir -p "$HOME/.local/bin"
     curl -fsSL "$url" | tar xz -C "$tmp" --strip-components=1
-    rm -rf "$install_dir"
-    mv "$tmp" "$install_dir"
+    rm -rf "$NVIM_DIR"
+    mv "$tmp" "$NVIM_DIR"
 
     link_nvim
-    info "neovim installed to $install_dir"
-    "$install_dir/bin/nvim" --version | awk 'NR==1'
+    info "neovim installed to $NVIM_DIR"
+    "$NVIM_DIR/bin/nvim" --version | awk 'NR==1'
 }
 
 install_appimage_runtime() {
@@ -488,13 +466,12 @@ install_private_dotfiles() {
 }
 
 main() {
-    case "${1:-stable}" in
-        stable|nightly) NVIM_CHANNEL="${1:-stable}" ;;
-        *) error "usage: install.sh [stable|nightly]" ;;
-    esac
+    if [[ $# -gt 0 ]]; then
+        error "usage: install.sh"
+    fi
 
     info "dotfiles installer — $(date)"
-    info "OS: $OS | DOTFILES: $DOTFILES | nvim: $NVIM_CHANNEL"
+    info "OS: $OS | DOTFILES: $DOTFILES"
 
     setup_path
 
@@ -521,7 +498,7 @@ main() {
         exit 1
     fi
 
-    info "done! nvim → $(nvim_install_dir)"
+    info "done! nvim → $NVIM_DIR"
     info "restart your shell or run: exec zsh"
 }
 
