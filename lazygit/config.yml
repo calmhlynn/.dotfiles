@@ -1,0 +1,37 @@
+gui:
+  theme:
+    activeBorderColor:
+      - "#89b4fa"
+      - bold
+    inactiveBorderColor:
+      - "#a6adc8"
+    searchingActiveBorderColor:
+      - "#f9e2af"
+      - bold
+    optionsTextColor:
+      - "#89b4fa"
+    selectedLineBgColor:
+      - "#313244"
+    inactiveViewSelectedLineBgColor:
+      - "#313244"
+    cherryPickedCommitFgColor:
+      - "#89b4fa"
+    cherryPickedCommitBgColor:
+      - "#45475a"
+    markedBaseCommitFgColor:
+      - "#89b4fa"
+    markedBaseCommitBgColor:
+      - "#f9e2af"
+    unstagedChangesColor:
+      - "#f38ba8"
+    defaultFgColor:
+      - "#cdd6f4"
+  authorColors:
+    "*": "#b4befe"
+
+git:
+  diffRenderers:
+    - name: delta
+      type: stdinFilter
+      command: delta --no-gitconfig --dark --paging=never --line-numbers --navigate --syntax-theme "Catppuccin Mocha"
+      colorArg: always
