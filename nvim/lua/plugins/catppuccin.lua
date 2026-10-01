@@ -15,6 +15,7 @@ require("catppuccin").setup({
 			DiagnosticUnderlineHint = { undercurl = true, sp = colors.teal },
 			["@markup.raw.block"] = { link = "Normal" },
 			["@comment.documentation"] = { fg = "#a9cbc6" },
+			["@lsp.typemod.comment.documentation.rust"] = { link = "@comment.documentation" },
 
 			-- Markdown: keep structure on one cool ramp and leave text
 			-- emphasis uncolored, so a paragraph never mixes hues.
