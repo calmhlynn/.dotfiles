@@ -5,6 +5,11 @@
 *~
 tmux/plugins/
 bat/themes
+
 herdr/session.json
 herdr/.plugins.lock
 herdr/release-notes.json
+herdr/session-snapshots
+herdr/herdr.sock.agent
+herdr/herdr-client.sock
+herdr/herdr.sock
