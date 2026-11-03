@@ -121,5 +121,6 @@ if (( $+commands[zoxide] )); then
 fi
 
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd (){ print -n '\e[5 q' }
+_cursor_beam() { print -n '\e[5 q' }
+add-zsh-hook precmd _cursor_beam
 

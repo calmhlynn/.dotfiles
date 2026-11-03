@@ -52,6 +52,17 @@ vim.opt.clipboard = "unnamedplus"
 vim.g.tmux_navigator_no_mappings = 1
 vim.g.rustaceanvim = {
 	server = {
+		settings = function(root_dir, default_settings)
+			local path = root_dir and (root_dir .. "/.rust-analyzer.json")
+			if path and vim.fn.filereadable(path) == 1 then
+				local ok, settings = pcall(vim.json.decode, table.concat(vim.fn.readfile(path), "\n"))
+				if ok and type(settings) == "table" then
+					return vim.tbl_deep_extend("force", default_settings, { ["rust-analyzer"] = settings })
+				end
+				vim.notify("ignoring invalid " .. path, vim.log.levels.WARN)
+			end
+			return default_settings
+		end,
 		default_settings = {
 			["rust-analyzer"] = {
 				files = {
@@ -106,7 +117,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	group = vim.api.nvim_create_augroup("pack_treesitter_update", { clear = true }),
 	desc = "Run TSUpdate when nvim-treesitter changes",
 	callback = function(ev)
-		if ev.data.spec.name == "nvim-treesitter" then
+		if ev.data.spec.name == "nvim-treesitter" and ev.data.kind ~= "delete" then
 			if not ev.data.active then
 				vim.cmd.packadd("nvim-treesitter")
 			end

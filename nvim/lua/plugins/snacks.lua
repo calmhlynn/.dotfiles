@@ -40,7 +40,7 @@ require("snacks").setup({
 		},
 		previewers = {
 			diff = {
-				builtin = false,
+				style = "terminal",
 				cmd = {
 					"delta",
 					"--paging=never",

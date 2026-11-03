@@ -11,7 +11,9 @@ require("bufferline").setup({
 
 vim.keymap.set("n", "<leader>n", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<leader>p", "<cmd>bprev<cr>", { desc = "Previous Buffer" })
-vim.keymap.set("n", "<leader>q", "<cmd>bp | bd #<cr>", { desc = "Close Buffer" })
+vim.keymap.set("n", "<leader>q", function()
+	Snacks.bufdelete()
+end, { desc = "Close Buffer" })
 vim.keymap.set("n", "<leader>b", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close Other Buffers" })
 
 for i = 1, 9 do

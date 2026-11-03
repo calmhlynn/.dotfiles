@@ -13,3 +13,7 @@ herdr/session-snapshots
 herdr/herdr.sock.agent
 herdr/herdr-client.sock
 herdr/herdr.sock
+herdr/plugins/
+herdr/plugins.json
+
+htop/htop_history

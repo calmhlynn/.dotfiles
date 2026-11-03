@@ -1,5 +1,6 @@
-[include]
-	path = ~/.gitconfig.local
+[user]
+	email = barca105@naver.com
+	name = calmhlynn
 [core]
 	editor = nvim
 	excludesfile = ~/.gitexclude
@@ -55,6 +56,8 @@
 	recurse = true
 [help]
 	autocorrect = prompt
+[grep]
+	lineNumber = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -66,7 +69,7 @@
     br       = branch
     co       = checkout
     nb       = "!_() { git checkout -b \"$1\"; }; _"
-    mb       = "!_() { git branch --merged | grep -v '\\*\\|main\\|master' | xargs git branch -D; }; _"
+    mb       = "!_() { git branch --merged | grep -v '\\*\\|main\\|master' | xargs -r git branch -D; }; _"
 
     ca       = commit -a
     amend    = commit --amend --no-edit
@@ -92,17 +95,14 @@
     stl      = stash list
     stp      = stash pop
     fs       = "!_() { git stash list | fzf; }; _"
-    fsp      = "!_() { git stash list | fzf | awk '{print $1}' | xargs git stash apply; }; _"
+    fsp      = "!_() { git stash list | fzf | awk -F: '{print $1}' | xargs -r git stash apply; }; _"
 
-    clean    = clean -fd
     undo     = reset --soft HEAD^
     hard     = reset --hard
 
     cp       = cherry-pick
     tagg     = "!_() { git tag -a \"$1\" -m \"$2\"; }; _"
-    grep     = grep --color -n
     rb       = remote -v
     tree     = "!_() { git ls-tree --name-only -r HEAD | sed 's|[^/]*/|   |g'; }; _"
-[user]
-	email = barca105@naver.com
-	name = calmhlynn
+[include]
+	path = ~/.gitconfig.local

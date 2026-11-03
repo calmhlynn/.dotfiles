@@ -6,6 +6,7 @@ DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS="$(uname -s)"
 FAILED_STEPS=""
 NVIM_DIR="$HOME/.local/nvim"
+HTOP_MIN_VERSION="3.5.3"
 
 info()  { printf '\033[1;34m[INFO]\033[0m  %s\n' "$1"; }
 warn()  { printf '\033[1;33m[WARN]\033[0m  %s\n' "$1"; }
@@ -54,7 +55,7 @@ detect_pkg_manager() {
 
 install_system_packages() {
     local pm
-    pm="$(detect_pkg_manager)"
+    pm="$(detect_pkg_manager)" || return 1
     info "installing system packages via $pm"
 
     case "$pm" in
@@ -68,13 +69,13 @@ install_system_packages() {
             ;;
         apt)
             sudo apt-get update || warn "apt-get update failed, using cached package lists"
-            sudo apt-get install -y zsh git git-lfs tmux curl unzip p7zip-full build-essential clang pkg-config fontconfig fzf
+            sudo apt-get install -y zsh git git-lfs tmux curl unzip p7zip-full build-essential clang pkg-config fontconfig fzf libncurses-dev libsensors-dev
             ;;
         dnf)
-            sudo dnf install -y zsh git git-lfs tmux curl unzip 7zip gcc gcc-c++ make clang pkgconf-pkg-config fontconfig fzf
+            sudo dnf install -y zsh git git-lfs tmux curl unzip 7zip gcc gcc-c++ make clang pkgconf-pkg-config fontconfig fzf ncurses-devel lm_sensors-devel
             ;;
         pacman)
-            sudo pacman -Syu --noconfirm --needed zsh git git-lfs tmux curl unzip p7zip base-devel clang pkgconf fontconfig fzf
+            sudo pacman -Syu --noconfirm --needed zsh git git-lfs tmux curl unzip p7zip base-devel clang pkgconf fontconfig fzf ncurses lm_sensors
             ;;
     esac
 }
@@ -134,7 +135,7 @@ nvim_is_current() {
 
 install_neovim() {
     local url tmp
-    url="https://github.com/neovim/neovim/releases/latest/download/$(nvim_tarball)"
+    url="https://github.com/neovim/neovim/releases/latest/download/$(nvim_tarball)" || return 1
 
     if [[ -d "$NVIM_DIR" ]] && nvim_is_current "$NVIM_DIR"; then
         link_nvim
@@ -145,7 +146,11 @@ install_neovim() {
     tmp="$(mktemp -d)"
 
     mkdir -p "$HOME/.local/bin"
-    curl -fsSL "$url" | tar xz -C "$tmp" --strip-components=1
+    if ! curl -fsSL "$url" | tar xz -C "$tmp" --strip-components=1; then
+        rm -rf "$tmp"
+        warn "neovim download failed"
+        return 1
+    fi
     rm -rf "$NVIM_DIR"
     mv "$tmp" "$NVIM_DIR"
 
@@ -191,7 +196,7 @@ install_ghostty() {
     fi
 
     info "installing ghostty"
-    local version arch url install_dir
+    local version arch url install_dir tmp
     install_dir="$HOME/.local/bin"
 
     version="$(curl -fsSL "https://api.github.com/repos/pkgforge-dev/ghostty-appimage/releases/latest" \
@@ -205,11 +210,59 @@ install_ghostty() {
     url="https://github.com/pkgforge-dev/ghostty-appimage/releases/download/v${version}/Ghostty-${version}-${arch}.AppImage"
 
     mkdir -p "$install_dir"
-    curl -fsSL -o "${install_dir}/ghostty" "$url"
-    chmod +x "${install_dir}/ghostty"
+    tmp="$(mktemp)"
+    if ! curl -fsSL -o "$tmp" "$url"; then
+        rm -f "$tmp"
+        warn "ghostty download failed"
+        return 1
+    fi
+    chmod +x "$tmp"
+    mv "$tmp" "${install_dir}/ghostty"
     info "ghostty ${version} installed to ${install_dir}/ghostty"
 
     install_appimage_runtime
+}
+
+install_htop() {
+    local installed_ver version url tmp
+
+    installed_ver="$(htop --version 2>/dev/null | awk 'NR==1{print $2}')" || installed_ver=""
+    installed_ver="${installed_ver%%-*}"
+    if [[ -n "$installed_ver" ]] && printf '%s\n' "$HTOP_MIN_VERSION" "$installed_ver" | sort -V -C; then
+        info "htop $installed_ver already installed"
+        return
+    fi
+
+    if [[ "$OS" == "Darwin" ]]; then
+        info "installing htop"
+        brew install htop
+        return
+    fi
+
+    version="$(curl -fsSL "https://api.github.com/repos/htop-dev/htop/releases/latest" \
+        | grep '"tag_name"' | cut -d'"' -f4)" || version=""
+    if [[ -z "$version" ]]; then
+        warn "cannot query latest htop release"
+        return 1
+    fi
+
+    info "building htop $version from source"
+    url="https://github.com/htop-dev/htop/releases/download/${version}/htop-${version}.tar.xz"
+    tmp="$(mktemp -d)"
+    if ! curl -fsSL "$url" | tar xJ -C "$tmp" --strip-components=1; then
+        rm -rf "$tmp"
+        warn "htop download failed"
+        return 1
+    fi
+
+    if ! (cd "$tmp" && ./configure --prefix="$HOME/.local" --enable-sensors && make -j"$(nproc)" && make install); then
+        rm -rf "$tmp"
+        warn "htop build failed"
+        return 1
+    fi
+
+    rm -rf "$tmp"
+    info "htop $version installed to $HOME/.local/bin/htop"
 }
 
 install_rust() {
@@ -359,6 +412,7 @@ create_symlinks() {
     link "$DOTFILES/herdr"           "$HOME/.config/herdr"
     link "$DOTFILES/lazygit"         "$HOME/.config/lazygit"
     link "$DOTFILES/leaf"            "$HOME/.config/leaf"
+    link "$DOTFILES/htop"            "$HOME/.config/htop"
     link "$DOTFILES/.gitconfig"      "$HOME/.gitconfig"
     link "$DOTFILES/.gitexclude"     "$HOME/.gitexclude"
 
@@ -478,6 +532,7 @@ main() {
     run_step install_system_packages
     run_step install_neovim
     run_step install_ghostty
+    run_step install_htop
     run_step install_rust
     run_step install_cargo_tools
     run_step install_fonts
