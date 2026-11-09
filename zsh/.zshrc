@@ -120,6 +120,14 @@ if (( $+commands[zoxide] )); then
     unalias zi 2>/dev/null
 fi
 
+if (( $+commands[codex] )); then
+    [[ ! -f "$ZCOMPLDIR/_codex" ]] && codex completion zsh > "$ZCOMPLDIR/_codex"
+fi
+
+if (( $+commands[rex] )); then
+    [[ ! -f "$ZCOMPLDIR/_rex" ]] && rex completion zsh > "$ZCOMPLDIR/_rex"
+fi
+
 autoload -Uz add-zsh-hook
 _cursor_beam() { print -n '\e[5 q' }
 add-zsh-hook precmd _cursor_beam
